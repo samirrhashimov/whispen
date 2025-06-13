@@ -29,10 +29,11 @@ body {
       overflow: hidden;
       }
     #music-start , #music-stop {
-      display: flex;
+      display: none;
       border: none;
       background: white;
     }
+
   #zoom-in, #zoom-out {
     display: none;
   }
@@ -55,7 +56,7 @@ body {
   margin-left: 13px;
   font-family: Inter;
   font-size: 13px;
-  max-width: 60%;
+  max-width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -192,7 +193,16 @@ body {
       padding-top: 1rem;
       border-top: 1px solid #4b5563;
     }
-
+    .mailadress {
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+    #user-email-display {
+      font-family: Poppins;
+      font-size: 12px;
+    }
+    
     .sidebar-signin {
       background-color: #2563eb; /* blue-600 */
       color: white;
@@ -324,6 +334,46 @@ body {
   animation: popEffect 0.3s ;
 }
 
+.ambientdiv {
+      position: fixed; top: 0; left: -120%;
+      width: 60%; height: 100vh;
+      background-color: #1f2937; color: white;
+      z-index: 1000; transition: left 0.3s ease;
+      display: flex; flex-direction: column;
+      padding: 1rem;
+    }
+    .ambientdiv.open { left: 0; }
+    }
+    .sound-list {
+      flex: 1; overflow-y: auto; margin-top: 1rem;
+    }
+    .sound-item {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem; margin-bottom: 0.5rem;
+      background: #374151; border-radius: 4px;
+    }
+    .sound-item:hover { background: #4b5563; }
+    .sound-title { flex: 1; color: white; }
+    .sound-actions button {
+      background: none; border: none;
+      color: white; font-size: 1.2rem;
+      margin-left: 0.5rem; cursor: pointer;
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .ambientstext {
+      font-family: Inter;
+    }
+    .ambienttitles {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
 /* Animations */ 
 @keyframes popEffect {
     0% {

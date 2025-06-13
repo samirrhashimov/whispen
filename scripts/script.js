@@ -157,3 +157,25 @@ const clearHistoryBtnReloader = document.getElementById('clear-history');
 clearHistoryBtnReloader.addEventListener('click', () => {
   updateRecentPdfList()
 });
+
+//Sidebar Mail System
+auth.onAuthStateChanged((user) => {
+  const signinBtn = document.querySelector(".sidebar-signin");
+  const emailDisplay = document.getElementById("user-email-display");
+  const emailImgDisplay = document.getElementById("user-email-img");
+
+  if (user) {
+    // Kullanıcı giriş yaptıysa
+    signinBtn.style.display = "none";
+    emailDisplay.style.display = "block";
+    emailDisplay.textContent = user.email;
+    emailImgDisplay.style.display ="block";
+    
+  } else {
+    // Kullanıcı çıkış yaptıysa
+    signinBtn.style.display = "block";
+    emailDisplay.style.display = "none";
+    emailDisplay.textContent = "";
+    emailImgDisplay.style.display ="none";
+  }
+});

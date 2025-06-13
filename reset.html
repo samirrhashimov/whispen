@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff" id="theme-color">
+    <title>Reset Password - Whispen</title>
+    <link rel="stylesheet" href="styles/reset.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Password Reset</h2>
+        <p>Please enter your registered email address. We send you a password reset link.</p>
+        <input type="email" id="resetEmail" placeholder="Your email address">
+        <button onclick="resetPassword()">Reset Password</button>
+        <p id="resetMessage"></p>
+        <p class="separator">or</p>
+<a id="loginreset"href="login.html">Login</a>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="scripts/firebase-config.js"></script>
+    <script src="scripts/reset.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

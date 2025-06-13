@@ -10,6 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <link href="https://unpkg.com/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+      <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <nav>
@@ -43,7 +46,7 @@
         <span class="librarybutton centermaker  sidebarelements">Library</span>
       </div>
       
-      <div class="sidebar-tab">
+      <div class="sidebar-tab ambienttab" onclick="toggleAmbientMenu()">
         <span class="centermaker">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -85,7 +88,16 @@
 
     <!-- Alt buton -->
     <div class="sidebar-footer">
-      <button class="sidebar-signin">Sign In</button>
+      <a href="login.html">
+      <button class="sidebar-signin">Sign In</button></a>
+      
+      <div class="mailadress">
+      <svg id="user-email-img" style="display:none;" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18" fill="white">
+  <path d="M12.006,12.309c3.611-.021,5.555-1.971,5.622-5.671-.062-3.56-2.111-5.614-5.634-5.637-3.561,.022-5.622,2.122-5.622,5.672s2.062,5.615,5.634,5.636Z"/>
+  <path d="M11.994,13.661c-5.328,.034-8.195,2.911-8.291,8.322-.004,.268,.099,.527,.287,.718s.445,.299,.713,.299h14.595c.268,0,.525-.108,.713-.299,.188-.191,.291-.45,.287-.718-.092-5.333-3.036-8.288-8.304-8.322Z"/>
+</svg>
+      <p id="user-email-display" style="display: none;"></p>
+     </div>
     </div>
   </div>
   
@@ -110,14 +122,38 @@
   <button id="clear-history">  <span id="clear-historytext">Clear History</span></button>
 </div>
 
-  <div id="controls">
+<!--Sounds Sidebar -->
+  <div class="ambientdiv" id="ambientdiv">
+    <button class="close-btn" onclick="toggleAmbientMenu()">×</button>
+    <span>
+      <div class="ambienttitles">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 12v0"></path>
+  <path d="M6 10v4"></path>
+  <path d="M9 8v8"></path>
+  <path d="M12 6v12"></path>
+  <path d="M15 8v8"></path>
+  <path d="M18 10v4"></path>
+  <path d="M21 12v0"></path>
+</svg>
+    </span>
+    <span class="ambientstext">Ambient Sounds</span>
+    </div>
+    <div class="sound-list" id="soundList">
+      <!-- Dynamically generated sound items -->
+    </div>
+    <div id="error-container"></div>
+  </div>
+
+  <div id="controls" onclick="toggleAmbientMenu()">
     <button id="zoom-in">+</button>
     <button id="zoom-out">-</button>
   <div class="musicname">
 <div class="musiclogo">
 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18"><path d="m18,8.5v7c0,.828-.672,1.5-1.5,1.5s-1.5-.672-1.5-1.5v-7c0-.828.672-1.5,1.5-1.5s1.5.672,1.5,1.5ZM11.5,0c-.828,0-1.5.672-1.5,1.5v21c0,.828.672,1.5,1.5,1.5s1.5-.672,1.5-1.5V1.5c0-.828-.672-1.5-1.5-1.5Zm10,4c-.828,0-1.5.672-1.5,1.5v13c0,.828.672,1.5,1.5,1.5s1.5-.672,1.5-1.5V5.5c0-.828-.672-1.5-1.5-1.5Zm-15,1c-.828,0-1.5.672-1.5,1.5v11c0,.828.672,1.5,1.5,1.5s1.5-.672,1.5-1.5V6.5c0-.828-.672-1.5-1.5-1.5ZM1.5,9c-.828,0-1.5.672-1.5,1.5v3c0,.828.672,1.5,1.5,1.5s1.5-.672,1.5-1.5v-3c0-.828-.672-1.5-1.5-1.5Z"/></svg>
 </div>
-<p id="musicnametext">Hiss - Laylay (official music video) | Car Drift Park Show</p>
+<p id="musicnametext">No sound playing</p>
   </div>
   <div class="music-controls">
     <button id="music-start"><svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="15" height="15"><path d="M20.492,7.969,10.954.975A5,5,0,0,0,3,5.005V19a4.994,4.994,0,0,0,7.954,4.03l9.538-6.994a5,5,0,0,0,0-8.062Z"/></svg></button>
@@ -125,16 +161,16 @@
     <button id="music-stop">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="15" height="15">
 <path d="M106.667,0h298.667C464.244,0,512,47.756,512,106.667v298.667C512,464.244,464.244,512,405.333,512H106.667  C47.756,512,0,464.244,0,405.333V106.667C0,47.756,47.756,0,106.667,0z"/></button>
+
+<svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="20" height="20"><path d="M8.127,24l9.507-9.52a3.507,3.507,0,0,0,0-4.948L8.116,0,6,2.121l9.518,9.531a.5.5,0,0,1,0,.707L6.01,21.879Z"/></svg>
   </div>
 </div>
   <div id="pdf-scroll">
     <div id="pdf-container"></div>
   </div>
-
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2021/09/08/audio_c47bfeb63b.mp3" type="audio/mp3">
-    Tarayıcınız ses etiketini desteklemiyor.
-  </audio>
+ <script src="scripts/login.js"></script>
+<script src="scripts/firebase-config.js"></script>
+<script src="scripts/soundsystem.js"></script>
 <script src="scripts/pdfviewer.js"></script>
 <script src="scripts/script.js"></script>
 </body>

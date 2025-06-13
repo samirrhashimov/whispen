@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff" id="theme-color">
+    <title>Login - Whispen</title>
+    <link rel="stylesheet" href="styles/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <link href="https://unpkg.com/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="logo-container">
+      <p id="logotextlogin">Whispen</p>
+  </div>
+  <div class="video-bg">
+     <img src="assets/images/loginbg.png">
+  </div>
+    
+    <div class="login-container">
+        <h2></h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div id="message" class="message"></div>
+    <p class="separator">or</p>
+
+<!--
+<button class="google-btn"onclick="googleLogin()"style="background-color: black; color:white; font-family: 'roboto'">
+<span style="font-weight: bold;">Google&nbsp </span>  ile Devam Et
+</button>
+
+    -->
+<p class="minitext">Don't have an account? <a href="register.html">Register</a></p>
+<p class="minitext2"><a href="reset.html">Forgot your password?</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="scripts/firebase-config.js"></script>
+    <script src="scripts/login.js"></script>
+</body>
+</html>
