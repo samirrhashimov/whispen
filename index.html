@@ -31,13 +31,13 @@
 
     <!-- Sekmeler -->
     <div class="sidebar-tabs">
-      <div class="sidebaradd sidebar-tab">
+      <div class="sidebaradd sidebar-tab ">
       <span class="centermaker">
 <svg id="Layer_1" height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m16 16a1 1 0 0 1 -1 1h-2v2a1 1 0 0 1 -2 0v-2h-2a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2h2a1 1 0 0 1 1 1zm6-5.515v8.515a5.006 5.006 0 0 1 -5 5h-10a5.006 5.006 0 0 1 -5-5v-14a5.006 5.006 0 0 1 5-5h4.515a6.958 6.958 0 0 1 4.95 2.05l3.484 3.486a6.951 6.951 0 0 1 2.051 4.949zm-6.949-7.021a5.01 5.01 0 0 0 -1.051-.78v4.316a1 1 0 0 0 1 1h4.316a4.983 4.983 0 0 0 -.781-1.05zm4.949 7.021c0-.165-.032-.323-.047-.485h-4.953a3 3 0 0 1 -3-3v-4.953c-.162-.015-.321-.047-.485-.047h-4.515a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3z"/></svg>
       </span>
     <input type="file" id="file-input" accept="application/pdf" style="display: none;">
       </div>
-      <div class="sidebar-tab">
+      <div class="sidebar-tab librarylistener">
         <span class="centermaker"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
   stroke-linecap="round" stroke-linejoin="round" class="feather feather-book">
   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
@@ -62,7 +62,7 @@
         <span class="centermaker sidebarelements">Ambient Sounds</span>
         </div>
         
-     <div class="sidebar-tab">
+     <div class="sidebar-tab" onclick="toggleThemesMenu()">
        <span class="centermaker">
          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
   stroke-linecap="round" stroke-linejoin="round" class="feather feather-droplet">
@@ -146,6 +146,48 @@
     <div id="error-container"></div>
   </div>
 
+<!-- Themes Div -->
+<div id="themesdiv" class="themesdiv">
+  <button class="close-btn" onclick="toggleThemesMenu()">×</button>
+  <span style="font-family:Inter; font-weight:bold">Themes:</span>
+  <div class="theme-option" data-theme="default" style="display: flex; margin-top: 15px; margin-bottom: 7px ; width: 100%; height: 40px; background: #ffffff; color: #000000; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Default
+</div>
+  <div class="theme-option" data-theme="moon-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #334155; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+    Moon
+  </div>
+
+  <div class="theme-option" data-theme="forest-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: url('/assets/images/wood_texture.png');background-size: cover; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+    Forest
+  </div>
+  <div class="theme-option" data-theme="desert-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #ed8c2b; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+    Desert
+  </div>
+    <div class="theme-option" data-theme="ocean-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #00796b; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Ocean
+</div> 
+<div class="theme-option" data-theme="sakura-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #f8bbd0; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Sakura
+</div>
+<div class="theme-option" data-theme="cyberpunk-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #2a003f; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Cyberpunk
+</div>
+<div class="theme-option" data-theme="autumn-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #d84315; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Autumn
+</div>
+<div class="theme-option" data-theme="mystic-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #3c096c; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Mystic
+</div>
+<div class="theme-option" data-theme="cafe-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #8d6e63; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Cafe
+</div>
+<div class="theme-option" data-theme="mc-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: url('/assets/images/mcnavbar2.jpg');background-size: cover; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+   Minecraft
+</div>
+
+</div>
+
+
   <div id="controls" onclick="toggleAmbientMenu()">
     <button id="zoom-in">+</button>
     <button id="zoom-out">-</button>
@@ -165,6 +207,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="20" height="20"><path d="M8.127,24l9.507-9.52a3.507,3.507,0,0,0,0-4.948L8.116,0,6,2.121l9.518,9.531a.5.5,0,0,1,0,.707L6.01,21.879Z"/></svg>
   </div>
 </div>
+
   <div id="pdf-scroll">
     <div id="pdf-container"></div>
   </div>

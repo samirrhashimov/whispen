@@ -122,12 +122,22 @@ const soundLibrary = [
       soundList.appendChild(item);
     });
 
-    // Toggle sidebar
-    function toggleAmbientMenu() {
-      document.getElementById('ambientdiv').classList.toggle('open');
-    }
-    
-  document.addEventListener('click', function(event) {
+// Menü aç/kapatma fonksiyonu
+function toggleAmbientMenu() {
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
+    window.location.href = "login.html";
+    return;
+  }
+
+  const menu = document.getElementById('ambientdiv');
+  menu.classList.toggle('open');
+}
+
+// Menü dışına tıklanınca kapat
+document.addEventListener('click', function(event) {
   const menu = document.getElementById('ambientdiv');
 
   // Menü açık değilse hiçbir şey yapma
@@ -141,6 +151,9 @@ const soundLibrary = [
 
   menu.classList.remove('open');
 });
+
+
+
 
     // Download sound to IndexedDB
     async function downloadSound(sound) {

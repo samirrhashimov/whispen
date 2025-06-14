@@ -1,3 +1,129 @@
+:root{
+  --bg-color: #f0f0f0;
+  --text-color: white;
+  --text-color2: black;
+  --navbar-color: #1f2937;
+  --menu-color: #1f2937;
+  --controlbar-color: white;
+  --button-color: #374151;
+  --navborder-radius: 0px 0px 10px 10px;
+}
+
+.forest-style {
+  --bg-color: #f0f0f0;
+  --text-color: #d2f5d2;
+  --text-color2: #ffffff;
+  --menu-color: linear-gradient(135deg, #13810C 0%, #136400 50%, #13410C 100%);
+  --navbar-color: url('/assets/images/leafe_texture.png');
+  --controlbar-color:  url('/assets/images/wood_texture.png');
+  --button-color:linear-gradient(135deg, #2D5A5D 0%, #10816C 50%, #529788 100%);
+  --navborder-radius: 0px;
+}
+
+.moon-style {
+  --bg-color: #0f172a;
+  --text-color: #cbd5e1;
+  --text-color2: #fffffd;
+  --navbar-color: #1e293b;
+  --controlbar-color: #445166;
+  --menu-color: #1e293b;
+  --button-color: #334155;
+  --navborder-radius: 0 0 10px 10px;
+}
+
+.desert-style {
+  --bg-color: #f4e2d8;
+  --text-color: #5b3a29;
+  --text-color2: #000000;
+  --navbar-color: url('/assets/images/desert_texture.jpg');
+  --controlbar-color: #e1c89a;
+  --menu-color: linear-gradient(to bottom, #ed8c2b, #d0761d, #b35f11, #944a07, #733700);
+  --button-color: #e2725b;
+  --navborder-radius: 0 0 10px 10px;
+}
+
+.ocean-style {
+--bg-color: #e0f7fa;
+--text-color: #01579b;
+--text-color2: #004d40;
+--navbar-color: #006064;
+--menu-color: #004d40;
+--controlbar-color: #b2ebf2;
+--button-color: #00796b;
+--navborder-radius: 0px 0px 10px 10px;
+}
+
+.sakura-style  {
+  --bg-color: #fff0f5;
+--text-color: #880e4f;
+--text-color2: #4a148c;
+--navbar-color: #f8bbd0;
+--menu-color: #f48fb1;
+--controlbar-color: #fce4ec;
+--button-color: #ec407a;
+--navborder-radius: 0px 0px 10px 10px;
+}
+
+.cyberpunk-style {
+  --bg-color: #0f0f0f;
+--text-color: #39ff14;
+--text-color2: #ff00ff;
+--navbar-color: #1a1a1a;
+--menu-color: #2a003f;
+--controlbar-color: #1f1f1f;
+--button-color: #cc00cc;
+--navborder-radius: 0px 0px 10px 10px;
+}
+
+.autumn-style{
+--bg-color: #fff3e0;
+--text-color: #4e342e;
+--text-color2: #3e2723;
+--navbar-color: #d84315;
+--menu-color: #bf360c;
+--controlbar-color: #ffe0b2;
+--button-color: #ff7043;
+--navborder-radius: 0px 0px 10px 10px;
+}
+
+.mystic-style {
+  --bg-color: #1a1a2e;
+--text-color: #e0e0e0;
+--text-color2: #e0e0e0;
+--navbar-color: #3c096c;
+--menu-color: #240046;
+--controlbar-color: #3f3d56;
+--button-color: #7b2cbf;
+--navborder-radius: 0px 0px 14px 14px;
+}
+
+.cafe-style {
+  --bg-color: #f5f5dc;
+--text-color: #4e342e;
+--text-color2: #3e2723;
+--navbar-color: url('/assets/images/coffee_texture.png');
+--menu-color: #6d4c41;
+--controlbar-color: #d7ccc8;
+--button-color: #8d6e63;
+--navborder-radius: 0px 0px 10px 10px;
+}
+
+.mc-style {
+--bg-color: url('/assets/images/stonebg.jpg');;
+--text-color: #2e7d32;
+--text-color2: #000000;
+--navbar-color: url('/assets/images/mcnavbar2.jpg');
+--menu-color: url('/assets/images/mcbg.jpg');
+--controlbar-color: #38ae3c;
+--button-color: #388e3c;
+--navborder-radius: 0px;
+}
+
+
+
+
+
+
 html {
   width: 100%;
   box-sizing: border-box;
@@ -6,7 +132,8 @@ html {
 body {
       margin: 0;
       font-family: sans-serif;
-      background: #f0f0f0;
+      background: var(--bg-color);
+      background-size: cover;
     }
 #betaicon {
   position: fixed;
@@ -20,7 +147,8 @@ body {
       gap: 10px;
       align-items: center;
       padding: 10px;
-      background: white;
+      background: var(--controlbar-color);
+      background-size: cover;
       position: sticky;
       top: 55px;
       height: 20px;
@@ -28,10 +156,10 @@ body {
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       overflow: hidden;
       }
+      
     #music-start , #music-stop {
       display: none;
       border: none;
-      background: white;
     }
 
   #zoom-in, #zoom-out {
@@ -60,7 +188,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #1f2937;
+  color: var(--text-color2);
 }
 .musiclogo {
   margin-left: 10px;
@@ -93,11 +221,13 @@ body {
   nav {
       position: fixed;
       width: 100%;
-      background-color: #1f2937;
+      background: var(--navbar-color);
+      background-position: center 80%;
       color: white;
-      border-radius: 0 0 10px 10px;
+      border-radius: var(--navborder-radius);
       top: 0;
       z-index: 999;
+      background-size: cover;
     }
 
     .container {
@@ -140,7 +270,8 @@ body {
       left: -90%;
       width: 60%;
       height: 100vh;
-      background-color: #1f2937;
+      background: var(--menu-color);
+      background-size: cover;
       color: white;
       z-index: 1000;
       transition: left 0.3s ease;
@@ -167,7 +298,7 @@ body {
     /* Sekmeler */
     
     .sidebaradd {
-      background: linear-gradient(to right, #b8860b, #daa520, #ffd700, #daa520, #b8860b);
+      background: linear-gradient(to right, #b8860b, #daa520, #ffd700, #daa520, #b8860b) !important;
     }
     .sidebar-tabs {
       display: flex;
@@ -177,11 +308,12 @@ body {
     }
 
     .sidebar-tab {
-      background-color: #374151; /* gray-700 */
+      background: var(--button-color);
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
       cursor: pointer;
       transition: background-color 0.2s ease;
+      box-shadow: 3px 3px 3px #00000033;
     }
 
     .sidebar-tab:hover {
@@ -249,7 +381,8 @@ body {
   left: -110%;
   width: 60%;
   height: 100vh;
-  background-color: #1f2937;
+  background: var(--menu-color);
+  background-size: cover;
   color: white;
   z-index: 1000;
   transition: left 0.3s ease;
@@ -284,17 +417,13 @@ body {
 }
 
 .library .pdf-item {
-  background-color: #374151;
+  background: var(--button-color);
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-}
-
-.library .pdf-item:hover {
-  background-color: #4b5563;
 }
 
 .library .pdf-title {
@@ -336,29 +465,45 @@ body {
 
 .ambientdiv {
       position: fixed; top: 0; left: -120%;
-      width: 60%; height: 100vh;
-      background-color: #1f2937; color: white;
-      z-index: 1000; transition: left 0.3s ease;
+      width: 60%;
+      height: 100vh;
+      background: var(--menu-color);
+      overflow-y: auto;
+      background-size: cover;
+      color: white;
+      z-index: 1000; 
+      transition: left 0.3s ease;
       display: flex; flex-direction: column;
       padding: 1rem;
     }
     .ambientdiv.open { left: 0; }
     }
     .sound-list {
-      flex: 1; overflow-y: auto; margin-top: 1rem;
+      flex: 1;
+      overflow-y: auto;
+      margin-top: 1rem;
     }
     .sound-item {
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 0.5rem; margin-bottom: 0.5rem;
-      background: #374151; border-radius: 4px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: var(--button-color);
+      border-radius: 4px;
     }
-    .sound-item:hover { background: #4b5563; }
-    .sound-title { flex: 1; color: white; }
+  
+    .sound-title {
+      flex: 1;
+      color: white; }
+      
     .sound-actions button {
-      background: none; border: none;
-      color: white; font-size: 1.2rem;
-      margin-left: 0.5rem; cursor: pointer;
+      background: none;
+      border: none;
+      color: white; 
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
     }
     .error-message {
       color: #ef4444;
@@ -374,6 +519,43 @@ body {
       gap: 8px;
       margin-bottom: 15px;
     }
+    
+  /* Themes Div */
+  .themesdiv {
+      position: fixed;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100vh;
+      background: var(--menu-color);
+      background-size: cover;
+      overflow-y: auto;
+      color: white;
+      z-index: 1000; 
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    .themesdiv.open { left: 0; }
+    }
+    
+  .theme-option {
+  background-color: red;
+  width: 100%;
+  height: 15px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+
+.theme-option.active {
+  color: #22f55e !important;
+  font-weight: bold;
+  border: 2px solid #22c55e;
+  box-sizing: border-box;
+}
 /* Animations */ 
 @keyframes popEffect {
     0% {
