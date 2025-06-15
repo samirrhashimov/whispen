@@ -633,7 +633,131 @@ body {
   color: #999;
   cursor: pointer;
 }
-,
+
+.settingsmenu {
+  position: fixed;
+  top: 0;
+  left: -90%;
+  width: 60%;
+  height: 100vh;
+  background: var(--menu-color);
+  background-size: cover;
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  gap: 1.2rem;
+}
+
+.settingsmenu.open {
+  left: 0;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setting-item label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.setting-item button,
+.setting-item select {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  font-weight: 500;
+}
+
+#volumeControl {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #4f46e5 50%, #e5e7eb 50%);
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Thumb stilleri (önceden olduğu gibi) */
+#volumeControl::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border: 3px solid #4f46e5;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+#volumeControl::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+#volumeControl::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: white;
+  border: 3px solid #4f46e5;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.setting-item.danger button {
+  background-color: crimson;
+  color: white;
+}
+
+.password-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.password-form input,
+.password-form button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.password-form input {
+  background: #ffffff10;
+  color: white;
+}
+
+.password-form button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+.password-form button:hover {
+  background-color: #45a049;
+}
+
+.password-form p {
+  font-size: 0.9rem;
+  color: lightgreen;
+  margin-top: 0.5rem;
+}
+
+.password-form.hidden {
+  display: none;
+}
 /* Animations */ 
 @keyframes popEffect {
     0% {

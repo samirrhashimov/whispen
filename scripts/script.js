@@ -285,3 +285,147 @@ function showLoginModal() {
 function closeLoginModal() {
   document.getElementById('loginModal').style.display = 'none';
 }
+
+
+
+//settingsbutton
+function toggleSettingsMenu() {
+  const menu = document.getElementById('settingsMenu');
+  menu.classList.toggle('open');
+}
+
+// Menü dışına ve .sidebar-tab dışına tıklanınca kapat
+document.addEventListener('click', function(event) {
+  const menu = document.getElementById('settingsMenu');
+
+  // Menü açık değilse bir şey yapma
+  if (!menu.classList.contains('open')) return;
+
+  // Eğer tıklanan yer menünün içindeyse veya .sidebar-tab ise kapatma
+  if (menu.contains(event.target) || event.target.closest('.sidebar-tab')) return;
+
+  // Aksi halde menüyü kapat
+  menu.classList.remove('open');
+});
+
+
+
+
+//settings
+function togglePasswordForm() {
+  const form = document.getElementById('password-form');
+  form.classList.toggle('hidden');
+}
+
+function changePassword() {
+  const currentPassword = document.getElementById('current-password').value;
+  const newPassword = document.getElementById('new-password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+  const msg = document.getElementById('password-update-message');
+
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    msg.textContent = "Giriş yapılmamış.";
+    msg.style.color = "orange";
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    msg.textContent = "Yeni şifreler uyuşmuyor.";
+    msg.style.color = "orange";
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    msg.textContent = "Yeni şifre en az 6 karakter olmalı.";
+    msg.style.color = "orange";
+    return;
+  }
+
+  // Eski şifreyi doğrulamak için yeniden kimlik doğrulama gerekir
+  const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+
+  user.reauthenticateWithCredential(credential)
+    .then(() => {
+      return user.updatePassword(newPassword);
+    })
+    .then(() => {
+      msg.textContent = "Şifre başarıyla güncellendi.";
+      msg.style.color = "lightgreen";
+
+      // Formu temizle
+      document.getElementById('current-password').value = '';
+      document.getElementById('new-password').value = '';
+      document.getElementById('confirm-password').value = '';
+    })
+    .catch((error) => {
+      msg.textContent = "Hata: " + error.message;
+      msg.style.color = "red";
+    });
+}
+
+
+
+function setVolume(value) {
+  const volume = parseInt(value) / 100;
+  console.log('Ses seviyesi:', volume);
+  console.log('Audio:', window.currentAudio);
+
+  if (window.currentAudio) {
+    window.currentAudio.volume = volume;
+  }
+}
+
+
+
+
+function changeLanguage(lang) {
+  // localStorage.setItem('language', lang);
+  // Dili güncelleme işlemi
+}
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+    window.location.href = "login.html";
+  });
+}
+
+function deleteAccount() {
+  const user = firebase.auth().currentUser;
+  if (user) {
+    user.delete().then(() => {
+      alert("Hesabınız silindi.");
+      window.location.href = "register.html";
+    }).catch((error) => {
+      alert("Yeniden giriş yapmanız gerekebilir.");
+    });
+  }
+}
+
+
+
+
+
+
+
+document.getElementById('volumeControl').addEventListener('input', function (e) {
+  const volume = parseInt(e.target.value) / 100;
+  localStorage.setItem('ambientVolume', volume);  // 💾 Ayarı kaydet
+  window.defaultVolume = volume; // 🔁 Yeni sesler bu seviyede başlasın
+
+  if (window.currentAudio) {
+    window.currentAudio.volume = volume; // 🎧 Ses anında değişsin
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const slider = document.getElementById('volumeControl');
+  const savedVolume = localStorage.getItem('ambientVolume');
+
+  if (savedVolume !== null) {
+    slider.value = Math.round(parseFloat(savedVolume) * 100);
+  } else {
+    slider.value = 70; // İlk kez geliyorsa 70 olarak ayarla
+  }
+});

@@ -36,6 +36,14 @@ const soundLibrary = [
       }
     ];
 
+window.defaultVolume = parseFloat(localStorage.getItem('ambientVolume')) || 0.7;
+
+
+
+
+
+
+
     // IndexedDB setup
     let db;
     
@@ -362,6 +370,8 @@ document.addEventListener('click', function(event) {
 
         // Yeni Audio nesnesi oluştur - GLOBAL OLARAK
         currentAudio = new Audio();
+        currentAudio.volume = window.defaultVolume;
+        window.currentAudio = currentAudio;
         currentAudio.src = audioSrc;
         currentAudio.loop = true;
         
@@ -459,3 +469,4 @@ document.addEventListener('click', function(event) {
       // This helps with autoplay restrictions
     }, { once: true });
     
+    window.currentAudio = currentAudio;

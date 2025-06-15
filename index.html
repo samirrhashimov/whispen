@@ -72,7 +72,7 @@
       <span class="centermaker sidebarelements">Themes</span>
       
       </div>
-      <div class="sidebar-tab">
+      <div class="sidebar-tab" onclick="toggleSettingsMenu()">
       <span class="centermaker">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -222,6 +222,107 @@ Please <strong>Log In</strong> or <strong>Sign Up</strong>.
       <button onclick="closeLoginModal()" class="cancel-btn">Dismiss</button>
     </div>
   </div>
+</div>
+
+<!-- Ayarlar Menüsü -->
+<div id="settingsMenu" class="settingsmenu">
+  <h2>Settings</h2>
+
+
+
+
+  <div class="setting-item">
+    <button onclick="togglePasswordForm()">Change Password</button>
+  </div>
+    <div id="password-form" class="password-form hidden">
+    <input type="password" id="current-password" placeholder="Mevcut Şifre" />
+    <input type="password" id="new-password" placeholder="Yeni Şifre" />
+    <input type="password" id="confirm-password" placeholder="Yeni Şifre (Tekrar)" />
+    <button onclick="changePassword()">Submit</button>
+    <p id="password-update-message"></p>
+ </div>
+
+
+
+
+
+  <div class="setting-item">
+    <label>🔊 Sound Volume</label>
+    <input type="range" id="volumeControl" min="0" max="100" value="70" onchange="setVolume(this.value)">
+  </div>
+<script>
+  const volumeSlider = document.getElementById("volumeControl");
+
+// Sayfa yüklendiğinde önce localStorage’taki sesi oku ve ayarla
+window.addEventListener('DOMContentLoaded', () => {
+  const savedVolume = localStorage.getItem('ambientVolume');
+  if (savedVolume !== null) {
+    const percent = Math.round(parseFloat(savedVolume) * 100);
+    volumeSlider.value = percent;
+  } else {
+    volumeSlider.value = 70; // Varsayılan değer
+  }
+
+  updateVolumeBackground(volumeSlider); // 🎯 Doğru pozisyondan başlat
+});
+
+// Arka plan rengini güncelle
+function updateVolumeBackground(el) {
+  const min = el.min || 0;
+  const max = el.max || 100;
+  const val = el.value;
+
+  const percentage = ((val - min) / (max - min)) * 100;
+  el.style.background = `linear-gradient(to right, #4f46e5 0%, #4f46e5 ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`;
+}
+
+// Değişikliklerde arka planı güncelle
+volumeSlider.addEventListener("input", () => {
+  updateVolumeBackground(volumeSlider);
+
+  // Ses değerini kaydet
+  const volume = parseInt(volumeSlider.value) / 100;
+  localStorage.setItem('ambientVolume', volume);
+  window.defaultVolume = volume;
+  if (window.currentAudio) {
+    window.currentAudio.volume = volume;
+  }
+});
+</script>
+
+
+
+
+
+  <div class="setting-item">
+    <label>🌐 Uygulama Dili</label>
+    <select id="languageSelect" onchange="changeLanguage(this.value)">
+      <option value="tr">Türkçe</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+
+
+
+
+  <div class="setting-item">
+    <button onclick="logout()">🚪 Çıkış Yap</button>
+  </div>
+
+
+
+
+
+
+  <div class="setting-item danger">
+    <button onclick="deleteAccount()">❌ Hesabı Sil</button>
+  </div>
+  
+  
+  
+  
+  
 </div>
   <div id="pdf-scroll">
     <div id="pdf-container"></div>
