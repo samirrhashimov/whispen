@@ -64,3 +64,14 @@ function register() {
             alert("Error: " + error.message);
         });
 }
+
+//anonymous login
+function anonymous() {
+    firebase.auth().signInAnonymously()
+      .then(() => {
+        window.location.href = "index.html";
+      })
+      .catch(() => {
+        
+      });
+  }

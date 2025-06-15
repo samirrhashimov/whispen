@@ -33,6 +33,7 @@
 <script>
   function toggleButton(checkbox) {
     document.getElementById("registerBtn").disabled = !checkbox.checked;
+    document.getElementById("anonymousbutton").disabled = !checkbox.checked;
   }
 </script>
         <div id="message" class="message"></div>
@@ -43,6 +44,7 @@
 <span style="font-weight: bold;">Google&nbsp </span>  ile Devam Et
 </button>
     -->
+    <button id="anonymousbutton" onclick="anonymous()" disabled>Try without account</button>
         <p class="minitext">Do you have an account? <a href="login.html">Login</a></p>
     </div>
     <!-- Firebase SDK -->

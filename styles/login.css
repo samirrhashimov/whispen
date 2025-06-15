@@ -57,6 +57,14 @@ button {
     font-weight: bold;
 }
 
+#anonymousbutton {
+  background: #222;
+  font-size: 14px;
+}
+#anonymousbutton:disabled {
+  background: grey !important;
+  cursor: not-allowed;
+}
 #registerBtn:disabled {
     background: grey !important;
     cursor: not-allowed;

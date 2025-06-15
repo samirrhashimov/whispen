@@ -7,12 +7,32 @@ const soundLibrary = [
       { 
         id: 'ocean', 
         name: 'Ocean Waves', 
-        src: 'https://files.catbox.moe/w8615t.mp3' 
+        src: './assets/sounds/oceanwaves.mp3' 
       },
       { 
-        id: 'birds', 
-        name: 'Forest Birds', 
-        src: 'https://www2.cs.uic.edu/~i101/SoundFiles/ImperialMarch60.wav' 
+        id: 'icywind', 
+        name: 'Icy Wind', 
+        src: './assets/sounds/icywind.mp3'
+      },
+      { 
+        id: 'library', 
+        name: 'Library', 
+        src: './assets/sounds/library.mp3'
+      },
+      { 
+        id: 'coffeeshop', 
+        name: 'Coffee Shop', 
+        src: './assets/sounds/coffeeshop.mp3'
+      },
+      { 
+        id: 'forest', 
+        name: 'Forest', 
+        src: './assets/sounds/forest.mp3'
+      },
+      { 
+        id: 'campfire', 
+        name: 'Campfire', 
+        src: './assets/sounds/campfire.mp3'
       }
     ];
 
@@ -126,9 +146,8 @@ const soundLibrary = [
 function toggleAmbientMenu() {
   const user = firebase.auth().currentUser;
 
-  if (!user) {
-    // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
-    window.location.href = "login.html";
+  if (!user || user.isAnonymous) {
+    showLoginModal();
     return;
   }
 
@@ -419,7 +438,7 @@ document.addEventListener('click', function(event) {
       if (!sound) return;
       
       if (action === 'pause') {
-        playBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="18" height="18" fill="white"><path d="M106.667,0h298.667C464.244,0,512,47.756,512,106.667v298.667C512,464.244,464.244,512,405.333,512H106.667  C47.756,512,0,464.244,0,405.333V106.667C0,47.756,47.756,0,106.667,0z"/>';
+        playBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="18" height="18" fill="#00bb00"><path d="M106.667,0h298.667C464.244,0,512,47.756,512,106.667v298.667C512,464.244,464.244,512,405.333,512H106.667  C47.756,512,0,464.244,0,405.333V106.667C0,47.756,47.756,0,106.667,0z"/>';
         playBtn.onclick = () => {
           if (currentAudio && currentSoundId === soundId) {
             currentAudio.pause();

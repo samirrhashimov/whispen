@@ -183,11 +183,18 @@ auth.onAuthStateChanged((user) => {
   const emailImgDisplay = document.getElementById("user-email-img");
 
   if (user) {
-    // Kullanıcı giriş yaptıysa
     signinBtn.style.display = "none";
     emailDisplay.style.display = "block";
     emailDisplay.textContent = user.email;
     emailImgDisplay.style.display ="block";
+    
+    if (user.isAnonymous) {
+    signinBtn.style.display = "none";
+    emailDisplay.style.display = "block";
+    emailDisplay.textContent = user.email;
+    } else {
+      emailDisplay.textContent = user.email;
+    }
     
   } else {
     // Kullanıcı çıkış yaptıysa
@@ -203,9 +210,8 @@ auth.onAuthStateChanged((user) => {
 function toggleThemesMenu() {
   const user = firebase.auth().currentUser;
 
-  if (!user) {
-    // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
-    window.location.href = "login.html";
+  if (!user || user.isAnonymous) {
+    showLoginModal();
     return;
   }
 
@@ -271,3 +277,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+function showLoginModal() {
+  document.getElementById('loginModal').style.display = 'flex';
+}
+
+function closeLoginModal() {
+  document.getElementById('loginModal').style.display = 'none';
+}

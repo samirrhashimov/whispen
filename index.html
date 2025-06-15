@@ -207,7 +207,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="20" height="20"><path d="M8.127,24l9.507-9.52a3.507,3.507,0,0,0,0-4.948L8.116,0,6,2.121l9.518,9.531a.5.5,0,0,1,0,.707L6.01,21.879Z"/></svg>
   </div>
 </div>
+<!-- Login Uyarı Modalı -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn2" onclick="closeLoginModal()">&times;</span>
+    <h2>Login Required</h2>
+    <p>
+You need an account to use this feature.
+Please <strong>Log In</strong> or <strong>Sign Up</strong>.
 
+    </p>
+    <div class="modal-actions">
+      <button onclick="window.location.href='login.html'" class="login-btn">Login</button>
+      <button onclick="closeLoginModal()" class="cancel-btn">Dismiss</button>
+    </div>
+  </div>
+</div>
   <div id="pdf-scroll">
     <div id="pdf-container"></div>
   </div>
