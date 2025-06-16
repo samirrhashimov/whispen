@@ -64,7 +64,7 @@ window.defaultVolume = parseFloat(localStorage.getItem('ambientVolume')) || 0.7;
       });
     }
 
-    // GLOBAL AUDIO CONTROL - Tek bir audio nesnesi kullanıyoruz
+    // GLOBAL AUDIO CONTROL - using a single audio object
     let currentAudio = null;
     let currentSoundId = null;
     let currentSoundName = '';
@@ -73,7 +73,7 @@ window.defaultVolume = parseFloat(localStorage.getItem('ambientVolume')) || 0.7;
     document.getElementById('music-start').disabled = true;
     document.getElementById('music-stop').disabled = true;
 
-    // NAVBAR CONTROLS - Global audio kontrolü
+    // NAVBAR CONTROLS - Global audio control
     document.getElementById('music-start').onclick = () => {
       if (currentAudio && currentAudio.paused) {
         currentAudio.play().catch(err => {
@@ -150,7 +150,7 @@ window.defaultVolume = parseFloat(localStorage.getItem('ambientVolume')) || 0.7;
       soundList.appendChild(item);
     });
 
-// Menü aç/kapatma fonksiyonu
+// Ambient Menu Open/close
 function toggleAmbientMenu() {
   const user = firebase.auth().currentUser;
 
@@ -163,14 +163,12 @@ function toggleAmbientMenu() {
   menu.classList.toggle('open');
 }
 
-// Menü dışına tıklanınca kapat
+// Close when clicking outside the menu
 document.addEventListener('click', function(event) {
   const menu = document.getElementById('ambientdiv');
 
-  // Menü açık değilse hiçbir şey yapma
   if (!menu.classList.contains('open')) return;
 
-  // Eğer tıklanan yer menünün ya da açma düğmesinin içindeyse, kapatma
   if (
     menu.contains(event.target) ||
     event.target.closest('.sidebar-tab, #controls, svg')
@@ -315,14 +313,13 @@ document.addEventListener('click', function(event) {
       }
     }
 
-    // Play sound - TEK AUDIO NESNESI KULLANIMI
+    // Play sound
     async function playSound(sound) {
       try {
-        // Mevcut sesi durdur ve temizle
+        // Stop and clear current audio
         if (currentAudio) {
           currentAudio.pause();
           currentAudio.currentTime = 0;
-          // Event listener'ları temizle
           currentAudio.onended = null;
           currentAudio.onplay = null;
           currentAudio.onpause = null;
@@ -340,7 +337,7 @@ document.addEventListener('click', function(event) {
         let audioSrc = null;
         let isOffline = false;
         
-        // Önce IndexedDB'den dene (offline)
+        // Try from IndexedDB first (offline)
         if (db) {
           try {
             const tx = db.transaction('sounds', 'readonly');
@@ -362,20 +359,20 @@ document.addEventListener('click', function(event) {
           }
         }
         
-        // Offline bulunamadıysa online kullan
+        // If not found offline, use online
         if (!audioSrc) {
           audioSrc = sound.src;
           console.log(`Playing ${sound.name} from online source`);
         }
 
-        // Yeni Audio nesnesi oluştur - GLOBAL OLARAK
+        // Create new Audio object - GLOBALLY
         currentAudio = new Audio();
         currentAudio.volume = window.defaultVolume;
         window.currentAudio = currentAudio;
         currentAudio.src = audioSrc;
         currentAudio.loop = true;
         
-        // Audio event listeners - GLOBAL AUDIO İÇİN
+        // Audio event listeners - for GLOBAL AUDIO
         currentAudio.onerror = (e) => {
           console.error('Audio playback error:', e);
           const errorMsg = isOffline ? 
@@ -386,7 +383,7 @@ document.addEventListener('click', function(event) {
         };
         
         currentAudio.onended = () => {
-          // Loop için tekrar başlat
+          // Start Again for Loop
           if (currentAudio && !currentAudio.paused) {
             currentAudio.currentTime = 0;
             currentAudio.play().catch(err => {
@@ -420,7 +417,7 @@ document.addEventListener('click', function(event) {
           await playPromise;
         }
         
-        // Blob URL'i kullandıysak, audio bittiğinde temizle
+        // If we used Blob URL, clear when audio is finished
         if (isOffline && audioSrc.startsWith('blob:')) {
           const originalOnPause = currentAudio.onpause;
           currentAudio.onpause = (e) => {

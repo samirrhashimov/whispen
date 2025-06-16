@@ -1,0 +1,93 @@
+==========================================
+📘 Whispen Geliştirici Rehberi - Ambiyans & Tema Ekleme (TR)
+==========================================
+
+
+🎵 Ambians Sesi ekleme:
+{
+ id: 'soundname', 
+ name: 'Sound Name', 
+ src: './assets/sounds/test.mp3'
+}
+     
+Yukarıdakı şablonu, kendi ses ve isimlerinize göre değiştirin ve soundsystem.js in içindeki const soundLibrary = [] - e yapıştırın. (satır 1)
+      
+---
+      
+🎨 Tema ekleme:
+    <div data-i18n="themename" class="theme-option" data-theme="themename-style" style="display: flex; margin-top: 7px; margin-bottom: 7px ; width: 100%; height: 40px; background: #000000; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px 10px 10px 10px; font-family: Poppins; align-items: center;">
+    
+     1) Yukarıdakı şablonu .themesdiv  öğesinin içine ekleyin.
+     2) datai18n öğesinin içine tema adınızı yazın. Bunun çevirisini lang.json içinede yazın. Bu kısım çeviri içindir.
+     3) class="theme-option" daki theme kelimesini değişin ve kendi tema adınızı yazın. -style sabit olarak kalmalı.
+     4)   .theme-style {
+          --bg-color: #f0f0f0;
+          --text-color: white;
+          --text-color2: black;
+          --navbar-color: #1f2937;
+          --menu-color: #1f2937;
+          --controlbar-color: white;
+          --button-color: #374151;
+          --navborder-radius: 0px 0px 10px 10px;
+          }
+        
+        Yukarıdakı şablona göre stilinizi yazınız.
+      5) script.js de  "// Clear all theme classes" yorum satrını bulun (satır 254) . Burada halihazırdakı temaların listesini göreceksiniz. Buradakı listeye kendi stilinizi ilave edin.
+     
+  --- 
+  
+⚠️ Dikkat: ID ve isimler benzersiz olmalıdır.
+  
+  
+==========================================
+📘 Whispen Developer Guide – Adding Ambient Sounds & Themes (EN)
+==========================================
+
+🎵 Adding Ambient Sounds:
+{
+    id: 'soundname',
+    name: 'Sound Name',
+    src: './assets/sounds/test.mp3'
+  }
+
+➡ Replace the values above with your own sound's ID, name, and file path.
+➡ Then paste this object inside the const soundLibrary = [] array in soundsystem.js.
+(Located near the top – Line 1)
+
+
+---
+
+🎨 Adding Themes:
+
+<div data-i18n="themename" class="theme-option" data-theme="themename-style" style="display: flex; margin-top: 7px; margin-bottom: 7px; width: 100%; height: 40px; background: #000000; color: #ffffff; text-align: center; justify-content: center; border-radius: 10px; font-family: Poppins; align-items: center;">
+
+1. Add the block above into the .themesdiv container in your HTML.
+
+
+2. Replace the data-i18n attribute with your theme key. Also, add its translation in lang.json. This is for multilingual support.
+
+
+3. Change themename in data-theme="themename-style" and the class value. Keep the -style suffix.
+
+
+4. Define your theme’s styles like below:
+
+
+
+.theme-style {
+  --bg-color: #f0f0f0;
+  --text-color: white;
+  --text-color2: black;
+  --navbar-color: #1f2937;
+  --menu-color: #1f2937;
+  --controlbar-color: white;
+  --button-color: #374151;
+  --navborder-radius: 0px 0px 10px 10px;
+}
+
+5. In script.js, find the comment // Clear all theme classes (around line 254).
+➤ Add your new theme class to the list right there.
+
+---
+
+⚠️ Important: IDs and theme names must be unique.

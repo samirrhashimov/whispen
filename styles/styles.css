@@ -651,6 +651,7 @@ body {
   justify-content: flex-start;
   padding: 1rem;
   gap: 1.5rem;
+  overflow-x: hidden;
 }
 
 .settingsmenu.open {
@@ -677,6 +678,8 @@ body {
 .settingstext {
   display: flex;
   font-family: Inter;
+  white-space: normal !important ;
+  word-break: break-word;
   
 }
 #volumeControl {

@@ -31,7 +31,7 @@ function handleOutsideClick(event) {
 
 //sidebar add toggleButton
 document.addEventListener('DOMContentLoaded', function() {
-    // Tıklanacak div elementini seç
+    // Select Click Div
     const sidebarAddTab = document.querySelector('.sidebaradd.sidebar-tab');
 
     // Select hidden input element
@@ -85,21 +85,21 @@ function handleFileUpload(event) {
   }
 }
 
-// LocalStorage’a PDF adını kaydet
+// Save PDF name to LocalStorage
 function saveRecentPdf(fileName) {
 let pdfList = JSON.parse(localStorage.getItem('recentPdfs')) || [];
 
-// Aynı dosya varsa en üste taşı
+// If the same file exists, move it to the top
 pdfList = pdfList.filter(name => name !== fileName);
 pdfList.unshift(fileName);
 
-// En fazla 5 tane tut
+// Keep at most 5
 if (pdfList.length > 5) pdfList = pdfList.slice(0, 5);
 
 localStorage.setItem('recentPdfs', JSON.stringify(pdfList));
 }
 
-// Listeyi güncelle
+// Update List
 function updateRecentPdfList() {
 const listContainer = document.getElementById('recentPdfsList');
 listContainer.innerHTML = '';
@@ -117,12 +117,12 @@ item.appendChild(title);
 listContainer.appendChild(item);
 });
 }
-// Sayfa yüklendiğinde listeyi göster
+// Show list on page load
 window.addEventListener('DOMContentLoaded', updateRecentPdfList);
 
 const libraryButton = document.querySelector(".librarybutton");
 
-// Elemente tıklama olay dinleyicisi ekle
+// Add click event listener to element
 libraryButton.addEventListener("click", toggleLibrary);
 
 //clear history
@@ -134,15 +134,15 @@ document.getElementById('clear-history').addEventListener('click', function () {
 });
 
 
-// HTML elementlerini JavaScript'te seçiyoruz
+// Select HTML elements in JavaScript
 const metinElementi = document.getElementById('clear-historytext');
 const butonElementi = document.getElementById('clear-history');
 
-// Orijinal ve yeni metinleri tanımlıyoruz
+// Define original and new texts
 const orijinalMetin = "Clear History";
 const yeniMetin = "History Cleared!";
 
-// Butona tıklama olayı dinleyicisi ekliyoruz
+// Add a click event listener to the button
 butonElementi.addEventListener('click', function() {
     metinElementi.textContent = yeniMetin;
 });
@@ -153,17 +153,16 @@ setTimeout(() => {
 const clearHistoryBtn = document.getElementById('clear-history');
 
 clearHistoryBtn.addEventListener('click', () => {
-  clearHistoryBtn.classList.remove('popEffect'); // Yeniden eklenebilmesi için önce çıkar
-  void clearHistoryBtn.offsetWidth; // DOM'u zorla yeniden hesaplat, animasyonu sıfırlar
-  clearHistoryBtn.classList.add('popEffect'); // Animasyonu yeniden başlat
-  
+  clearHistoryBtn.classList.remove('popEffect');
+  void clearHistoryBtn.offsetWidth;
+  clearHistoryBtn.classList.add('popEffect'); 
 });
   clearHistoryBtn.addEventListener('animationend', () => {
-  clearHistoryBtn.disabled = true;         // Butonu devre dışı bırak
-  clearHistoryBtn.classList.remove('popEffect'); // Sınıfı temizle
+  clearHistoryBtn.disabled = true;  
+  clearHistoryBtn.classList.remove('popEffect');
 });
 
-// 10 san sonra aktiv
+// Active Again 10s
 setTimeout(() => {
   clearHistoryBtn.disabled = false;
 }, 10000);
@@ -197,7 +196,7 @@ auth.onAuthStateChanged((user) => {
     }
     
   } else {
-    // Kullanıcı çıkış yaptıysa
+    // If the user is logged out
     signinBtn.style.display = "block";
     emailDisplay.style.display = "none";
     emailDisplay.textContent = "";
@@ -219,14 +218,14 @@ function toggleThemesMenu() {
   menu.classList.toggle('open');
 }
 
-// Menü dışına tıklanınca kapat
+// Close when clicking outside the menu
 document.addEventListener('click', function(event) {
   const menu = document.getElementById('themesdiv');
 
-  // Menü açık değilse hiçbir şey yapma
+  // If the menu is not open, do nothing
   if (!menu.classList.contains('open')) return;
 
-  // Eğer tıklanan yer menünün ya da açma düğmesinin içindeyse, kapatma
+  // If the clicked location is inside the menu or open button, close
   if (
     menu.contains(event.target) ||
     event.target.closest('.sidebar-tab, #controls, svg')
@@ -242,10 +241,10 @@ options.forEach(option => {
   option.addEventListener("click", () => {
     const selectedTheme = option.dataset.theme;
 
-    // Tüm tema classlarını temizle
+    // Clear all theme classes
     document.body.classList.remove("forest-style", "moon-style", "desert-style", "ocean-style", "sakura-style", "cyberpunk-style", "autumn-style", "mystic-style", "cafe-style", "mc-style");
 
-    // Tüm seçeneklerden active classını kaldır
+    // Remove active class from all options
     options.forEach(opt => opt.classList.remove("active"));
 
     if (selectedTheme !== "default") {
@@ -255,7 +254,7 @@ options.forEach(option => {
       localStorage.removeItem("selectedTheme");
     }
 
-    // Seçilen temaya active class'ı ekle
+    // Add active class to selected theme
     option.classList.add("active");
   });
 });
@@ -264,13 +263,13 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedTheme) {
     document.body.classList.add(savedTheme);
 
-    // Doğru seçeneğe "active" sınıfı ekle
+    // Add "active" class to the right option
     const selectedOption = document.querySelector(`.theme-option[data-theme="${savedTheme}"]`);
     if (selectedOption) {
       selectedOption.classList.add("active");
     }
   } else {
-    // Default tema aktifse default'u işaretle
+    // If the default theme is active, mark default
     const defaultOption = document.querySelector('.theme-option[data-theme="default"]');
     if (defaultOption) {
       defaultOption.classList.add("active");
@@ -294,17 +293,13 @@ function toggleSettingsMenu() {
   menu.classList.toggle('open');
 }
 
-// Menü dışına ve .sidebar-tab dışına tıklanınca kapat
 document.addEventListener('click', function(event) {
   const menu = document.getElementById('settingsMenu');
 
-  // Menü açık değilse bir şey yapma
   if (!menu.classList.contains('open')) return;
 
-  // Eğer tıklanan yer menünün içindeyse veya .sidebar-tab ise kapatma
   if (menu.contains(event.target) || event.target.closest('.sidebar-tab')) return;
 
-  // Aksi halde menüyü kapat
   menu.classList.remove('open');
 });
 
@@ -326,24 +321,24 @@ function changePassword() {
   const user = firebase.auth().currentUser;
 
   if (!user) {
-    msg.textContent = "Giriş yapılmamış.";
+    msg.textContent = "No login has been made.";
     msg.style.color = "orange";
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    msg.textContent = "Yeni şifreler uyuşmuyor.";
+    msg.textContent = "New passwords do not match.";
     msg.style.color = "orange";
     return;
   }
 
   if (newPassword.length < 6) {
-    msg.textContent = "Yeni şifre en az 6 karakter olmalı.";
+    msg.textContent = "New password must be at least 6 characters.";
     msg.style.color = "orange";
     return;
   }
 
-  // Eski şifreyi doğrulamak için yeniden kimlik doğrulama gerekir
+  // Re-authentication is required to verify the old password
   const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
 
   user.reauthenticateWithCredential(credential)
@@ -351,16 +346,16 @@ function changePassword() {
       return user.updatePassword(newPassword);
     })
     .then(() => {
-      msg.textContent = "Şifre başarıyla güncellendi.";
+      msg.textContent = "Password updated successfully.";
       msg.style.color = "lightgreen";
 
-      // Formu temizle
+      // Clear Form
       document.getElementById('current-password').value = '';
       document.getElementById('new-password').value = '';
       document.getElementById('confirm-password').value = '';
     })
     .catch((error) => {
-      msg.textContent = "Hata: " + error.message;
+      msg.textContent = "Error: " + error.message;
       msg.style.color = "red";
     });
 }
@@ -369,20 +364,12 @@ function changePassword() {
 
 function setVolume(value) {
   const volume = parseInt(value) / 100;
-  console.log('Ses seviyesi:', volume);
+  console.log('Volume:', volume);
   console.log('Audio:', window.currentAudio);
 
   if (window.currentAudio) {
     window.currentAudio.volume = volume;
   }
-}
-
-
-
-
-function changeLanguage(lang) {
-  // localStorage.setItem('language', lang);
-  // Dili güncelleme işlemi
 }
 
 function logout() {
@@ -408,7 +395,7 @@ function confirmDeleteAccount() {
   const errorElement = document.getElementById('deleteErrorMessage');
 
   if (deleteText !== 'DELETE') {
-    errorElement.textContent = 'Lütfen DELETE yazarak onaylayın.';
+    errorElement.textContent = 'Please confirm by typing DELETE.';
     return;
   }
 
@@ -421,14 +408,13 @@ function confirmDeleteAccount() {
       return user.delete();
     })
     .then(() => {
-      alert("Hesabınız başarıyla silindi.");
       window.location.href = "register.html";
     })
     .catch((error) => {
       if (error.code === 'auth/wrong-password') {
-        errorElement.textContent = 'Şifre yanlış.';
+        errorElement.textContent = 'Password Wrong.';
       } else {
-        errorElement.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+        errorElement.textContent = 'An error occurred. Please try again.';
       }
     });
 }
@@ -436,11 +422,11 @@ function confirmDeleteAccount() {
 
 document.getElementById('volumeControl').addEventListener('input', function (e) {
   const volume = parseInt(e.target.value) / 100;
-  localStorage.setItem('ambientVolume', volume);  // 💾 Ayarı kaydet
-  window.defaultVolume = volume; // 🔁 Yeni sesler bu seviyede başlasın
+  localStorage.setItem('ambientVolume', volume);  // Save Setting
+  window.defaultVolume = volume;
 
   if (window.currentAudio) {
-    window.currentAudio.volume = volume; // 🎧 Ses anında değişsin
+    window.currentAudio.volume = volume; // 🎧 Change the sound instantly
   }
 });
 
@@ -451,9 +437,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedVolume !== null) {
     slider.value = Math.round(parseFloat(savedVolume) * 100);
   } else {
-    slider.value = 70; // İlk kez geliyorsa 70 olarak ayarla
+    slider.value = 70; // If it's your first time, set it to 70
   }
 });
-
-
-//language selector
