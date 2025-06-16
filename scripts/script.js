@@ -9,7 +9,7 @@
   if (!isOpen) {
     sidebar.classList.add('open');
 
-    // Dokunmayı dinlemeye başla
+    // Listen Click
     setTimeout(() => {
       document.addEventListener('click', handleOutsideClick);
     }, 10);
@@ -34,17 +34,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tıklanacak div elementini seç
     const sidebarAddTab = document.querySelector('.sidebaradd.sidebar-tab');
 
-    // Gizli input elementini seç
+    // Select hidden input element
     const fileInput = document.getElementById('file-input');
 
-    // Div'e tıklama olay dinleyicisi ekle
+    // Add click event listener to div
     sidebarAddTab.addEventListener('click', function() {
-        // Gizli input'a programatik olarak tıkla
+        // Click on hidden input programmatically
         fileInput.click();
     });
 });
 
-// Menü aç/kapa
+// Menu Open/Close
 function toggleLibrary() {
   const library = document.getElementById('library');
   library.classList.toggle('open');
@@ -62,13 +62,13 @@ function handleOutsideClicker(event) {
 
   const clickedElement = event.target;
 
-  // Eğer tıklanan yer library içinde veya toggle buton ise: kapatma
+  // If the clicked place is in the library or on the toggle button: close
   if (library.contains(clickedElement) || (toggleButton && toggleButton.contains(clickedElement))) return;
 
-  // Eğer tıklanan öğe .listener sınıfına sahipse: kapatma
+  // If the clicked element has the .listener class: close
   if (clickedElement.closest('.librarylistener')) return;
 
-  // Aksi halde library'yi kapat
+  // Otherwise close the library
   library.classList.remove('open');
   document.removeEventListener('click', handleOutsideClicker);
 }
@@ -391,22 +391,47 @@ function logout() {
   });
 }
 
-function deleteAccount() {
-  const user = firebase.auth().currentUser;
-  if (user) {
-    user.delete().then(() => {
-      alert("Hesabınız silindi.");
-      window.location.href = "register.html";
-    }).catch((error) => {
-      alert("Yeniden giriş yapmanız gerekebilir.");
-    });
-  }
+function showDeleteAccountModal() {
+  document.getElementById('deleteAccountModal').classList.remove('hidden');
 }
 
+function closeDeleteAccountModal() {
+  document.getElementById('deleteAccountModal').classList.add('hidden');
+  document.getElementById('deleteErrorMessage').textContent = '';
+  document.getElementById('confirmPassword').value = '';
+  document.getElementById('confirmDelete').value = '';
+}
 
+function confirmDeleteAccount() {
+  const password = document.getElementById('confirmPassword').value;
+  const deleteText = document.getElementById('confirmDelete').value;
+  const errorElement = document.getElementById('deleteErrorMessage');
 
+  if (deleteText !== 'DELETE') {
+    errorElement.textContent = 'Lütfen DELETE yazarak onaylayın.';
+    return;
+  }
 
+  const user = firebase.auth().currentUser;
+  const email = user.email;
+  const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
+  user.reauthenticateWithCredential(credential)
+    .then(() => {
+      return user.delete();
+    })
+    .then(() => {
+      alert("Hesabınız başarıyla silindi.");
+      window.location.href = "register.html";
+    })
+    .catch((error) => {
+      if (error.code === 'auth/wrong-password') {
+        errorElement.textContent = 'Şifre yanlış.';
+      } else {
+        errorElement.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+      }
+    });
+}
 
 
 document.getElementById('volumeControl').addEventListener('input', function (e) {
@@ -429,3 +454,6 @@ window.addEventListener('DOMContentLoaded', () => {
     slider.value = 70; // İlk kez geliyorsa 70 olarak ayarla
   }
 });
+
+
+//language selector

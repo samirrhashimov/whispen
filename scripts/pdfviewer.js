@@ -17,7 +17,7 @@ const fileInput = document.getElementById('file-input');
 
     fileInput.addEventListener('change', function (e) {
       const file = e.target.files[0];
-      if (!file || file.type !== "application/pdf") return alert("PDF seçin.");
+      if (!file || file.type !== "application/pdf") return alert("Select PDF");
 
       const reader = new FileReader();
       reader.onload = function () {
