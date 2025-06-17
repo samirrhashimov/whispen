@@ -273,7 +273,7 @@ body {
       background: var(--menu-color);
       background-size: cover;
       color: white;
-      z-index: 1000 !important;
+      z-index: 800;
       transition: left 0.3s ease;
       display: flex;
       flex-direction: column;
