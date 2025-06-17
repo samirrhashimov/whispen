@@ -10,7 +10,7 @@
 - 🎵 Ambient sound support (online & offline)
 - 🎨 Theme switching with customizable palettes
 - 📚 Library system and recent files history
-- 🗣️ Multilingual interface (English, Turkish, Russian, Spanish)
+- 🗣️ Multilingual interface (English, Azerbaijan, Turkish, Russian, Spanish)
 - 🔐 Firebase-based login & registration
 - ⚙️ Settings panel for volume, language, password, and account options
 
@@ -31,7 +31,7 @@ scripts/firebase-config.js
 
 ---
 
-🌍 Language Support
+## 🌍 Language Support
 
 🇬🇧 English (Default)
 
@@ -46,7 +46,7 @@ scripts/firebase-config.js
 
 ---
 
-🧩 Developer Guide
+## 🧩 Developer Guide
 
 Want to add new ambient sounds or themes?
 Check out the docs/dev-guide.txt for detailed instructions.
@@ -54,7 +54,7 @@ Check out the docs/dev-guide.txt for detailed instructions.
 
 ---
 
-🛡️ License
+## 🛡️ License
 
 This project is licensed under Creative Commons BY-NC-ND 4.0.
 
@@ -70,7 +70,7 @@ Learn more: creativecommons.org/licenses/by-nc-nd/4.0
 
 ---
 
-🙌 Contributing
+## 🙌 Contributing
 
 Feel free to open issues or submit pull requests.
 Whispen welcomes clean code and new ideas!
@@ -78,7 +78,7 @@ Whispen welcomes clean code and new ideas!
 
 ---
 
-📫 Contact
+##  📫 Contact
 
 Email: whispen.app@gmail.com
 
