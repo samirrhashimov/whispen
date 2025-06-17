@@ -44,6 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Select Click Div
+    const sidebarAddTab = document.querySelector('.plusbutton');
+
+    // Select hidden input element
+    const fileInput = document.getElementById('file-input');
+
+    // Add click event listener to div
+    sidebarAddTab.addEventListener('click', function() {
+        // Click on hidden input programmatically
+        fileInput.click();
+    });
+});
 // Menu Open/Close
 function toggleLibrary() {
   const library = document.getElementById('library');
