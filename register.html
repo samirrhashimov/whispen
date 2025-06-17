@@ -16,19 +16,35 @@
     <div class="video-bg">
      <img src="assets/images/loginbg.png">
     </div>
+    
+    <div style="position: absolute; top: 0.8rem; left: 1rem;">
+  <select id="languageSelect" onchange="changeLanguage(this.value)">
+    <option value="en">English</option>
+    <option value="az">Azərbaycan</option>
+    <option value="es">Español</option>
+    <option value="tr">Türkçe</option>
+    <option value="ru">Русский</option>
+  </select>
+</div>
+
     <div class="login-container">
         <h2></h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
+        <input data-i18n-placeholder="email-placeholder" type="email" id="email" placeholder="">
+        <input type="password" id="password" data-i18n-placeholder="password-placeholder" placeholder="">
         
       <div class="agreement">
 <input class="inline" type="checkbox" id="agreeCheckbox" onchange="toggleButton(this)">
- <p class="inline" id="agreeCheckboxp"> I accept the <a href="termsandconditions.html" target="_blank">Terms & Conditions</a> and 
-  <a href="privacypolicy.html" target="_blank">Privacy Policy</a>.
+ 
+ <p class="inline" id="agreeCheckboxp">
+  <span data-i18n="accept">I accept the</span>
+  <a href="./docs/termsandconditions.html" target="_blank" data-i18n="terms">Terms & Conditions</a>
+  <span data-i18n="and">and</span>
+  <a href="./docs/privacypolicy.html" target="_blank" data-i18n="privacy">Privacy Policy</a>.
 </p>
+
    </div>
 
-<button id="registerBtn" onclick="register()" disabled>Register</button>
+<button data-i18n="register" id="registerBtn" onclick="register()" disabled></button>
 
 <script>
   function toggleButton(checkbox) {
@@ -44,11 +60,16 @@
 <span style="font-weight: bold;">Google&nbsp </span>  ile Devam Et
 </button>
     -->
-    <button id="anonymousbutton" onclick="anonymous()" disabled>Try without account</button>
-        <p class="minitext">Do you have an account? <a href="login.html">Login</a></p>
+    <button data-i18n="withoutaccount" id="anonymousbutton" onclick="anonymous()" disabled></button>
+    
+    <p class="minitext">
+      <span data-i18n="haveaccount"></span>
+      <a data-i18n="login" href="login.html"></a>
+    </p>
     </div>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="scripts/language.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
     <script src="scripts/firebase-config.js"></script>
     <script src="scripts/login.js"></script>

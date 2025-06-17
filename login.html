@@ -18,13 +18,27 @@
      <img src="assets/images/loginbg.png">
   </div>
     
+  <div style="position: absolute; top: 0.8rem; left: 1rem;">
+  <select id="languageSelect" onchange="changeLanguage(this.value)">
+    <option value="en">English</option>
+    <option value="az">Azərbaycan</option>
+    <option value="es">Español</option>
+    <option value="tr">Türkçe</option>
+    <option value="ru">Русский</option>
+  </select>
+</div>
+    
+    
+    
+    
+    
     <div class="login-container">
         <h2></h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Login</button>
+        <input type="email" id="email" data-i18n-placeholder="email-placeholder" placeholder="">
+        <input type="password" id="password" data-i18n-placeholder="password-placeholder" placeholder="">
+        <button data-i18n="login" onclick="login()"></button>
         <div id="message" class="message"></div>
-    <p class="separator">or</p>
+    <p data-i18n="or" class="separator"></p>
 
 <!--
 <button class="google-btn"onclick="googleLogin()"style="background-color: black; color:white; font-family: 'roboto'">
@@ -32,12 +46,18 @@
 </button>
 
     -->
-<p class="minitext">Don't have an account? <a href="register.html">Register</a></p>
-<p class="minitext2"><a href="reset.html">Forgot your password?</a></p>
+<p class="minitext">
+  <span data-i18n="dontaccount"></span>
+  <a data-i18n="registertext" href="register.html"></a>
+</p>
+<p class="minitext2">
+  <a data-i18n="forgotpassword" href="reset.html"></a>
+</p>
     </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="scripts/language.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
     <script src="scripts/firebase-config.js"></script>
     <script src="scripts/login.js"></script>

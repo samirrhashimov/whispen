@@ -8,10 +8,24 @@
     <link rel="stylesheet" href="styles/reset.css">
 </head>
 <body>
+  <div style="position: absolute; top: 0.8rem; left: 1rem;">
+  <select id="languageSelect" onchange="changeLanguage(this.value)">
+    <option value="en">English</option>
+    <option value="az">Azərbaycan</option>
+    <option value="es">Español</option>
+    <option value="tr">Türkçe</option>
+    <option value="ru">Русский</option>
+  </select>
+</div>
+
  <div class="container">
-<h1>A verification link has been sent to your email address.</h1>
-<p> Please verify your email address then  <a id="loginreset"href="login.html">Login</a></p>
+<h1 data-i18n="verify-sent-title">A verification link has been sent to your email address.</h1>
+<p>
+  <span data-i18n="verify-sent-text">Please verify your email address then</span>
+  <a id="loginreset" href="login.html" data-i18n="verify-login">Login</a>
+</p>
    
  </div>
+ <script src="scripts/language.js"></script>
 </body>
 </html>

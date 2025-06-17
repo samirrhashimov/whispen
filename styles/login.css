@@ -212,7 +212,29 @@ a {
   flex-direction: row;
 }
 
+#languageSelect {
+  background: none;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  font-family: "Inter" , Segoe UI;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+#languageSelect:hover {
+  background: none;
+  transform: scale(1.03);
+}
 
+#languageSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #00000000;
+}
 @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 70%; }

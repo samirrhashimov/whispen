@@ -289,6 +289,12 @@ function closeLoginModal() {
 
 //settingsbutton
 function toggleSettingsMenu() {
+  const user = firebase.auth().currentUser;
+
+  if (!user || user.isAnonymous) {
+    showLoginModal();
+    return;
+  }
   const menu = document.getElementById('settingsMenu');
   menu.classList.toggle('open');
 }
