@@ -14,8 +14,8 @@
   --text-color: #d2f5d2;
   --text-color2: #ffffff;
   --menu-color: linear-gradient(135deg, #13810C 0%, #136400 50%, #13410C 100%);
-  --navbar-color: url('/assets/images/leafe_texture.png');
-  --controlbar-color:  url('/assets/images/wood_texture.png');
+  --navbar-color: url('/assets/images/leafe_texture.webp');
+  --controlbar-color:  url('/assets/images/wood_texture.webp');
   --button-color:linear-gradient(135deg, #2D5A5D 0%, #10816C 50%, #529788 100%);
   --navborder-radius: 0px;
 }
