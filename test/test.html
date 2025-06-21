@@ -1,0 +1,54 @@
+<!-- landing.html içine ekle -->
+<section class="roadmap">
+  <h2>🚇 Yol Haritası</h2>
+  <ul class="station-list">
+    <li class="station completed">PDF Görüntüleyici, Temalar, Sesler</li>
+    <li class="station completed">Çoklu Dil Desteği (5 dil)</li>
+    <li class="station">Beta Test Süreci</li>
+    <li class="station">Not Alma Sistemi ve Hesaplar</li>
+    <li class="station">AI Asistan & Özetleme</li>
+    <li class="station">Google Play / App Store Yayını</li>
+  </ul>
+</section>
+
+<style>
+.roadmap {
+  max-width: 600px;
+  margin: 50px auto;
+  font-family: sans-serif;
+}
+.roadmap h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.station-list {
+  list-style: none;
+  padding-left: 0;
+  position: relative;
+  border-left: 3px solid #ccc;
+}
+.station {
+  padding: 10px 20px;
+  margin-left: 10px;
+  position: relative;
+  border-radius: 4px;
+}
+.station::before {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.station.completed::before {
+  background-color: #4caf50;
+}
+.station.completed {
+  text-decoration: line-through;
+  color: #777;
+}
+</style>

@@ -144,7 +144,7 @@
     }
   
    .usecases {
-      background-color: #ffffff;
+      background-color: #f2f7fb;
       padding: 2rem 1rem;
     }
     .usecases h2 {
@@ -165,7 +165,7 @@
       margin-bottom: 0.8rem;
     }
     .faq {
-      background-color: #f2f7fb;
+      background-color: #ffffff;
       padding: 2rem 1rem;
     }
     .faq h2 {
@@ -191,7 +191,7 @@
       color: #666;
     }
     .contact {
-      background-color: #ffffff;
+      background-color: #f2f7fb;
       padding: 2rem 1rem;
     }
     .contact h2 {
@@ -217,6 +217,60 @@
       padding: 0;
       font-family: Poppins;
     }
+    .video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 9/16 = %56.25 */
+  height: 0;
+}
+.video-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.roadmap {
+  max-width: 600px;
+  margin: 25px auto;
+  font-family: sans-serif;
+  padding: 2rem 1rem;
+}
+.roadmap h2 {
+  margin-bottom: 20px;
+  font-family: Inter;
+}
+.station-list {
+  list-style: none;
+  padding-left: 0;
+  position: relative;
+  border-left: 3px solid #ccc;
+  font-family: Poppins;
+}
+.station {
+  padding: 10px 20px;
+  margin-left: 10px;
+  position: relative;
+  border-radius: 4px;
+}
+.station::before {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.station.completed::before {
+  background-color: #4caf50;
+}
+.station.completed {
+  text-decoration: line-through;
+  color: #777;
+}
   </style>
 </head>
 <body>
@@ -246,6 +300,10 @@
     </div>
   </main>
 
+<div class="video-container">
+  <iframe src="https://www.youtube.com/embed/lz9i6lUHvvc?si=yqzL_K2gxM2WTlZf" 
+    frameborder="0" allowfullscreen></iframe>
+</div>
   <!-- Features Section -->
   <section class="features">
     <h2 data-i18n="features_title">Why Choose Whispen?</h2>
@@ -258,12 +316,25 @@
       <li data-i18n="feature_6">🗣️ Multilingual interface (English, Azerbaijan, Turkish, Russian, Spanish)</li>
     </ul>
   </section>
+  <section class="roadmap">
+  <h2 data-i18n="roadmap_title">Roadmap</h2>
+  <ul class="station-list">
+    <li class="station completed" data-i18n="step_pdf_viewer">PDF Viewer, Themes, Ambient Sounds</li>
+    <li class="station completed" data-i18n="step_multilang">Multi Language support (EN,TR +3 more)</li>
+    <li class="station" data-i18n="step_beta">Beta Testing Phase</li>
+    <li class="station" data-i18n="step_notes">Note Taking Integration</li>
+    <li class="station" data-i18n="step_asset">User asset ownership system</li>
+    <li class="station" data-i18n="step_stbbeta">Stable Beta</li>
+    <li class="station" data-i18n="step_ai">AI Assistant, AI Vocabulary, AI Summarizer</li>
+    <li class="station" data-i18n="step_publish">Google Play / App Store Release</li>
+  </ul>
+</section>
   <section class="usecases">
   <h2 data-i18n="use_cases_title">Who is Whispen for?</h2>
   <ul>
     <li data-i18n="use_case_students"><strong>Students:</strong> Study long PDFs with peaceful background sound to stay focused.</li>
     <li data-i18n="use_case_readers"><strong>Readers:</strong> Enjoy immersive reading with adjustable themes and no distractions.</li>
-    <li data-i18n="use_case_devs"><strong>Developers & Researchers:</strong> Read tech docs in a calm environment, offline or online.</li>
+    <li data-i18n="use_case_devs"><strong>Developers & Researchers:</strong> Read tech docs in a calm environment.</li>
   </ul>
 </section>
 <section class="faq">

@@ -235,8 +235,10 @@ function insertCanvasInOrder(canvas, pageNum) {
 // Basitleştirilmiş zoom fonksiyonu
 function updateZoom() {  
   cssZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, cssZoom));  
-  pdfContainer.style.transform = `scale(${cssZoom})`;
-  pdfContainer.style.transformOrigin = 'center center';
+  pdfContainer.style.transform = `scale(${cssZoom})`;  
+  pdfContainer.style.transformOrigin = '0 0'; // Üst sol köşe sabit kalsın  
+  pdfContainer.style.width = `${100 / cssZoom}%`; // Boyutları ölçeğe göre ayarla  
+  pdfContainer.style.height = `${100 / cssZoom}%`;  
 }  
 
 zoomInBtn.addEventListener('click', () => {  
@@ -247,7 +249,7 @@ zoomInBtn.addEventListener('click', () => {
 zoomOutBtn.addEventListener('click', () => {  
   cssZoom = Math.max(MIN_ZOOM, cssZoom - 0.2);  
   updateZoom();  
-});  
+});
 
 // Basitleştirilmiş touch kontrolleri
 let isZooming = false;
