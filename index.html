@@ -327,10 +327,88 @@ volumeSlider.addEventListener("input", () => {
 </div>
 </div>
 <!-- + Button -->
-<div class="plusbutton" style="position: absolute; bottom: 30px; right: 20px; width: 55px; height: 55px; background: var(--button-color); z-index: #999; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 7px; cursor: pointer; font-size: 30px;">
+<!-- Buton + Tooltip -->
+<div style="position: absolute; bottom: 30px; right: 20px; z-index: 999;">
+
+  <!-- Açılır Yazı -->
+  <div id="tooltip" data-i18n="new_pdf" style="
+    position: absolute;
+    bottom: 70px;
+    right: 0px;
+    background: #2c2c2c;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  ">
+    Open New PDF
+  </div>
+
+  <!-- Buton -->
+  <div class="plusbutton" id="plus-btn" style="
+    width: 55px;
+    height: 55px;
+    background: var(--button-color);
+    z-index: #999;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 30px;
+    animation: glow 3s linear forwards;
+  ">
     +
+  </div>
 </div>
-<input type="file" id="file-input" style="display: none;">
+
+<!-- Gizli Dosya Seçici -->
+<input type="file" id="file-input" style="display: none;" accept="application/pdf" />
+
+<!-- Animasyon Tanımı -->
+<style>
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #3f87ff, 0 0 10px #7f00ff;
+    }
+    25% {
+      box-shadow: 0 0 10px #7f00ff, 0 0 15px #00ffcc;
+    }
+    50% {
+      box-shadow: 0 0 15px #00ffcc, 0 0 20px #39ff14;
+    }
+    75% {
+      box-shadow: 0 0 10px #39ff14, 0 0 15px #0099ff;
+    }
+    100% {
+      box-shadow: 0 0 0px transparent;
+    }
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const tooltip = document.getElementById("tooltip");
+
+    // Tooltip göster
+    setTimeout(() => {
+      tooltip.style.opacity = "1";
+      tooltip.style.transform = "translateY(0)";
+    }, 200);
+
+    setTimeout(() => {
+      tooltip.style.opacity = "0";
+      tooltip.style.transform = "translateY(10px)";
+    }, 3200);
+  });
+</script>
 
   <div id="pdf-scroll">
     <div id="pdf-container"></div>

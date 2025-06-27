@@ -89,7 +89,8 @@
     "faq_sound_a": "Evet, yağmur, rüzgar, kafe gibi birçok ortam sesi arasından seçim yapabilirsiniz.",
     "contact_title": "İletişim",
     "contact_info": "Geri bildiriminiz mi var ya da katkıda mı bulunmak istiyorsunuz?",
-    "footer_text": "© 2025 Whispen. Tüm hakları saklıdır."
+    "footer_text": "© 2025 Whispen. Tüm hakları saklıdır.",
+     "new_pdf": "Yeni PDF Aç"
   },
   "en": {
     "library": "Library",
@@ -182,7 +183,8 @@
     "faq_sound_a": "Yes, you can choose from multiple ambient sounds (rain, wind, cafe, and more).",
     "contact_title": "Contact",
     "contact_info": "Have feedback or want to contribute?",
-    "footer_text": "© 2025 Whispen. All rights reserved."
+    "footer_text": "© 2025 Whispen. All rights reserved.",
+    "new_pdf": "Open New PDF"
     
   },
   "ru": {
@@ -274,7 +276,8 @@
     "faq_sound_a": "Да, можно выбрать из множества звуков (дождь, ветер, кафе и др.).",
     "contact_title": "Контакты",
     "contact_info": "Есть отзывы или хотите внести вклад?",
-    "footer_text": "© 2025 Whispen. Все права защищены."
+    "footer_text": "© 2025 Whispen. Все права защищены.",
+    "new_pdf": "Открыть PDF"
 },
 "es": {
   "library": "Biblioteca",
@@ -365,7 +368,8 @@
     "faq_sound_a": "Sí, puedes elegir entre múltiples sonidos ambientales (lluvia, viento, café y más).",
     "contact_title": "Contacto",
     "contact_info": "¿Tienes comentarios o deseas contribuir?",
-    "footer_text": "© 2025 Whispen. Todos los derechos reservados."
+    "footer_text": "© 2025 Whispen. Todos los derechos reservados.",
+    "new_pdf": "Abrir PDF nuevo"
 },
 "az": {
   "library": "Kitabxana",
@@ -457,6 +461,7 @@
     "faq_sound_a": "Bəli, bir neçə fon səsi arasından seçim edə bilərsiniz (yağış, külək, kafe və s.).",
     "contact_title": "Əlaqə",
     "contact_info": "Rəy bildirmək və ya töhfə vermək istəyirsiniz?",
-    "footer_text": "© 2025 Whispen. Bütün hüquqlar qorunur."
+    "footer_text": "© 2025 Whispen. Bütün hüquqlar qorunur.",
+    "new_pdf": "Yeni PDF Aç"
 }
 }

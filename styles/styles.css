@@ -135,13 +135,6 @@ body {
       background: var(--bg-color);
       background-size: cover;
     }
-#betaicon {
-  position: fixed;
-  width: 30px;
-  height: 20px;
-  right: 9px;
-  top: 3px;
-}
     #controls {
       display: flex;
       gap: 10px;
@@ -257,12 +250,20 @@ body {
       cursor: pointer;
     }
       
-  .whispennavbar {
+.whispennavbar {
     font-size: 20px;
     font-family: Comfortaa;
     font-weight: bold;
-  }
+}
   
+#betaicon {
+  position: fixed;
+  width: 40px;
+  height: 30px;
+  right: 4px;
+  top: 2px;
+  clip-path: inset(10px 5px 10px 5px );
+}
   
 .sidebar {
       position: fixed;
@@ -364,7 +365,7 @@ body {
   .mobile-toggle {
       background: none;
       border: none;
-      color: #d1d5db;
+      color: #ffffff;
       font-size: 1.5rem;
     }
   .centermaker {
