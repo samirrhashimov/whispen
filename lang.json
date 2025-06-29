@@ -82,7 +82,7 @@
     "faq_apk_safe_q": "APK güvenli mi?",
     "faq_apk_safe_a": "Evet, APK kendi sunucumuzda barındırılır, reklam veya takip içermez. Whispen açık kaynaklıdır. Dikkat! Sadece resmi Whispen kaynaklarından indirin!",
     "faq_data_q": "Verilerim nerede saklanıyor?",
-    "faq_data_a": "Notlarınız ve ayarlarınız tarayıcınızda yerel olarak IndexedDB ile saklanır.",
+    "faq_data_a": "Verileriniz IndexedDB, LocalStorage ve Firebase veritabanı kullanılarak saklanır.",
     "faq_login_q": "Giriş yapmak zorunda mıyım?",
     "faq_login_a": "Giriş yapmak zorunda değilsiniz. Uygulamanın demosunu giriş yapmadan kullanabilirsiniz. Bazı özellikler kilitli olabilir.",
     "faq_sound_q": "Arka plan seslerini değiştirebilir miyim?",
@@ -90,7 +90,12 @@
     "contact_title": "İletişim",
     "contact_info": "Geri bildiriminiz mi var ya da katkıda mı bulunmak istiyorsunuz?",
     "footer_text": "© 2025 Whispen. Tüm hakları saklıdır.",
-     "new_pdf": "Yeni PDF Aç"
+     "new_pdf": "Yeni PDF Aç",
+     "notes": "Notlar:",
+    "add_note": "Not Ekle:",
+    "edit_note": "Notu Düzenle:",
+    "notetitle": "Başlık",
+    "notecontent": "Düşüncelerini kaleme al"
   },
   "en": {
     "library": "Library",
@@ -176,7 +181,7 @@
     "faq_apk_safe_q": "Is the APK safe to install?",
     "faq_apk_safe_a": "Yes, the APK is self-hosted and free of trackers or ads. Whispen is open-source on GitHub. Attention! Download files only from official Whispen accounts and sites!",
     "faq_data_q": "Where is my data stored?",
-    "faq_data_a": "Your notes and settings are stored locally in your browser using IndexedDB.",
+    "faq_data_a": "Your data is stored using IndexedDB, LocalStorage, and the Firebase database.",
     "faq_login_q": "Do I need to log in?",
     "faq_login_a": "No login is required. You can use the application demo without logging in. Some features may not be unlocked in the demo version.",
     "faq_sound_q": "Can I change the background sounds?",
@@ -184,7 +189,10 @@
     "contact_title": "Contact",
     "contact_info": "Have feedback or want to contribute?",
     "footer_text": "© 2025 Whispen. All rights reserved.",
-    "new_pdf": "Open New PDF"
+    "new_pdf": "Open New PDF",
+    "notes": "Notes:",
+    "add_note": "Add Note:",
+    "edit_note": "Edit Note:"
     
   },
   "ru": {
@@ -269,7 +277,7 @@
     "faq_apk_safe_q": "APK безопасен?",
     "faq_apk_safe_a": "Да, файл безопасен, без рекламы и трекеров. Whispen — это open-source. Внимание! Загружайте только с официальных сайтов.",
     "faq_data_q": "Где хранятся мои данные?",
-    "faq_data_a": "Ваши заметки и настройки хранятся локально в вашем браузере через IndexedDB.",
+    "faq_data_a": "Ваши данные хранятся с использованием IndexedDB, LocalStorage и базы данных Firebase.",
     "faq_login_q": "Нужно ли входить в систему?",
     "faq_login_a": "Нет, вход не требуется. Вы можете использовать демо-версию без входа. Некоторые функции могут быть ограничены.",
     "faq_sound_q": "Можно ли менять звуки фона?",
@@ -277,7 +285,10 @@
     "contact_title": "Контакты",
     "contact_info": "Есть отзывы или хотите внести вклад?",
     "footer_text": "© 2025 Whispen. Все права защищены.",
-    "new_pdf": "Открыть PDF"
+    "new_pdf": "Открыть PDF",
+    "notes": "Заметки:",
+    "add_note": "Добавить заметку:",
+    "edit_note": "Редактировать заметку:"
 },
 "es": {
   "library": "Biblioteca",
@@ -361,7 +372,7 @@
     "faq_apk_safe_q": "¿Es seguro instalar el APK?",
     "faq_apk_safe_a": "Sí, el APK está alojado de forma segura y no contiene rastreadores ni anuncios. Whispen es de código abierto en GitHub. ¡Atención! Descarga solo desde fuentes oficiales.",
     "faq_data_q": "¿Dónde se guardan mis datos?",
-    "faq_data_a": "Tus notas y configuraciones se guardan localmente en tu navegador usando IndexedDB.",
+    "faq_data_a": "Tus datos se almacenan usando IndexedDB, LocalStorage y la base de datos de Firebase.",
     "faq_login_q": "¿Necesito iniciar sesión?",
     "faq_login_a": "No se requiere inicio de sesión. Puedes usar la demo sin iniciar sesión. Algunas funciones podrían estar limitadas.",
     "faq_sound_q": "¿Puedo cambiar los sonidos de fondo?",
@@ -369,7 +380,10 @@
     "contact_title": "Contacto",
     "contact_info": "¿Tienes comentarios o deseas contribuir?",
     "footer_text": "© 2025 Whispen. Todos los derechos reservados.",
-    "new_pdf": "Abrir PDF nuevo"
+    "new_pdf": "Abrir PDF nuevo",
+    "notes": "Notas:",
+    "add_note": "Agregar Nota:",
+    "edit_note": "Editar Nota:"
 },
 "az": {
   "library": "Kitabxana",
@@ -454,7 +468,7 @@
     "faq_apk_safe_q": "APK təhlükəsizdirmi?",
     "faq_apk_safe_a": "Bəli, APK təhlükəsizdir, reklam və izləyicilər yoxdur. Whispen açıq mənbəlidir. Diqqət! Yalnız rəsmi mənbələrdən yükləyin.",
     "faq_data_q": "Məlumatlarım harada saxlanılır?",
-    "faq_data_a": "Qeydlər və parametrlər brauzerinizdə IndexedDB ilə yerli olaraq saxlanılır.",
+    "faq_data_a": "Məlumatlarınız IndexedDB, LocalStorage və Firebase verilənlər bazasında saxlanılır.",
     "faq_login_q": "Giriş etməliyəmmi?",
     "faq_login_a": "Xeyr, giriş tələb olunmur. Demo versiyanı qeydiyyatsız istifadə edə bilərsiniz. Bəzi funksiyalar bağlı ola bilər.",
     "faq_sound_q": "Fon səslərini dəyişmək mümkündürmü?",
@@ -462,6 +476,9 @@
     "contact_title": "Əlaqə",
     "contact_info": "Rəy bildirmək və ya töhfə vermək istəyirsiniz?",
     "footer_text": "© 2025 Whispen. Bütün hüquqlar qorunur.",
-    "new_pdf": "Yeni PDF Aç"
+    "new_pdf": "Yeni PDF Aç",
+    "notes": "Qeydlər:",
+    "add_note": "Qeyd əlavə et:",
+    "edit_note": "Qeydi redaktə et:"
 }
 }

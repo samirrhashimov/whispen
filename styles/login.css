@@ -235,6 +235,8 @@ a {
   outline: none;
   box-shadow: 0 0 0 2px #00000000;
 }
+
+
 @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 70%; }

@@ -459,3 +459,47 @@ window.addEventListener('DOMContentLoaded', () => {
     slider.value = 70; // If it's your first time, set it to 70
   }
 });
+
+
+
+
+
+function toggleNotesMenu() {
+  const user = firebase.auth().currentUser;
+
+  if (!user || user.isAnonymous) {
+    showLoginModal();
+    return;
+  }
+
+  const menu = document.getElementById('noteMenu');
+  menu.classList.toggle('open');
+}
+
+// Close when clicking outside the menu
+document.addEventListener('click', function(event) {
+  const menu = document.getElementById('noteMenu');
+
+  if (!menu.classList.contains('open')) return;
+
+  if (
+    menu.contains(event.target) ||
+    event.target.closest('.sidebar-tab, #controls, svg, .addmodal')
+  ) return;
+
+  menu.classList.remove('open');
+});
+
+
+
+
+
+function setupModalOutsideClick(modal, contentSelector) {
+  modal.addEventListener("click", (e) => {
+    if (!e.target.closest(contentSelector)) {
+      closeModal(modal);
+    }
+  });
+}
+
+setupModalOutsideClick(noteModal, ".modal-content2");
