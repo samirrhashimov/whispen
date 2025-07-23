@@ -155,37 +155,40 @@ body {
       border: none;
     }
 
-  #zoom-in, #zoom-out {
-    display: none;
-  }
-  .music-controls {
-      position: absolute;
-      display: flex;
-      right: 10px;
-    }
-  .musiclogo {
-    height: 18px;
-    width: 18px;
-  }
-  .musicname {
-    display: flex;
-    gap: 20px
-    margin-right: 20px;
-    align-items: center;
-  }
-#musicnametext{
-  margin-left: 13px;
+#greeting {
+  color: #000;
+  z-index: 9999;
+  padding: 0 0 0 15px;
+  font-size: 18px;
   font-family: Inter;
-  font-size: 13px;
-  max-width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--text-color2);
+  font-weight: Bold;
 }
-.musiclogo {
-  margin-left: 10px;
+.hellobar {
+  position: absolute;
+  top: -3px;
+  line-height: 12px;
+  width: 100vw;
+  box-sizing: border-box;
 }
+#hello {
+  position: relative;
+  top: 10px;
+  padding: 0 0 0 15px;
+  color: #777;
+  font-family: Poppins;
+  font-size: 15px;
+}
+.mobile-toggle {
+  position: absolute;
+  top: 15px;
+  right: 13px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1.8rem;
+}
+
+
     #pdf-scroll {
       height: calc(100vh - 70px);
       overflow: auto;
@@ -364,12 +367,6 @@ body {
       font-size: 1.2rem;
     }
     
-  .mobile-toggle {
-      background: none;
-      border: none;
-      color: #ffffff;
-      font-size: 1.5rem;
-    }
   .centermaker {
     display: flex;
     justify-content: center;

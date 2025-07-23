@@ -503,3 +503,26 @@ function setupModalOutsideClick(modal, contentSelector) {
 }
 
 setupModalOutsideClick(noteModal, ".modal-content2");
+
+
+//test
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var uid = user.uid;
+      var db = firebase.firestore();
+
+      db.collection("users").doc(uid).get().then(function(doc) {
+        if (doc.exists) {
+          var username = doc.data().username;
+          var usernameSpan = document.getElementById("username");
+          if (usernameSpan) {
+            usernameSpan.textContent = username;
+          }
+        } else {
+          console.log("Kullanıcı belgesi bulunamadı.");
+        }
+      }).catch(function(error) {
+        console.error("Kullanıcı adı alınamadı:", error);
+      });
+    }
+  });

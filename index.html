@@ -17,6 +17,7 @@
   <meta name="twitter:url" content="https://whispen.netlify.app">
   <meta name="twitter:site" content="@whispenapp">
   <title>Whispen</title>
+  
   <link href="./styles/styles.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +30,7 @@
 </head>
 <body>
   <nav>
+    <!--
     <img id="betaicon" src="./assets/images/betaicon.webp">
     <div class="container">
       <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
@@ -37,7 +39,21 @@
       <p class="whispennavbar">Whispen</p>
     </div>
     </div>
+    -->
   </nav>
+  
+  
+  
+      <div class="hellobar">
+<p id="hello">Hello <span id="username">a</span>👋🏻</p>
+
+     <p data-i18n="greeting" id="greeting">...</p>
+     <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+     </div>
+  
+  
+  
+  
    <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleMobileMenu()">×</button>
 
@@ -185,6 +201,7 @@
 </div>
 </div>
 
+<!-- Ambient Controller bar
   <div id="controls" onclick="toggleAmbientMenu()">
     <button id="zoom-in">+</button>
     <button id="zoom-out">-</button>
@@ -204,6 +221,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="20" height="20"><path d="M8.127,24l9.507-9.52a3.507,3.507,0,0,0,0-4.948L8.116,0,6,2.121l9.518,9.531a.5.5,0,0,1,0,.707L6.01,21.879Z"/></svg>
   </div>
 </div>
+-->
 
 <!-- Login alert modal -->
 <div id="loginModal" class="modal">

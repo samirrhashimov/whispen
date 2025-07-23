@@ -95,7 +95,11 @@
     "add_note": "Not Ekle:",
     "edit_note": "Notu Düzenle:",
     "notetitle": "Başlık",
-    "notecontent": "Düşüncelerini kaleme al"
+    "notecontent": "Düşüncelerini kaleme al",
+    "morning": "Günaydın",
+    "afternoon": "Tünaydın",
+    "evening": "İyi akşamlar",
+    "night": "İyi geceler"
   },
   "en": {
     "library": "Library",
@@ -192,7 +196,11 @@
     "new_pdf": "Open New PDF",
     "notes": "Notes:",
     "add_note": "Add Note:",
-    "edit_note": "Edit Note:"
+    "edit_note": "Edit Note:",
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "night": "Good night"
     
   },
   "ru": {
@@ -288,7 +296,11 @@
     "new_pdf": "Открыть PDF",
     "notes": "Заметки:",
     "add_note": "Добавить заметку:",
-    "edit_note": "Редактировать заметку:"
+    "edit_note": "Редактировать заметку:",
+    "morning": "Доброе утро",
+    "afternoon": "Добрый день",
+    "evening": "Добрый вечер",
+    "night": "Спокойной ночи"
 },
 "es": {
   "library": "Biblioteca",
@@ -383,7 +395,11 @@
     "new_pdf": "Abrir PDF nuevo",
     "notes": "Notas:",
     "add_note": "Agregar Nota:",
-    "edit_note": "Editar Nota:"
+    "edit_note": "Editar Nota:",
+    "morning": "Buenos días",
+    "afternoon": "Buenas tardes",
+    "evening": "Buena tarde",
+    "night": "Buenas noches"
 },
 "az": {
   "library": "Kitabxana",
@@ -479,6 +495,10 @@
     "new_pdf": "Yeni PDF Aç",
     "notes": "Qeydlər:",
     "add_note": "Qeyd əlavə et:",
-    "edit_note": "Qeydi redaktə et:"
+    "edit_note": "Qeydi redaktə et:",
+    "morning": "Sabahınız xeyir",
+    "afternoon": "Günortanız xeyir",
+    "evening": "Axşamınız xeyir",
+    "night": "Gecəniz xeyrə qalsın"
 }
 }

@@ -1,22 +1,165 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8" />
-    <title>PDF Viewer</title>
-    <style>
-        html, body, iframe {
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            width: 100%;
-            border: none;
-        }
-        iframe {
-            display: block;
-        }
-    </style>
-</head>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
 <body>
-    <iframe src="pdfview/viewer.html" frameborder="0" width="100%" height="100%"></iframe>
+  <style>
+  body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.iframe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  width: 100vw;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.custom-iframe {
+  width: 100vw;
+  height: 80vh;
+  border: none;
+  border-radius: 10px 10px 0 0;
+}
+#languageSelect {
+  position: absolute;
+  top: 10px
+}
+#deleteheader {
+  position:absolute;
+  top: 10px;
+  
+  
+}
+
+#greeting {
+  color: #000;
+  z-index: 9999;
+  padding: 0 0 0 10px;
+  font-size: 18px;
+  font-family: Inter;
+  font-weight: Bold;
+}
+.hellobar {
+  border: 1px dashed red;
+  position: absolute;
+  top: 60px;
+  line-height: 12px;
+  width: 100vw;
+}
+#hello {
+  position: relative;
+  top: 10px;
+  padding: 0 0 0 10px;
+  color: #777;
+  font-family: Poppins;
+  font-size: 15px;
+}
+.mobile-toggle {
+  position: absolute;
+  top: 23px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+  </style>
+<div class="iframe-wrapper">
+  <iframe src="../pdf.js/web/viewer.html" class="custom-iframe" allowfullscreen></iframe>
+  
+  
+  
+</div>
+ <select id="languageSelect" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="az">Azərbaycan</option>
+      <option value="es">Español</option>
+      <option value="tr">Türkçe</option>
+      <option value="ru">Русский</option>
+    </select>
+    <h3 id="deleteheader" data-i18n="delete-account"></h3>
+    
+    <div class="hellobar">
+     <p id="hello">Hello Samir👋🏻</p>
+     <p data-i18n="greeting" id="greeting">...</p>
+     <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+     </div>
+     
+     
+  <script>
+    const translations = {
+      en: {
+        morning: "Good morning",
+        afternoon: "Good afternoon",
+        evening: "Good evening",
+        night: "Good night"
+      },
+      tr: {
+        morning: "Günaydın",
+        afternoon: "Tünaydın",
+        evening: "İyi akşamlar",
+        night: "İyi geceler"
+      },
+      az: {
+        morning: "Sabahınız xeyir",
+        afternoon: "Günortanız xeyir",
+        evening: "Axşamınız xeyir",
+        night: "Gecəniz xeyrə qalsın"
+      },
+      es: {
+        morning: "Buenos días",
+        afternoon: "Buenas tardes",
+        evening: "Buena tarde",
+        night: "Buenas noches"
+      },
+      ru: {
+        morning: "Доброе утро",
+        afternoon: "Добрый день",
+        evening: "Добрый вечер",
+        night: "Спокойной ночи"
+      }
+    };
+    
+    
+    function getTimeKey() {
+      const hour = new Date().getHours();
+      if (hour >= 5 && hour < 12) return "morning";
+      if (hour >= 12 && hour < 17) return "afternoon";
+      if (hour >= 17 && hour < 21) return "evening";
+      return "night";
+    }
+
+    function changeLanguage(lang) {
+      const timeKey = getTimeKey();
+      const greetingElement = document.querySelector('[data-i18n="greeting"]');
+      const translatedText = translations[lang]?.[timeKey] || translations['en'][timeKey];
+      greetingElement.textContent = translatedText;
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+      const defaultLang = document.getElementById("languageSelect").value;
+      changeLanguage(defaultLang);
+    });
+  </script>
+  
+  
+ <script src="scripts/login.js"></script>
+<script src="scripts/language.js"></script>
+<script src="scripts/firebase-config.js"></script>
+<script src="scripts/notes.js"></script>
+<script src="scripts/soundsystem.js"></script>
+<script src="scripts/pdfviewer.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
