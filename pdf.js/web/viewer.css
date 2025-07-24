@@ -4608,7 +4608,7 @@
   --sidebar-transition-duration:200ms;
   --sidebar-transition-timing-function:ease;
 
-  --toolbar-height:32px;
+  --toolbar-height:35px;
   --toolbar-horizontal-padding:1px;
   --toolbar-vertical-padding:2px;
   --icon-size:16px;
@@ -4746,7 +4746,7 @@
 :root{
 
   --main-color:light-dark(rgb(12 12 13), rgb(249 249 250));
-  --body-bg-color:light-dark(rgb(212 212 215), rgb(42 42 46));
+  --body-bg-color:light-dark(rgb(212 212 215), rgb(230 230 230));
   --progressBar-color:light-dark(rgb(10 132 255), rgb(0 96 223));
   --progressBar-bg-color:light-dark(rgb(221 221 222), rgb(40 40 43));
   --progressBar-blend-color:light-dark(rgb(116 177 239), rgb(20 68 133));
@@ -4760,7 +4760,7 @@
     rgb(42 42 46 / 0.9)
   );
   --sidebar-toolbar-bg-color:light-dark(rgb(245 246 247), rgb(50 50 52));
-  --toolbar-bg-color:light-dark(rgb(249 249 250), rgb(56 56 61));
+  --toolbar-bg-color:light-dark(rgb(249 249 250), rgb(0 0 0));
   --toolbar-border-color:light-dark(rgb(184 184 184), rgb(12 12 13));
   --toggled-btn-color:light-dark(rgb(0 0 0), rgb(255 255 255));
   --dropdown-btn-bg-color:light-dark(rgb(215 215 219), rgb(74 74 79));
@@ -4783,7 +4783,7 @@
     rgb(0 0 0 / 0.2),
     rgb(255 255 255 / 0.2)
   );
-  --doorhanger-bg-color:light-dark(rgb(255 255 255), #42414d);
+  --doorhanger-bg-color:light-dark(rgb(255 255 255), #000000);
   --doorhanger-border-color:light-dark(rgb(12 12 13 / 0.2), rgb(39 39 43));
   --doorhanger-hover-color:light-dark(rgb(12 12 13), rgb(249 249 250));
   --doorhanger-separator-color:light-dark(rgb(222 222 222), rgb(92 92 97));

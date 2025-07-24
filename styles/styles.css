@@ -17,7 +17,7 @@
   --menu-color: linear-gradient(135deg, #13810C 0%, #136400 50%, #13410C 100%);
   --navbar-color: url('/assets/images/leafe_texture.webp');
   --controlbar-color:  url('/assets/images/wood_texture.webp');
-  --button-color:linear-gradient(135deg, #2D5A5D 0%, #10816C 50%, #529788 100%);
+  --button-color:linear-gradient(135deg, #004900 0%, #004400 50%, #004000 100%);
   --navborder-radius: 0px;
   --greeting-color: #13810C;
 }
@@ -146,6 +146,7 @@ body {
       background: var(--bg-color);
       background-size: cover;
       overflow-y: hidden;
+      overflow-x: hidden;
     }
     
     #controls {
@@ -406,6 +407,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
+  border-radius: 0 7px 7px 0;
+  border-right: 1.5px solid #11111177;
 }
 
 .library.open {
@@ -491,6 +494,8 @@ body {
       transition: left 0.3s ease;
       display: flex; flex-direction: column;
       padding: 1rem;
+      border-radius: 0 7px 7px 0;
+      border-right: 1.5px solid #11111177;
     }
     .ambientdiv.open { left: 0; }
     }
@@ -552,6 +557,8 @@ body {
       display: flex;
       flex-direction: column;
       padding: 1rem;
+      border-radius: 0 7px 7px 0;
+      border-right: 1.5px solid #11111177;
     }
     .themesdiv.open { left: 0; }
     }
@@ -587,6 +594,8 @@ body {
   flex-direction: column;
   padding: 1rem;
   overflow-y: auto;
+  border-radius: 0 7px 7px 0;
+  border-right: 1.5px solid #11111177;
 }
 .notetitle {
   font-weight: bold;
@@ -859,6 +868,8 @@ body {
   padding: 1rem;
   gap: 0.85rem;
   overflow-x: hidden;
+  border-radius: 0 7px 7px 0;
+  border-right: 1.5px solid #11111177;
 }
 
 .settingsmenu.open {
