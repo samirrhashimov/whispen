@@ -241,7 +241,7 @@ document.addEventListener('click', function(event) {
   // If the clicked location is inside the menu or open button, close
   if (
     menu.contains(event.target) ||
-    event.target.closest('.sidebar-tab, #controls, svg')
+    event.target.closest('.sidebar-tab, #controls, svg, .bottomnav')
   ) return;
 
   menu.classList.remove('open');

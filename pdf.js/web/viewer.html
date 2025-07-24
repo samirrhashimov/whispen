@@ -731,5 +731,19 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     </div> <!-- outerContainer -->
     <div id="printContainer"></div>
+    
+    
+    <script>
+window.addEventListener("message", (event) => {
+  if (event.data === "triggerOpenFile") {
+    const openButton = document.getElementById("secondaryOpenFile");
+    if (openButton) {
+      openButton.click();
+    }
+  }
+});
+</script>
+
+
   </body>
 </html>
