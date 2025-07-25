@@ -1130,8 +1130,30 @@ body {
   border-radius: 10px 10px 0 0;
   
 }
+#openBtn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.15);
+  transform: scale(0);
+  animation: rippleEffect 0.5s ease-out;
+  pointer-events: none;
+}
+
 
 /* Animations */ 
+@keyframes rippleEffect {
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
 @keyframes popEffect {
     0% {
         transform: scale(1);

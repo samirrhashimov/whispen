@@ -30,33 +30,7 @@ function handleOutsideClick(event) {
 }
 
 //sidebar add toggleButton
-document.addEventListener('DOMContentLoaded', function() {
-    // Select Click Div
-    const sidebarAddTab = document.querySelector('.sidebaradd.sidebar-tab');
 
-    // Select hidden input element
-    const fileInput = document.getElementById('file-input');
-
-    // Add click event listener to div
-    sidebarAddTab.addEventListener('click', function() {
-        // Click on hidden input programmatically
-        fileInput.click();
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Select Click Div
-    const sidebarAddTab = document.querySelector('.plusbutton');
-
-    // Select hidden input element
-    const fileInput = document.getElementById('file-input');
-
-    // Add click event listener to div
-    sidebarAddTab.addEventListener('click', function() {
-        // Click on hidden input programmatically
-        fileInput.click();
-    });
-});
 // Menu Open/Close
 function toggleLibrary() {
   const library = document.getElementById('library');
@@ -305,8 +279,6 @@ function toggleSettingsMenu() {
   const user = firebase.auth().currentUser;
 
   if (!user || user.isAnonymous) {
-    showLoginModal();
-    return;
   }
   const menu = document.getElementById('settingsMenu');
   menu.classList.toggle('open');
@@ -321,8 +293,6 @@ document.addEventListener('click', function(event) {
 
   menu.classList.remove('open');
 });
-
-
 
 
 //settings
