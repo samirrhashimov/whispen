@@ -14,6 +14,10 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
+    html {
+      height: 100vh;
+      overflow: hidden;
+    }
 
     body {
       min-height: 100vh;
@@ -24,26 +28,32 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 0;
+      perspective: 1000px;
     }
 
     .title {
       color: white;
       font-family: Comfortaa;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       text-shadow: 1px 1px 8px rgba(0,0,0,0.3);
     }
 
-    .screenshot {
-      width: 85%;
-      max-width: 360px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      aspect-ratio: 9 / 16;
-      background-color: rgba(255, 255, 255, 0.1);
-      background-size: cover;
-      background-position: center;
-    }
+.screenshot {
+  width: 70%;
+  max-width: 360px;
+  aspect-ratio: 9 / 17.5;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  
+  transform: rotateY(-20deg) rotateX(15deg) scale(0.93);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  animation: screenshotEnter 1s ease-out forwards;
+}
 
     .button-container {
       width: 90%;
@@ -80,17 +90,93 @@
     .signin-btn:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
+    
+    .subtitle {
+      font-family: Poppins;
+      color: #ccc;
+      font-size: 12px;
+    }
+    
+.whispen-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, #2c255a, #0f0e1a 80%);
+  overflow: hidden;
+}
+
+/* Işık dalgaları - çok katmanlı glow */
+.whispen-bg::before,
+.whispen-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 300%;
+  height: 300%;
+  top: -100%;
+  left: -100%;
+  background: radial-gradient(circle, rgba(150,100,255,0.15), transparent 60%);
+  animation: glowPulse 30s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+  opacity: 0.4;
+}
+
+.whispen-bg::after {
+  background: radial-gradient(circle, rgba(100,200,255,0.1), transparent 60%);
+  animation-delay: 10s;
+  opacity: 0.3;
+}
+
+/* Ana animasyon */
+@keyframes glowPulse {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.3) translate(20%, 10%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+    @keyframes screenshotEnter {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(30deg) rotateZ(-20deg) scale(0.8) translateY(-40px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: perspective(1000px) rotateY(-20deg) rotateX(7deg) scale(0.87);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(-20deg) rotateX(15deg) scale(0.85);
+  }
+}
   </style>
 </head>
 <body>
+  <div class="whispen-bg"></div>
   <div class="title" data-i18n="welcome_title">Whispen</div>
+  <div class="subtitle" data-i18n="whispensubtitle">“Read Calmly, Focus Deeply"</div>
+  
 
-  <!-- Replace background-image URL with your real screenshot -->
-  <div class="screenshot" style="background-image: url('./assets/screenshot-placeholder.png');"></div>
+  <div class="screenshot" style="background-image: url('./assets/images/screenshot-main.jpg');">
+  </div>
 
   <div class="button-container">
-    <button class="button signup-btn" data-i18n="sign_up">Sign Up</button>
-    <button class="button signin-btn" data-i18n="sign_in">Sign In</button>
+    <button class="button signup-btn" data-i18n="registertext" onclick="window.location.href='register.html'">Sign Up</button>
+    <button class="button signin-btn" data-i18n="login" onclick="window.location.href='login.html'">Sign In</button>
   </div>
+  
+  
+      <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="scripts/language.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="scripts/firebase-config.js"></script>
+    <script src="scripts/login.js"></script>
 </body>
 </html>
