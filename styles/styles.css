@@ -1190,7 +1190,9 @@ body {
     margin-bottom: 12px;
     color: #111;
   }
-
+#appname {
+  font-family: Comfortaa;
+}
   #dev-info-box p {
     margin: 6px 0;
 
