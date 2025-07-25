@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { buttonId: 'noteMenuBtn', menuId: 'noteMenu' },
     { buttonId: 'themesBtn', menuId: 'themesdiv' },
     { buttonId: 'ambientBtn', menuId: 'ambientdiv' },
-    { buttonId: 'settingsBtn', menuId: 'settingsmenu' },
+    { buttonId: 'settingsBtn', menuId: 'settingsMenu' },
   ];
 
   function closeAllMenus() {

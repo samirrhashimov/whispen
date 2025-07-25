@@ -274,30 +274,17 @@ function closeLoginModal() {
 
 
 
-//settingsbutton
-function toggleSettingsMenu() {
-  const user = firebase.auth().currentUser;
 
-  if (!user || user.isAnonymous) {
-  }
-  const menu = document.getElementById('settingsMenu');
-  menu.classList.toggle('open');
-}
-
-document.addEventListener('click', function(event) {
-  const menu = document.getElementById('settingsMenu');
-
-  if (!menu.classList.contains('open')) return;
-
-  if (menu.contains(event.target) || event.target.closest('.sidebar-tab')) return;
-
-  menu.classList.remove('open');
-});
 
 
 //settings
 function togglePasswordForm() {
   const form = document.getElementById('password-form');
+  form.classList.toggle('hidden');
+}
+
+function toggleAppInfo() {
+  const form = document.getElementById('dev-info-box');
   form.classList.toggle('hidden');
 }
 

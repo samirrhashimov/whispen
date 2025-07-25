@@ -48,12 +48,10 @@
 <p id="hello">Hello <span id="username"></span>👋🏻</p>
 
      <p data-i18n="greeting" id="greeting">...</p>
-     <button class="mobile-toggle" onclick="toggleSettingsMenu()" id="settingsBtn">☰</button>
+     <button id="settingsBtn" class="mobile-toggle">☰</button>
      </div>
   
-  
-  
-  
+
    <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleMobileMenu()">×</button>
 
@@ -246,7 +244,7 @@
 
 <!-- Settings Menu -->
 <div id="settingsMenu" class="settingsmenu">
-    <button class="close-btn" onclick="toggleSettingsMenu()">×</button>
+    <button id="settingsBtn" class="close-btn">×</button>
   <h1 data-i18n="settings" class="settingstext"></h1>
 
   <div class="setting-item">
@@ -318,10 +316,34 @@ volumeSlider.addEventListener("input", () => {
   <div class="setting-item">
     <button data-i18n="logout" onclick="logout()"></button>
   </div>
-
+  
   <div class="setting-item danger">
     <button data-i18n="delete-account" onclick="showDeleteAccountModal()"></button>
   </div>
+  
+  <label class="sitem" data-i18n="app-options"></label>
+    <div class="setting-item">
+     <button data-i18n="app-info" onclick="toggleAppInfo()"></button>
+  </div>
+  
+  <div id="dev-info-box" class="hidden">
+  <p>
+    <strong data-i18n="developer_name"></strong> <strong id="company">linzaapps</strong>
+  </p>
+  <p>
+    <strong data-i18n="contact"></strong>
+    <a href="mailto:linzaapps@gmail.com">linzaapps@gmail.com</a>
+  </p>
+  <p>
+    <strong>GitHub:</strong>
+    <a id="github-link" href="https://github.com/samirrhashimov/whispen" target="_blank">
+      github.com/samirrhashimov/whispen
+    </a>
+  </p>
+  <p>
+    <strong data-i18n="version"></strong> 1.2.7
+  </p>
+</div>
 
   <!-- Delete Account Modal -->
 <div id="deleteAccountModal" class="delete-account-overlay hidden">
@@ -348,7 +370,7 @@ volumeSlider.addEventListener("input", () => {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 55px;
   background: var(--controlbar-color);
   background-size: cover;
   border-top: 1px solid var(--text-color);

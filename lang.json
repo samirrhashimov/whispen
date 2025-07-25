@@ -99,7 +99,13 @@
     "morning": "Günaydın",
     "afternoon": "Tünaydın",
     "evening": "İyi akşamlar",
-    "night": "İyi geceler"
+    "night": "İyi geceler",
+     "app-options": "Uygulama Seçenekleri",
+    "app-info": "Uygulama Hakkında",
+    "developer_info": "Geliştirici Bilgisi",
+    "developer_name": "Geliştirici:",
+    "contact": "İletişim:",
+    "version": "Uygulama Sürümü:"
   },
   "en": {
     "library": "Library",
@@ -200,7 +206,13 @@
     "morning": "Good morning",
     "afternoon": "Good afternoon",
     "evening": "Good evening",
-    "night": "Good night"
+    "night": "Good night",
+    "app-options": "App Options",
+    "app-info": "About the App",
+    "developer_info": "Developer Info",
+    "developer_name": "Developer",
+    "contact": "Contact",
+    "version": "App Version"
     
   },
   "ru": {
@@ -300,7 +312,13 @@
     "morning": "Доброе утро",
     "afternoon": "Добрый день",
     "evening": "Добрый вечер",
-    "night": "Спокойной ночи"
+    "night": "Спокойной ночи",
+    "app-options": "Настройки приложения",
+    "app-info": "О приложении",
+    "developer_info": "Информация о разработчике",
+    "developer_name": "Разработчик",
+    "contact": "Контакты",
+    "version": "Версия приложения"
 },
 "es": {
   "library": "Biblioteca",
@@ -399,7 +417,13 @@
     "morning": "Buenos días",
     "afternoon": "Buenas tardes",
     "evening": "Buena tarde",
-    "night": "Buenas noches"
+    "night": "Buenas noches",
+    "app-options": "Opciones de la aplicación",
+    "app-info": "Acerca de la aplicación",
+    "developer_info": "Información del desarrollador",
+    "developer_name": "Desarrollador",
+    "contact": "Contacto",
+    "version": "Versión de la aplicación"
 },
 "az": {
   "library": "Kitabxana",
@@ -499,6 +523,12 @@
     "morning": "Sabahınız xeyir",
     "afternoon": "Günortanız xeyir",
     "evening": "Axşamınız xeyir",
-    "night": "Gecəniz xeyrə qalsın"
+    "night": "Gecəniz xeyrə qalsın",
+    "app-options": "Tətbiq Seçimləri",
+    "app-info": "Tətbiq Haqqında",
+    "developer_info": "Tərtibatçı Məlumatı",
+    "developer_name": "Tərtibatçı",
+    "contact": "Əlaqə",
+    "version": "Tətbiq Versiyası"
 }
 }

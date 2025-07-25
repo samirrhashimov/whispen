@@ -396,7 +396,7 @@ body {
   position: fixed;
   top: 0;
   left: -110%;
-  width: 60%;
+  width: 65%;
   height: 100vh;
   background: var(--menu-color);
   background-size: cover;
@@ -484,7 +484,7 @@ body {
 
 .ambientdiv {
       position: fixed; top: 0; left: -120%;
-      width: 60%;
+      width: 65%;
       height: 100vh;
       background: var(--menu-color);
       overflow-y: auto;
@@ -546,7 +546,7 @@ body {
       position: fixed;
       top: 0;
       left: -120%;
-      width: 60%;
+      width: 65%;
       height: 100vh;
       background: var(--menu-color);
       background-size: cover;
@@ -584,7 +584,7 @@ body {
   position: fixed;
   top: 0;
   left: -90%;
-  width: 60%;
+  width: 65%;
   height: 100vh;
   background: var(--menu-color);
   color: white;
@@ -854,7 +854,7 @@ body {
   position: fixed;
   top: 0;
   left: -120%;
-  width: 60%;
+  width: 75%;
   height: 100vh;
   background: var(--menu-color);
   background-size: cover;
@@ -1001,12 +1001,12 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* arka plan blur etkisi */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  backdrop-filter: blur(3px); /* modern blur efekti */
+  backdrop-filter: blur(3px);
 }
 
 .delete-account-box {
@@ -1102,6 +1102,9 @@ body {
 #confirmDelete {
   color: #cc0000;
 }
+#company {
+  font-family: Poppins;
+}
 
 #newlabel {
   position: absolute;
@@ -1145,7 +1148,53 @@ body {
   pointer-events: none;
 }
 
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(3px);
+}
 
+#dev-info-box {
+    margin-top: 24px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f5f5f5;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease-in-out;
+    word-break: break-word;
+  }
+
+  #dev-info-box a {
+    color: #2c7be5;
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  #dev-info-box a:hover {
+    text-decoration: underline;
+  }
+
+  .dev-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #111;
+  }
+
+  #dev-info-box p {
+    margin: 6px 0;
+
+  }
 /* Animations */ 
 @keyframes rippleEffect {
   to {
