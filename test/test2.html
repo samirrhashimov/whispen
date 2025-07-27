@@ -1,0 +1,51 @@
+<label for="battery">Battery</label>
+<meter id="battery" min="0" max="100" value="100" low="20" high="80" optimum="100">
+    %70
+</meter>
+
+<input type="file" accept="image/*">
+
+
+
+<input type="tel" id="phoneInput" placeholder="+994 77 777 77 77" maxlength="17">
+
+<script>
+document.getElementById('phoneInput').addEventListener('input', function (e) {
+  let digits = e.target.value.replace(/\D/g, ''); // Sadece rakamları al
+  if (digits.startsWith('0')) {
+    digits = digits.substring(1); // Baştaki 0'ı kaldır
+  }
+  if (!digits.startsWith('994')) {
+    digits = '994' + digits; // Başında 994 yoksa ekle
+  }
+
+  // Format: +994 77 777 77 77
+  const formatted = `+${digits.substring(0,3)} ${digits.substring(3,5)} ${digits.substring(5,8)} ${digits.substring(8,10)} ${digits.substring(10,12)}`.trim();
+  e.target.value = formatted;
+});
+</script>
+
+
+<form>
+<input list="isletimsistemleri" name="sistem">
+<datalist id="isletimsistemleri">
+ <option value="Windows">
+ <option value="Mac OS ">
+ <option value="Linux">
+</datalist>
+</form>
+
+<select>
+<optgroup label="Anadolu Yakası">
+ <option value="kad">Kadıköy</option>
+ <option value="usk">Üsküdar</option>
+ <option value="mal">Maltepe</option>
+</optgroup>
+
+<optgroup label="Avrupa Yakası">
+ <option value="sis">Şişli</option>
+ <option value="bey">Beyoğlu</option>
+ <option value="bay">Bayrampaşa</option>
+ <option value="fat">Fatih</option>
+</optgroup>
+</select>

@@ -138,6 +138,15 @@
   </div>
 
   <button data-i18n="clearhistory" id="clear-history">  <span id="clear-historytext"></span></button>
+  
+  
+  <div id="drive-section">
+  <button id="signin-button">Google Drive’a Giriş Yap</button>
+  <ul id="drive-file-list"></ul>
+</div>
+  
+  
+  
 </div>
 
 <!--Sounds Sidebar -->
@@ -582,5 +591,7 @@ document.getElementById('openBtn').addEventListener('click', () => {
 <script src="scripts/pdfviewer.js"></script>
 <script src="scripts/script.js"></script>
 <script src="scripts/nav_controller.js"></script>
+<script src="scripts/drive.js"></script>
+<script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
 </body>
 </html>
