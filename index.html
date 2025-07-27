@@ -144,9 +144,59 @@
   
     <button onclick="authorizeAndListDrive()">Google Drive’a Bağlan</button>
     <ul id="file-list"></ul>
-  
-  
 </div>
+
+  <script>
+    let tokenClient;
+
+    window.onload = () => {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
+        scope: 'https://www.googleapis.com/auth/drive.readonly',
+        callback: (tokenResponse) => {
+          if (tokenResponse.access_token) {
+            listDriveFiles(tokenResponse.access_token);
+          } else {
+            alert('Erişim tokenı alınamadı.');
+          }
+        },
+      });
+    };
+
+    function authorizeAndListDrive() {
+      tokenClient.requestAccessToken();
+    }
+
+    function listDriveFiles(token) {
+      fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name,webViewLink)', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+        if (data.files && data.files.length > 0) {
+          data.files.forEach(file => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${file.webViewLink}" target="_blank">${file.name}</a>`;
+            list.appendChild(li);
+          });
+        } else {
+          list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
+        }
+      })
+      .catch(err => {
+        alert('Drive listeleme hatası: ' + JSON.stringify(err));
+      });
+    }
+  </script>
+
+
+
+
+
 
 <!--Sounds Sidebar -->
   <div class="ambientdiv" id="ambientdiv">
