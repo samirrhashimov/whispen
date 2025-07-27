@@ -743,6 +743,23 @@ window.addEventListener("message", (event) => {
   }
 });
 </script>
+<script>
+  window.addEventListener('message', (event) => {
+    if (event.data?.type === 'load-pdf' && event.data?.dataUrl) {
+      const pdfData = event.data.dataUrl;
+
+      // Eğer PDF.js yüklüyse hemen aç
+      if (window.PDFViewerApplication) {
+        window.PDFViewerApplication.open(pdfData);
+      } else {
+        // PDF.js henüz yüklenmemişse
+        document.addEventListener('webviewerloaded', () => {
+          window.PDFViewerApplication.open(pdfData);
+        });
+      }
+    }
+  });
+</script>
 
 
   </body>
