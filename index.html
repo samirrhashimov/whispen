@@ -142,56 +142,77 @@
 
   <button data-i18n="clearhistory" id="clear-history">  <span id="clear-historytext"></span></button>
   
-    <button onclick="authorizeAndListDrive()">Google Drive’a Bağlan</button>
-    <ul id="file-list"></ul>
-</div>
+<ul id="file-list"></ul>
 
-  <script>
-    let tokenClient;
+<script>
+  let tokenClient;
+  let accessToken = null;
 
-    window.onload = () => {
-      tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/drive.readonly',
-        callback: (tokenResponse) => {
-          if (tokenResponse.access_token) {
-            listDriveFiles(tokenResponse.access_token);
-          } else {
-            alert('Erişim tokenı alınamadı.');
-          }
-        },
-      });
-    };
-
-    function authorizeAndListDrive() {
-      tokenClient.requestAccessToken();
-    }
-
-    function listDriveFiles(token) {
-      fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name,webViewLink)', {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById('file-list');
-        list.innerHTML = '';
-        if (data.files && data.files.length > 0) {
-          data.files.forEach(file => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="${file.webViewLink}" target="_blank">${file.name}</a>`;
-            list.appendChild(li);
-          });
+  window.onload = () => {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
+      scope: 'https://www.googleapis.com/auth/drive.readonly',
+      callback: (tokenResponse) => {
+        if (tokenResponse.access_token) {
+          accessToken = tokenResponse.access_token;
+          listDriveFiles();
         } else {
-          list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
+          alert('Erişim tokenı alınamadı.');
         }
-      })
-      .catch(err => {
-        alert('Drive listeleme hatası: ' + JSON.stringify(err));
-      });
-    }
-  </script>
+      },
+    });
+  };
+
+  function authorizeAndListDrive() {
+    tokenClient.requestAccessToken();
+  }
+
+  function listDriveFiles() {
+    fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name)', {
+      headers: {
+        'Authorization': 'Bearer ' + accessToken
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('file-list');
+      list.innerHTML = '';
+      if (data.files && data.files.length > 0) {
+        data.files.forEach(file => {
+          const li = document.createElement('li');
+          li.textContent = file.name;
+          li.style.cursor = 'pointer';
+          li.onclick = () => openInWhispen(file.id);
+          list.appendChild(li);
+        });
+      } else {
+        list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
+      }
+    })
+    .catch(err => {
+      alert('Drive listeleme hatası: ' + JSON.stringify(err));
+    });
+  }
+
+  function openInWhispen(fileId) {
+    const downloadUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+    fetch(downloadUrl, {
+      headers: {
+        'Authorization': 'Bearer ' + accessToken
+      }
+    })
+    .then(res => res.blob())
+    .then(blob => {
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(`/viewer.html?file=${encodeURIComponent(blobUrl)}`, '_blank');
+
+      // Bellek temizliği
+      setTimeout(() => {
+        URL.revokeObjectURL(blobUrl);
+      }, 10000);
+    });
+  }
+</script>
 
 
 
