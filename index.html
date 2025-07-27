@@ -145,9 +145,11 @@
   
   
   <!-- test google drive int-->
+
 <button onclick="authorizeAndListDrive()">Google Drive’a Bağlan</button>
   <ul id="file-list"></ul>
 
+</div>
   <script>
     let tokenClient;
     let accessToken = null;
@@ -161,9 +163,9 @@
             accessToken = tokenResponse.access_token;
             listDriveFiles();
           } else {
-            alert('Erişim tokenı alınamadı.');
+            alert('Token alınamadı.');
           }
-        },
+        }
       });
     };
 
@@ -184,8 +186,7 @@
         if (data.files && data.files.length > 0) {
           data.files.forEach(file => {
             const li = document.createElement('li');
-            li.textContent = file.name;
-            li.onclick = () => openInWhispen(file.id);
+            li.innerHTML = `<button onclick="openInIframeViewer('${file.id}')">${file.name}</button>`;
             list.appendChild(li);
           });
         } else {
@@ -193,33 +194,34 @@
         }
       })
       .catch(err => {
-        alert('Drive listeleme hatası: ' + JSON.stringify(err));
+        alert('Drive dosya listeleme hatası: ' + JSON.stringify(err));
       });
     }
 
-    function openInWhispen(fileId) {
-      const downloadUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
-      fetch(downloadUrl, {
+    function openInIframeViewer(fileId) {
+      const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+      fetch(url, {
         headers: {
           'Authorization': 'Bearer ' + accessToken
         }
       })
       .then(res => res.blob())
       .then(blob => {
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(`/viewer.html?file=${encodeURIComponent(blobUrl)}`, '_blank');
-
-        // Bellekten temizlemek için 10 saniye sonra iptal edebilirsin
-        setTimeout(() => {
-          URL.revokeObjectURL(blobUrl);
-        }, 10000);
+        const reader = new FileReader();
+        reader.onload = () => {
+          const iframe = document.getElementById('pdfViewer');
+          iframe.contentWindow.postMessage({
+            type: 'load-pdf',
+            dataUrl: reader.result
+          }, '*');
+        };
+        reader.readAsDataURL(blob);
       })
       .catch(err => {
-        alert('PDF yüklenemedi: ' + JSON.stringify(err));
+        alert('PDF yükleme hatası: ' + JSON.stringify(err));
       });
     }
   </script>
-
 
 
 
