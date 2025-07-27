@@ -27,6 +27,9 @@
       <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
 </head>
 <body>
   <nav>
@@ -139,12 +142,8 @@
 
   <button data-i18n="clearhistory" id="clear-history">  <span id="clear-historytext"></span></button>
   
-  
-  <div id="drive-section">
-  <button id="signin-button">Google Drive’a Giriş Yap</button>
-  <ul id="drive-file-list"></ul>
-</div>
-  
+    <button onclick="authorizeAndListDrive()">Google Drive’a Bağlan</button>
+    <ul id="file-list"></ul>
   
   
 </div>
