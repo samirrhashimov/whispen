@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Drive Bağlantısı Testi</title>
+  <title>Google Drive PDF Listesi (Yeni Giriş)</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
-  <h2>Google Drive PDF Listesi</h2>
-  <button id="signin-button">Google Drive’a Giriş Yap</button>
+  <h1>Google Drive PDF Listesi</h1>
+  <div id="g_id_onload"
+      data-client_id="326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com"
+      data-callback="handleCredentialResponse">
+  </div>
+  <div class="g_id_signin" data-type="standard"></div>
+
   <ul id="drive-file-list"></ul>
 
-  <!-- Google API -->
-  <script src="https://apis.google.com/js/api.js"></script>
-
-  <!-- Drive JS -->
   <script>
-    const CLIENT_ID = '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com';
     const API_KEY = 'AIzaSyC-K_Bywpf1oMVb1Wj2_pU-zh0bsEfOSiM';
-    const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
-    const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 
-    function start() {
-      gapi.load('client:auth2', initClient);
-    }
-
-    function initClient() {
-      gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES
-      }).then(() => {
-        document.getElementById('signin-button').onclick = () => {
-          gapi.auth2.getAuthInstance().signIn().then(() => {
-            listPDFFiles();
-          });
-        };
-      }, err => {
-        console.error('initClient Error:', err);
-alert("initClient Hatası:\n" + JSON.stringify(err, null, 2));
+    function handleCredentialResponse(response) {
+      const token = response.credential;
+      gapi.load('client', () => {
+        gapi.client.init({
+          apiKey: API_KEY,
+          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
+        }).then(() => {
+          gapi.client.setToken({access_token: token});
+          listPDFFiles();
+        });
       });
     }
 
@@ -45,26 +35,20 @@ alert("initClient Hatası:\n" + JSON.stringify(err, null, 2));
       gapi.client.drive.files.list({
         q: "mimeType='application/pdf'",
         fields: "files(id, name, webViewLink, webContentLink)"
-      }).then(res => {
-        const files = res.result.files;
+      }).then(response => {
+        const files = response.result.files;
         const listEl = document.getElementById('drive-file-list');
         listEl.innerHTML = '';
         files.forEach(file => {
           const li = document.createElement('li');
           li.textContent = file.name;
-          li.style.cursor = 'pointer';
           li.onclick = () => window.open(file.webContentLink, '_blank');
           listEl.appendChild(li);
         });
       }, err => {
-        console.error('Drive List Error:', err);
+        alert('Drive listeleme hatası: ' + JSON.stringify(err));
       });
     }
-
-    // DOM yüklendiğinde başlat
-    document.addEventListener('DOMContentLoaded', () => {
-      start();
-    });
   </script>
 </body>
-</html>
+</html> 
