@@ -743,93 +743,238 @@ window.addEventListener("message", (event) => {
   }
 });
 </script>
-// viewer.html dosyanızın sonuna eklenecek script
-<script>
-  window.addEventListener('message', (event) => {
-    console.log('Mesaj alındı:', event.data);
-    
-    // Yöntem 1: ArrayBuffer verisi
-    if (event.data?.type === 'load-pdf-array' && event.data?.pdfData) {
-      const uint8Array = new Uint8Array(event.data.pdfData);
-      
-      if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-        window.PDFViewerApplication.open(uint8Array);
-      } else {
-        document.addEventListener('webviewerloaded', () => {
-          window.PDFViewerApplication.open(uint8Array);
-        });
-      }
-    }
-    
-    // Yöntem 2: Blob URL
-    else if (event.data?.type === 'load-pdf-url' && event.data?.pdfUrl) {
-      if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-        window.PDFViewerApplication.open(event.data.pdfUrl);
-      } else {
-        document.addEventListener('webviewerloaded', () => {
-          window.PDFViewerApplication.open(event.data.pdfUrl);
-        });
-      }
-    }
-    
-    // Yöntem 3: Base64 verisi (düzeltilmiş)
-    else if (event.data?.type === 'load-pdf-base64' && event.data?.base64Data) {
-      try {
-        // Base64'ü binary'ye çevir
-        const binaryString = atob(event.data.base64Data);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-        
-        if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-          window.PDFViewerApplication.open(bytes);
-        } else {
-          document.addEventListener('webviewerloaded', () => {
-            window.PDFViewerApplication.open(bytes);
-          });
-        }
-      } catch (error) {
-        console.error('Base64 decode hatası:', error);
-      }
-    }
-    
-    // Eski data URL yöntemi (düzeltilmiş)
-    else if (event.data?.type === 'load-pdf' && event.data?.dataUrl) {
-      try {
-        // Data URL'den base64 kısmını çıkar
-        const base64Data = event.data.dataUrl.split(',')[1];
-        const binaryString = atob(base64Data);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-        
-        if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-          window.PDFViewerApplication.open(bytes);
-        } else {
-          document.addEventListener('webviewerloaded', () => {
-            window.PDFViewerApplication.open(bytes);
-          });
-        }
-      } catch (error) {
-        console.error('Data URL decode hatası:', error);
-      }
-    }
-  });
 
-  // PDF.js yüklenme durumunu kontrol et
-  document.addEventListener('DOMContentLoaded', () => {
+
+<script>
+console.log('PDF Viewer script yüklendi');
+
+// Ana sayfaya mesaj gönderme fonksiyonu
+function sendToParent(data) {
+    try {
+        window.parent.postMessage(data, '*');
+    } catch (e) {
+        console.error('Parent\'a mesaj gönderilemedi:', e);
+    }
+}
+
+// PDF yükleme fonksiyonu
+function loadPDFData(pdfData, fileName) {
+    console.log('PDF yükleme başlatılıyor:', fileName);
+    
+    if (!window.PDFViewerApplication) {
+        console.error('PDFViewerApplication bulunamadı');
+        sendToParent({
+            type: 'pdf-error',
+            error: 'PDF.js yüklenmemiş'
+        });
+        return;
+    }
+    
+    try {
+        // Mevcut PDF'i kapat
+        if (window.PDFViewerApplication.pdfDocument) {
+            console.log('Mevcut PDF kapatılıyor');
+            window.PDFViewerApplication.close();
+        }
+        
+        // PDF'i aç
+        console.log('Yeni PDF açılıyor');
+        const loadingTask = window.PDFViewerApplication.open(pdfData);
+        
+        if (loadingTask && loadingTask.then) {
+            loadingTask.then((pdf) => {
+                console.log('PDF başarıyla yüklendi, sayfa sayısı:', pdf.numPages);
+                sendToParent({
+                    type: 'pdf-loaded',
+                    pages: pdf.numPages,
+                    fileName: fileName
+                });
+            }).catch((error) => {
+                console.error('PDF yükleme hatası:', error);
+                sendToParent({
+                    type: 'pdf-error',
+                    error: error.message || 'PDF yüklenemedi'
+                });
+            });
+        } else {
+            // Eski PDF.js versiyonları için
+            setTimeout(() => {
+                if (window.PDFViewerApplication.pdfDocument) {
+                    const numPages = window.PDFViewerApplication.pdfDocument.numPages;
+                    console.log('PDF yüklendi (eski yöntem), sayfa sayısı:', numPages);
+                    sendToParent({
+                        type: 'pdf-loaded',
+                        pages: numPages,
+                        fileName: fileName
+                    });
+                } else {
+                    console.error('PDF yüklenemedi (eski yöntem)');
+                    sendToParent({
+                        type: 'pdf-error',
+                        error: 'PDF yüklenemedi'
+                    });
+                }
+            }, 2000);
+        }
+        
+    } catch (error) {
+        console.error('PDF yükleme exception:', error);
+        sendToParent({
+            type: 'pdf-error',
+            error: error.message || 'PDF yükleme hatası'
+        });
+    }
+}
+
+// Mesaj dinleyici
+window.addEventListener('message', (event) => {
+    console.log('Mesaj alındı:', event.data?.type);
+    
+    // ArrayBuffer yöntemi
+    if (event.data?.type === 'load-pdf-array' && event.data?.pdfData) {
+        console.log('PDF array verisi alındı, boyut:', event.data.pdfData.length);
+        
+        try {
+            const uint8Array = new Uint8Array(event.data.pdfData);
+            
+            // PDF header kontrolü
+            const header = String.fromCharCode.apply(null, uint8Array.slice(0, 4));
+            console.log('PDF Header:', header);
+            
+            if (header !== '%PDF') {
+                throw new Error('Geçersiz PDF dosyası');
+            }
+            
+            // PDF.js hazır olana kadar bekle
+            const waitForPDFJS = () => {
+                if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
+                    console.log('PDFViewerApplication hazır');
+                    loadPDFData(uint8Array, event.data.fileName);
+                } else {
+                    console.log('PDFViewerApplication bekleniyor...');
+                    setTimeout(waitForPDFJS, 100);
+                }
+            };
+            
+            waitForPDFJS();
+            
+        } catch (error) {
+            console.error('Array buffer işleme hatası:', error);
+            sendToParent({
+                type: 'pdf-error',
+                error: error.message
+            });
+        }
+    }
+    
+    // Blob URL yöntemi
+    else if (event.data?.type === 'load-pdf-url' && event.data?.pdfUrl) {
+        console.log('PDF URL alındı:', event.data.pdfUrl);
+        
+        const waitForPDFJS = () => {
+            if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
+                console.log('PDFViewerApplication hazır (URL yöntemi)');
+                loadPDFData(event.data.pdfUrl, event.data.fileName);
+            } else {
+                console.log('PDFViewerApplication bekleniyor (URL yöntemi)...');
+                setTimeout(waitForPDFJS, 100);
+            }
+        };
+        
+        waitForPDFJS();
+    }
+    
+    // Base64 yöntemi
+    else if (event.data?.type === 'load-pdf-base64' && event.data?.base64Data) {
+        console.log('PDF base64 verisi alındı, boyut:', event.data.base64Data.length);
+        
+        try {
+            // Base64'ü binary'ye çevir
+            const binaryString = atob(event.data.base64Data);
+            const uint8Array = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                uint8Array[i] = binaryString.charCodeAt(i);
+            }
+            
+            // PDF header kontrolü
+            const header = String.fromCharCode.apply(null, uint8Array.slice(0, 4));
+            console.log('PDF Header (base64):', header);
+            
+            if (header !== '%PDF') {
+                throw new Error('Geçersiz PDF dosyası');
+            }
+            
+            const waitForPDFJS = () => {
+                if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
+                    console.log('PDFViewerApplication hazır (base64 yöntemi)');
+                    loadPDFData(uint8Array, event.data.fileName);
+                } else {
+                    console.log('PDFViewerApplication bekleniyor (base64 yöntemi)...');
+                    setTimeout(waitForPDFJS, 100);
+                }
+            };
+            
+            waitForPDFJS();
+            
+        } catch (error) {
+            console.error('Base64 decode hatası:', error);
+            sendToParent({
+                type: 'pdf-error',
+                error: error.message
+            });
+        }
+    }
+});
+
+// PDF.js yüklenme kontrolü
+document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM yüklendi');
     
-    // PDF.js'in yüklenip yüklenmediğini kontrol et
+    // webviewerloaded event'ini dinle
+    document.addEventListener('webviewerloaded', () => {
+        console.log('webviewerloaded event alındı');
+        sendToParent({
+            type: 'viewer-ready'
+        });
+    });
+    
+    // PDFViewerApplication kontrolü
+    let checkCount = 0;
     const checkPDFJS = setInterval(() => {
-      if (window.PDFViewerApplication) {
-        console.log('PDFViewerApplication hazır');
-        clearInterval(checkPDFJS);
-      }
+        checkCount++;
+        
+        if (window.PDFViewerApplication) {
+            console.log('PDFViewerApplication bulundu, initialized:', window.PDFViewerApplication.initialized);
+            
+            if (window.PDFViewerApplication.initialized) {
+                console.log('PDF.js tamamen hazır');
+                clearInterval(checkPDFJS);
+                sendToParent({
+                    type: 'viewer-ready'
+                });
+            }
+        } else {
+            console.log('PDFViewerApplication henüz yok, deneme:', checkCount);
+        }
+        
+        // 10 saniye sonra vazgeç
+        if (checkCount > 100) {
+            console.warn('PDFViewerApplication 10 saniye içinde hazır olmadı');
+            clearInterval(checkPDFJS);
+        }
     }, 100);
-  });
+});
+
+// Global hata yakalayıcı
+window.addEventListener('error', (event) => {
+    console.error('Global viewer hatası:', event.error);
+    sendToParent({
+        type: 'pdf-error',
+        error: 'Viewer hatası: ' + (event.error?.message || 'Bilinmeyen hata')
+    });
+});
+
+console.log('PDF Viewer script hazır');
 </script>
 
 

@@ -7,101 +7,390 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
-        #file-list {
-            margin: 20px 0;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-        #file-list li {
-            margin: 5px 0;
+        
+        .header {
+            background: #4285f4;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
-        #file-list button {
-            padding: 5px 10px;
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .connect-section {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .connect-btn {
             background: #4285f4;
             color: white;
             border: none;
-            border-radius: 3px;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
             cursor: pointer;
+            transition: background 0.3s;
         }
-        #file-list button:hover {
+        
+        .connect-btn:hover {
             background: #3367d6;
         }
+        
+        .connect-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .file-section {
+            padding: 20px;
+        }
+        
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .file-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .file-item:hover {
+            background: #e8f0fe;
+        }
+        
+        .file-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .file-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .file-name {
+            margin-left: 12px;
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .viewer-section {
+            height: 80vh;
+            position: relative;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4285f4;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         #pdfViewer {
             width: 100%;
-            height: 600px;
-            border: 1px solid #ccc;
-            margin-top: 20px;
+            height: 100%;
+            border: none;
+            display: none;
         }
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
+        
+        .status {
+            padding: 10px 20px;
+            background: #e8f5e8;
+            color: #2e7d2e;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .error {
+            background: #ffeaea;
+            color: #d93025;
+        }
+        
+        .method-selector {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .method-selector label {
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        
+        .method-selector input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+        .method-option {
+            margin-right: 20px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
-    <h1>Google Drive PDF Görüntüleyici</h1>
-    
-    <button onclick="authorizeAndListDrive()">Google Drive'a Bağlan</button>
-    <ul id="file-list"></ul>
-    
-    <div class="loading" id="loading" style="display: none;">PDF yükleniyor...</div>
-    <iframe id="pdfViewer" src="/pdf.js/web/viewer.html" style="display: none;"></iframe>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Google Drive PDF Görüntüleyici</h1>
+        </div>
+        
+        <div class="connect-section">
+            <button class="connect-btn" onclick="authorizeAndListDrive()" id="connectBtn">
+                Google Drive'a Bağlan
+            </button>
+        </div>
+        
+        <div class="method-selector">
+            <label>Yükleme Yöntemi:</label>
+            <div class="method-option">
+                <input type="radio" id="method1" name="method" value="arrayBuffer" checked>
+                <label for="method1">ArrayBuffer (Önerilen)</label>
+            </div>
+            <div class="method-option">
+                <input type="radio" id="method2" name="method" value="blobUrl">
+                <label for="method2">Blob URL</label>
+            </div>
+            <div class="method-option">
+                <input type="radio" id="method3" name="method" value="base64">
+                <label for="method3">Base64</label>
+            </div>
+        </div>
+        
+        <div class="file-section">
+            <ul class="file-list" id="file-list">
+                <li style="text-align: center; color: #666; padding: 20px;">
+                    Önce Google Drive'a bağlanın
+                </li>
+            </ul>
+        </div>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="viewer-section">
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <div>PDF yükleniyor...</div>
+            </div>
+            <iframe id="pdfViewer" src="viewer.html"></iframe>
+        </div>
+    </div>
 
     <script>
         let tokenClient;
         let accessToken = null;
+        let isConnected = false;
 
+        // Sayfa yüklendiğinde
         window.onload = () => {
+            console.log('Sayfa yüklendi');
+            
             tokenClient = google.accounts.oauth2.initTokenClient({
                 client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
                 scope: 'https://www.googleapis.com/auth/drive.readonly',
                 callback: (tokenResponse) => {
+                    console.log('Token response:', tokenResponse);
+                    
                     if (tokenResponse.access_token) {
                         accessToken = tokenResponse.access_token;
+                        isConnected = true;
+                        showStatus('Google Drive\'a başarıyla bağlanıldı!', 'success');
+                        updateConnectButton();
                         listDriveFiles();
                     } else {
-                        alert('Token alınamadı.');
+                        showStatus('Token alınamadı. Lütfen tekrar deneyin.', 'error');
                     }
                 }
             });
+            
+            // iframe mesajlarını dinle
+            window.addEventListener('message', handleIframeMessage);
         };
 
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status ' + (type === 'error' ? 'error' : '');
+            statusDiv.style.display = 'block';
+            
+            // 5 saniye sonra gizle
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function updateConnectButton() {
+            const btn = document.getElementById('connectBtn');
+            if (isConnected) {
+                btn.textContent = '✅ Bağlandı - Yenile';
+                btn.disabled = false;
+            } else {
+                btn.textContent = 'Google Drive\'a Bağlan';
+                btn.disabled = false;
+            }
+        }
+
         function authorizeAndListDrive() {
+            console.log('Yetkilendirme başlatılıyor');
+            const btn = document.getElementById('connectBtn');
+            btn.disabled = true;
+            btn.textContent = 'Bağlanıyor...';
+            
             tokenClient.requestAccessToken();
         }
 
         function listDriveFiles() {
-            fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name)', {
+            console.log('Drive dosyaları listeleniyor');
+            showStatus('PDF dosyaları aranıyor...', 'success');
+            
+            fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name,size,modifiedTime)&orderBy=modifiedTime desc', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                return res.json();
+            })
             .then(data => {
-                const list = document.getElementById('file-list');
-                list.innerHTML = '';
-                if (data.files && data.files.length > 0) {
-                    data.files.forEach(file => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `<button onclick="openInIframeViewer('${file.id}')">${file.name}</button>`;
-                        list.appendChild(li);
-                    });
-                } else {
-                    list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
-                }
+                console.log('Drive dosyaları:', data);
+                displayFileList(data.files || []);
             })
             .catch(err => {
-                alert('Drive dosya listeleme hatası: ' + JSON.stringify(err));
+                console.error('Drive listeleme hatası:', err);
+                showStatus('Dosya listesi alınamadı: ' + err.message, 'error');
             });
         }
 
-        // Yöntem 1: ArrayBuffer kullanarak
-        function openInIframeViewer(fileId) {
+        function displayFileList(files) {
+            const list = document.getElementById('file-list');
+            
+            if (files.length === 0) {
+                list.innerHTML = '<li style="text-align: center; color: #666; padding: 20px;">Hiç PDF dosyası bulunamadı.</li>';
+                showStatus('Hiç PDF dosyası bulunamadı.', 'error');
+                return;
+            }
+            
+            showStatus(`${files.length} PDF dosyası bulundu.`, 'success');
+            
+            list.innerHTML = '';
+            files.forEach(file => {
+                const li = document.createElement('li');
+                li.className = 'file-item';
+                
+                const size = file.size ? formatFileSize(parseInt(file.size)) : 'Bilinmiyor';
+                const date = file.modifiedTime ? new Date(file.modifiedTime).toLocaleDateString('tr-TR') : '';
+                
+                li.innerHTML = `
+                    <button class="file-btn" onclick="openPDF('${file.id}', '${file.name}')">
+                        📄 Aç
+                    </button>
+                    <div class="file-name">
+                        <strong>${escapeHtml(file.name)}</strong>
+                        <div style="font-size: 12px; color: #666; margin-top: 2px;">
+                            ${size} • ${date}
+                        </div>
+                    </div>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function getSelectedMethod() {
+            const selected = document.querySelector('input[name="method"]:checked');
+            return selected ? selected.value : 'arrayBuffer';
+        }
+
+        function openPDF(fileId, fileName) {
+            console.log(`PDF açılıyor: ${fileName} (${fileId})`);
+            showStatus(`"${fileName}" yükleniyor...`, 'success');
+            
+            // Loading göster
             document.getElementById('loading').style.display = 'block';
             document.getElementById('pdfViewer').style.display = 'none';
             
+            const method = getSelectedMethod();
+            console.log('Seçilen yöntem:', method);
+            
+            switch (method) {
+                case 'arrayBuffer':
+                    openPDFArrayBuffer(fileId, fileName);
+                    break;
+                case 'blobUrl':
+                    openPDFBlobUrl(fileId, fileName);
+                    break;
+                case 'base64':
+                    openPDFBase64(fileId, fileName);
+                    break;
+                default:
+                    openPDFArrayBuffer(fileId, fileName);
+            }
+        }
+
+        // Yöntem 1: ArrayBuffer
+        function openPDFArrayBuffer(fileId, fileName) {
             const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
             
             fetch(url, {
@@ -109,30 +398,41 @@
                     'Authorization': 'Bearer ' + accessToken
                 }
             })
-            .then(res => res.arrayBuffer())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                
+                const contentType = res.headers.get('content-type');
+                console.log('Content-Type:', contentType);
+                
+                return res.arrayBuffer();
+            })
             .then(arrayBuffer => {
+                console.log('ArrayBuffer boyutu:', arrayBuffer.byteLength);
+                
+                // PDF doğrulama
                 const uint8Array = new Uint8Array(arrayBuffer);
+                if (!validatePDF(uint8Array)) {
+                    throw new Error('Geçersiz PDF dosyası');
+                }
                 
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('pdfViewer').style.display = 'block';
-                
-                const iframe = document.getElementById('pdfViewer');
-                iframe.contentWindow.postMessage({
+                // iframe'e gönder
+                sendToViewer({
                     type: 'load-pdf-array',
-                    pdfData: Array.from(uint8Array)
-                }, '*');
+                    pdfData: Array.from(uint8Array),
+                    fileName: fileName
+                });
+                
             })
             .catch(err => {
-                document.getElementById('loading').style.display = 'none';
-                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+                console.error('ArrayBuffer yöntem hatası:', err);
+                handlePDFError(err, fileName);
             });
         }
 
-        // Yöntem 2: Blob URL kullanarak (alternatif)
-        function openInIframeViewerBlob(fileId) {
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('pdfViewer').style.display = 'none';
-            
+        // Yöntem 2: Blob URL
+        function openPDFBlobUrl(fileId, fileName) {
             const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
             
             fetch(url, {
@@ -140,30 +440,46 @@
                     'Authorization': 'Bearer ' + accessToken
                 }
             })
-            .then(res => res.blob())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                return res.blob();
+            })
             .then(blob => {
-                const blobUrl = URL.createObjectURL(blob);
+                console.log('Blob boyutu:', blob.size, 'Type:', blob.type);
                 
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('pdfViewer').style.display = 'block';
-                
-                const iframe = document.getElementById('pdfViewer');
-                iframe.contentWindow.postMessage({
-                    type: 'load-pdf-url',
-                    pdfUrl: blobUrl
-                }, '*');
+                // PDF doğrulama için ilk birkaç byte'ı oku
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const arrayBuffer = e.target.result;
+                    const uint8Array = new Uint8Array(arrayBuffer);
+                    
+                    if (!validatePDF(uint8Array)) {
+                        throw new Error('Geçersiz PDF dosyası');
+                    }
+                    
+                    // Blob URL oluştur
+                    const blobUrl = URL.createObjectURL(blob);
+                    console.log('Blob URL oluşturuldu:', blobUrl);
+                    
+                    // iframe'e gönder
+                    sendToViewer({
+                        type: 'load-pdf-url',
+                        pdfUrl: blobUrl,
+                        fileName: fileName
+                    });
+                };
+                reader.readAsArrayBuffer(blob);
             })
             .catch(err => {
-                document.getElementById('loading').style.display = 'none';
-                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+                console.error('Blob URL yöntem hatası:', err);
+                handlePDFError(err, fileName);
             });
         }
 
-        // Yöntem 3: Base64 düzeltmesi (mevcut kodunuzun geliştirilmiş hali)
-        function openInIframeViewerBase64(fileId) {
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('pdfViewer').style.display = 'none';
-            
+        // Yöntem 3: Base64
+        function openPDFBase64(fileId, fileName) {
             const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
             
             fetch(url, {
@@ -171,28 +487,97 @@
                     'Authorization': 'Bearer ' + accessToken
                 }
             })
-            .then(res => res.blob())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                return res.blob();
+            })
             .then(blob => {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    // Base64 string'i düzenle
-                    const base64Data = reader.result.split(',')[1]; // "data:application/pdf;base64," kısmını çıkar
-                    
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('pdfViewer').style.display = 'block';
-                    
-                    const iframe = document.getElementById('pdfViewer');
-                    iframe.contentWindow.postMessage({
-                        type: 'load-pdf-base64',
-                        base64Data: base64Data
-                    }, '*');
+                    try {
+                        const dataUrl = reader.result;
+                        const base64Data = dataUrl.split(',')[1];
+                        
+                        console.log('Base64 boyutu:', base64Data.length);
+                        
+                        // PDF doğrulama
+                        const binaryString = atob(base64Data);
+                        const uint8Array = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) {
+                            uint8Array[i] = binaryString.charCodeAt(i);
+                        }
+                        
+                        if (!validatePDF(uint8Array)) {
+                            throw new Error('Geçersiz PDF dosyası');
+                        }
+                        
+                        // iframe'e gönder
+                        sendToViewer({
+                            type: 'load-pdf-base64',
+                            base64Data: base64Data,
+                            fileName: fileName
+                        });
+                        
+                    } catch (error) {
+                        handlePDFError(error, fileName);
+                    }
                 };
                 reader.readAsDataURL(blob);
             })
             .catch(err => {
-                document.getElementById('loading').style.display = 'none';
-                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+                console.error('Base64 yöntem hatası:', err);
+                handlePDFError(err, fileName);
             });
+        }
+
+        function validatePDF(uint8Array) {
+            if (uint8Array.length < 4) return false;
+            const header = String.fromCharCode.apply(null, uint8Array.slice(0, 4));
+            console.log('PDF Header:', header);
+            return header === '%PDF';
+        }
+
+        function sendToViewer(data) {
+            const iframe = document.getElementById('pdfViewer');
+            
+            // iframe yüklenme kontrolü
+            const sendMessage = () => {
+                console.log('Viewer\'a mesaj gönderiliyor:', data.type);
+                iframe.contentWindow.postMessage(data, '*');
+                
+                // Loading gizle, viewer göster
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('pdfViewer').style.display = 'block';
+                }, 500);
+            };
+            
+            if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                sendMessage();
+            } else {
+                iframe.onload = sendMessage;
+            }
+        }
+
+        function handlePDFError(error, fileName) {
+            console.error('PDF yükleme hatası:', error);
+            document.getElementById('loading').style.display = 'none';
+            showStatus(`"${fileName}" yüklenemedi: ${error.message}`, 'error');
+        }
+
+        function handleIframeMessage(event) {
+            const iframe = document.getElementById('pdfViewer');
+            if (event.source === iframe.contentWindow) {
+                console.log('Viewer\'dan mesaj:', event.data);
+                
+                if (event.data.type === 'pdf-loaded') {
+                    showStatus(`PDF başarıyla yüklendi: ${event.data.pages} sayfa`, 'success');
+                } else if (event.data.type === 'pdf-error') {
+                    showStatus(`PDF yükleme hatası: ${event.data.error}`, 'error');
+                }
+            }
         }
     </script>
 </body>
