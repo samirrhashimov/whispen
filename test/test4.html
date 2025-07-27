@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive PDF Viewer</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #file-list {
+            margin: 20px 0;
+        }
+        #file-list li {
+            margin: 5px 0;
+        }
+        #file-list button {
+            padding: 5px 10px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #file-list button:hover {
+            background: #3367d6;
+        }
+        #pdfViewer {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Drive PDF Görüntüleyici</h1>
+    
+    <button onclick="authorizeAndListDrive()">Google Drive'a Bağlan</button>
+    <ul id="file-list"></ul>
+    
+    <div class="loading" id="loading" style="display: none;">PDF yükleniyor...</div>
+    <iframe id="pdfViewer" src="/pdf.js/web/viewer.html" style="display: none;"></iframe>
+
+    <script>
+        let tokenClient;
+        let accessToken = null;
+
+        window.onload = () => {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
+                scope: 'https://www.googleapis.com/auth/drive.readonly',
+                callback: (tokenResponse) => {
+                    if (tokenResponse.access_token) {
+                        accessToken = tokenResponse.access_token;
+                        listDriveFiles();
+                    } else {
+                        alert('Token alınamadı.');
+                    }
+                }
+            });
+        };
+
+        function authorizeAndListDrive() {
+            tokenClient.requestAccessToken();
+        }
+
+        function listDriveFiles() {
+            fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name)', {
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('file-list');
+                list.innerHTML = '';
+                if (data.files && data.files.length > 0) {
+                    data.files.forEach(file => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<button onclick="openInIframeViewer('${file.id}')">${file.name}</button>`;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
+                }
+            })
+            .catch(err => {
+                alert('Drive dosya listeleme hatası: ' + JSON.stringify(err));
+            });
+        }
+
+        // Yöntem 1: ArrayBuffer kullanarak
+        function openInIframeViewer(fileId) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('pdfViewer').style.display = 'none';
+            
+            const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+            
+            fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            })
+            .then(res => res.arrayBuffer())
+            .then(arrayBuffer => {
+                const uint8Array = new Uint8Array(arrayBuffer);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('pdfViewer').style.display = 'block';
+                
+                const iframe = document.getElementById('pdfViewer');
+                iframe.contentWindow.postMessage({
+                    type: 'load-pdf-array',
+                    pdfData: Array.from(uint8Array)
+                }, '*');
+            })
+            .catch(err => {
+                document.getElementById('loading').style.display = 'none';
+                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+            });
+        }
+
+        // Yöntem 2: Blob URL kullanarak (alternatif)
+        function openInIframeViewerBlob(fileId) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('pdfViewer').style.display = 'none';
+            
+            const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+            
+            fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            })
+            .then(res => res.blob())
+            .then(blob => {
+                const blobUrl = URL.createObjectURL(blob);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('pdfViewer').style.display = 'block';
+                
+                const iframe = document.getElementById('pdfViewer');
+                iframe.contentWindow.postMessage({
+                    type: 'load-pdf-url',
+                    pdfUrl: blobUrl
+                }, '*');
+            })
+            .catch(err => {
+                document.getElementById('loading').style.display = 'none';
+                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+            });
+        }
+
+        // Yöntem 3: Base64 düzeltmesi (mevcut kodunuzun geliştirilmiş hali)
+        function openInIframeViewerBase64(fileId) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('pdfViewer').style.display = 'none';
+            
+            const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+            
+            fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            })
+            .then(res => res.blob())
+            .then(blob => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    // Base64 string'i düzenle
+                    const base64Data = reader.result.split(',')[1]; // "data:application/pdf;base64," kısmını çıkar
+                    
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('pdfViewer').style.display = 'block';
+                    
+                    const iframe = document.getElementById('pdfViewer');
+                    iframe.contentWindow.postMessage({
+                        type: 'load-pdf-base64',
+                        base64Data: base64Data
+                    }, '*');
+                };
+                reader.readAsDataURL(blob);
+            })
+            .catch(err => {
+                document.getElementById('loading').style.display = 'none';
+                alert('PDF yükleme hatası: ' + JSON.stringify(err));
+            });
+        }
+    </script>
+</body>
+</html>
