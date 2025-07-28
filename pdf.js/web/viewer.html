@@ -26,6 +26,93 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
+    
+    
+    // viewer.html dosyanızın <head> bölümüne (diğer script'lerden ÖNCE) eklenecek
+
+<script>
+// URL parametresinden file'ı al
+const urlParams = new URLSearchParams(window.location.search);
+const fileParam = urlParams.get('file');
+
+console.log('PDF.js başlangıç ayarları');
+console.log('File parametresi:', fileParam);
+
+if (fileParam) {
+    // PDFViewerApplicationOptions'ı override et
+    window.PDFViewerApplicationOptions = window.PDFViewerApplicationOptions || {};
+    
+    // Options'ları ayarla
+    const originalGet = window.PDFViewerApplicationOptions.get;
+    window.PDFViewerApplicationOptions.get = function(name) {
+        console.log('PDFViewerApplicationOptions.get çağrıldı:', name);
+        
+        if (name === 'defaultUrl') {
+            console.log('defaultUrl döndürülüyor:', fileParam);
+            return fileParam;
+        }
+        
+        // Eski get fonksiyonunu çağır
+        if (originalGet) {
+            return originalGet.call(this, name);
+        }
+        
+        return undefined;
+    };
+    
+    // Set fonksiyonunu da override et
+    const originalSet = window.PDFViewerApplicationOptions.set;
+    window.PDFViewerApplicationOptions.set = function(name, value) {
+        console.log('PDFViewerApplicationOptions.set çağrıldı:', name, value);
+        
+        if (originalSet) {
+            return originalSet.call(this, name, value);
+        }
+    };
+    
+    console.log('PDFViewerApplicationOptions override edildi');
+}
+
+// AppOptions için de aynı işlem
+if (fileParam && typeof window !== 'undefined') {
+    // AppOptions henüz yüklenmemiş olabilir, window'a bir flag koy
+    window._pdfFileToLoad = fileParam;
+    
+    // AppOptions yüklendiğinde yakala
+    Object.defineProperty(window, 'AppOptions', {
+        get: function() {
+            return this._appOptions;
+        },
+        set: function(value) {
+            console.log('AppOptions set ediliyor');
+            this._appOptions = value;
+            
+            if (value && window._pdfFileToLoad) {
+                console.log('AppOptions\'a defaultUrl set ediliyor:', window._pdfFileToLoad);
+                
+                // get metodunu override et
+                const originalGet = value.get;
+                value.get = function(name) {
+                    console.log('AppOptions.get çağrıldı:', name);
+                    
+                    if (name === 'defaultUrl') {
+                        console.log('AppOptions defaultUrl döndürülüyor:', window._pdfFileToLoad);
+                        return window._pdfFileToLoad;
+                    }
+                    
+                    if (originalGet) {
+                        return originalGet.call(this, name);
+                    }
+                    
+                    return undefined;
+                };
+            }
+        }
+    });
+}
+
+console.log('PDF.js ayarları hazır');
+</script>
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.json">
@@ -976,119 +1063,6 @@ window.addEventListener('error', (event) => {
 });
 
 console.log('PDF Viewer script hazır');
-</script>
-
-<script>
-console.log('PDF Viewer URL parameter handler yüklendi');
-
-// URL'den file parametresini al
-function getFileParameter() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const fileParam = urlParams.get('file');
-    console.log('URL file parametresi:', fileParam);
-    return fileParam;
-}
-
-// PDF.js'e URL'yi set et
-function setPDFURL() {
-    const fileUrl = getFileParameter();
-    
-    if (!fileUrl) {
-        console.log('File parametresi bulunamadı');
-        return;
-    }
-    
-    console.log('PDF URL set ediliyor:', fileUrl);
-    
-    // PDF.js'in hazır olmasını bekle
-    const waitForPDFJS = () => {
-        if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-            console.log('PDFViewerApplication hazır, PDF açılıyor');
-            
-            try {
-                // Mevcut PDF'i kapat
-                if (window.PDFViewerApplication.pdfDocument) {
-                    window.PDFViewerApplication.close();
-                }
-                
-                // Yeni PDF'i aç
-                window.PDFViewerApplication.open(fileUrl).then(() => {
-                    console.log('PDF başarıyla açıldı');
-                }).catch((error) => {
-                    console.error('PDF açma hatası:', error);
-                });
-                
-            } catch (error) {
-                console.error('PDF yükleme exception:', error);
-            }
-            
-        } else {
-            console.log('PDFViewerApplication henüz hazır değil, bekleniyor...');
-            setTimeout(waitForPDFJS, 100);
-        }
-    };
-    
-    // webviewerloaded event'ini bekle
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM yüklendi');
-            
-            document.addEventListener('webviewerloaded', () => {
-                console.log('webviewerloaded event alındı');
-                setTimeout(waitForPDFJS, 500);
-            });
-            
-            // Fallback: 2 saniye sonra kontrol et
-            setTimeout(waitForPDFJS, 2000);
-        });
-    } else {
-        // DOM zaten yüklü
-        if (window.PDFViewerApplication) {
-            waitForPDFJS();
-        } else {
-            document.addEventListener('webviewerloaded', () => {
-                console.log('webviewerloaded event alındı (geç)');
-                setTimeout(waitForPDFJS, 500);
-            });
-            setTimeout(waitForPDFJS, 2000);
-        }
-    }
-}
-
-// Alternatif yöntem: PDFViewerApplicationOptions'ı değiştir
-function setPDFOptions() {
-    const fileUrl = getFileParameter();
-    
-    if (!fileUrl) {
-        return;
-    }
-    
-    console.log('PDFViewerApplicationOptions set ediliyor');
-    
-    // PDF.js options'ını set et
-    if (window.PDFViewerApplicationOptions) {
-        window.PDFViewerApplicationOptions.set('defaultUrl', fileUrl);
-        console.log('defaultUrl set edildi:', fileUrl);
-    }
-    
-    // AppOptions'ı da dene
-    if (window.AppOptions) {
-        window.AppOptions.set('defaultUrl', fileUrl);
-        console.log('AppOptions defaultUrl set edildi:', fileUrl);
-    }
-}
-
-// Her iki yöntemi de dene
-console.log('URL:', window.location.href);
-setPDFOptions();
-setPDFURL();
-
-// Global hata yakalayıcı
-window.addEventListener('error', (event) => {
-    console.error('Viewer hatası:', event.error);
-});
-
-console.log('PDF Viewer URL handler hazır');
 </script>
 
 
