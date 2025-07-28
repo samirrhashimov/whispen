@@ -191,6 +191,7 @@
         let accessToken = null;
         let isConnected = false;
         let currentPdfBlob = null;
+        let blobUrls = []; // Blob URL'lerini takip et
 
         // Sayfa yüklendiğinde
         window.onload = () => {
@@ -213,7 +214,23 @@
                     }
                 }
             });
+            
+            // Sayfa kapatılırken blob URL'lerini temizle
+            window.addEventListener('beforeunload', cleanupBlobUrls);
+            window.addEventListener('unload', cleanupBlobUrls);
         };
+
+        function cleanupBlobUrls() {
+            console.log('Blob URL\'ler temizleniyor...');
+            blobUrls.forEach(url => {
+                try {
+                    URL.revokeObjectURL(url);
+                } catch (e) {
+                    console.log('Blob URL temizleme hatası:', e);
+                }
+            });
+            blobUrls = [];
+        }
 
         function showStatus(message, type = 'success') {
             const statusDiv = document.getElementById('status');
@@ -359,8 +376,8 @@
                     currentPdfBlob = URL.createObjectURL(blob);
                     console.log('Blob URL oluşturuldu:', currentPdfBlob);
                     
-                    // Viewer.html'i blob URL ile aç - SADECE URL YÖNTEMİ
-                    const viewerUrl = `viewer.html?file=${encodeURIComponent(currentPdfBlob)}`;
+                    // PDF.js viewer.html'i doğru yoldan aç
+                    const viewerUrl = `pdf.js/web/viewer.html?file=${encodeURIComponent(currentPdfBlob)}`;
                     console.log('Viewer URL:', viewerUrl);
                     
                     const iframe = document.getElementById('pdfViewer');
@@ -423,11 +440,7 @@
         }
 
         // Sayfa kapatılırken blob URL'lerini temizle
-        window.addEventListener('beforeunload', () => {
-            if (currentPdfBlob) {
-                URL.revokeObjectURL(currentPdfBlob);
-            }
-        });
+        window.addEventListener('beforeunload', cleanupBlobUrls);
     </script>
 </body>
 </html>
