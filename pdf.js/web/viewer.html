@@ -27,92 +27,44 @@ See https://github.com/adobe-type-tools/cmap-resources
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
     
-    
-    // viewer.html dosyanızın <head> bölümüne (diğer script'lerden ÖNCE) eklenecek
-
 <script>
+console.log('PDF.js URL parameter handler başlatılıyor');
+
 // URL parametresinden file'ı al
 const urlParams = new URLSearchParams(window.location.search);
 const fileParam = urlParams.get('file');
 
-console.log('PDF.js başlangıç ayarları');
+console.log('URL:', window.location.href);
 console.log('File parametresi:', fileParam);
 
 if (fileParam) {
-    // PDFViewerApplicationOptions'ı override et
-    window.PDFViewerApplicationOptions = window.PDFViewerApplicationOptions || {};
+    console.log('File parametresi bulundu, PDF.js ayarları yapılıyor');
     
-    // Options'ları ayarla
-    const originalGet = window.PDFViewerApplicationOptions.get;
-    window.PDFViewerApplicationOptions.get = function(name) {
-        console.log('PDFViewerApplicationOptions.get çağrıldı:', name);
-        
-        if (name === 'defaultUrl') {
-            console.log('defaultUrl döndürülüyor:', fileParam);
-            return fileParam;
-        }
-        
-        // Eski get fonksiyonunu çağır
-        if (originalGet) {
-            return originalGet.call(this, name);
-        }
-        
-        return undefined;
-    };
-    
-    // Set fonksiyonunu da override et
-    const originalSet = window.PDFViewerApplicationOptions.set;
-    window.PDFViewerApplicationOptions.set = function(name, value) {
-        console.log('PDFViewerApplicationOptions.set çağrıldı:', name, value);
-        
-        if (originalSet) {
-            return originalSet.call(this, name, value);
+    // PDFViewerApplicationOptions'ı hazırla
+    window.PDFViewerApplicationOptions = window.PDFViewerApplicationOptions || {
+        getAll: function() { return {}; },
+        get: function(name) {
+            console.log('PDFViewerApplicationOptions.get çağrıldı:', name);
+            if (name === 'defaultUrl') {
+                console.log('defaultUrl döndürülüyor:', fileParam);
+                return fileParam;
+            }
+            return undefined;
+        },
+        set: function(name, value) {
+            console.log('PDFViewerApplicationOptions.set çağrıldı:', name, value);
         }
     };
     
-    console.log('PDFViewerApplicationOptions override edildi');
-}
-
-// AppOptions için de aynı işlem
-if (fileParam && typeof window !== 'undefined') {
-    // AppOptions henüz yüklenmemiş olabilir, window'a bir flag koy
+    // AppOptions için de hazırlık
     window._pdfFileToLoad = fileParam;
     
-    // AppOptions yüklendiğinde yakala
-    Object.defineProperty(window, 'AppOptions', {
-        get: function() {
-            return this._appOptions;
-        },
-        set: function(value) {
-            console.log('AppOptions set ediliyor');
-            this._appOptions = value;
-            
-            if (value && window._pdfFileToLoad) {
-                console.log('AppOptions\'a defaultUrl set ediliyor:', window._pdfFileToLoad);
-                
-                // get metodunu override et
-                const originalGet = value.get;
-                value.get = function(name) {
-                    console.log('AppOptions.get çağrıldı:', name);
-                    
-                    if (name === 'defaultUrl') {
-                        console.log('AppOptions defaultUrl döndürülüyor:', window._pdfFileToLoad);
-                        return window._pdfFileToLoad;
-                    }
-                    
-                    if (originalGet) {
-                        return originalGet.call(this, name);
-                    }
-                    
-                    return undefined;
-                };
-            }
-        }
-    });
+    console.log('PDF.js options hazırlandı');
+} else {
+    console.log('File parametresi bulunamadı');
 }
-
-console.log('PDF.js ayarları hazır');
 </script>
+
 
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="locale/locale.json">
@@ -834,237 +786,73 @@ window.addEventListener("message", (event) => {
 
 
 <script>
-console.log('PDF Viewer script yüklendi');
+console.log('PDF.js post-load handler başlatılıyor');
 
-// Ana sayfaya mesaj gönderme fonksiyonu
-function sendToParent(data) {
-    try {
-        window.parent.postMessage(data, '*');
-    } catch (e) {
-        console.error('Parent\'a mesaj gönderilemedi:', e);
-    }
-}
+// URL'den file parametresini tekrar al
+const urlParams2 = new URLSearchParams(window.location.search);
+const fileParam2 = urlParams2.get('file');
 
-// PDF yükleme fonksiyonu
-function loadPDFData(pdfData, fileName) {
-    console.log('PDF yükleme başlatılıyor:', fileName);
+if (fileParam2) {
+    console.log('Post-load file parametresi:', fileParam2);
     
-    if (!window.PDFViewerApplication) {
-        console.error('PDFViewerApplication bulunamadı');
-        sendToParent({
-            type: 'pdf-error',
-            error: 'PDF.js yüklenmemiş'
-        });
-        return;
-    }
-    
-    try {
-        // Mevcut PDF'i kapat
-        if (window.PDFViewerApplication.pdfDocument) {
-            console.log('Mevcut PDF kapatılıyor');
-            window.PDFViewerApplication.close();
-        }
+    // PDF.js'in tamamen yüklenmesini bekle
+    function waitAndLoadPDF() {
+        console.log('PDF.js yüklenme kontrolü...');
         
-        // PDF'i aç
-        console.log('Yeni PDF açılıyor');
-        const loadingTask = window.PDFViewerApplication.open(pdfData);
-        
-        if (loadingTask && loadingTask.then) {
-            loadingTask.then((pdf) => {
-                console.log('PDF başarıyla yüklendi, sayfa sayısı:', pdf.numPages);
-                sendToParent({
-                    type: 'pdf-loaded',
-                    pages: pdf.numPages,
-                    fileName: fileName
-                });
+        if (window.PDFViewerApplication && 
+            window.PDFViewerApplication.initializedPromise) {
+            
+            console.log('PDFViewerApplication bulundu, initialized promise bekleniyor');
+            
+            window.PDFViewerApplication.initializedPromise.then(() => {
+                console.log('PDFViewerApplication tamamen hazır');
+                
+                // Kısa bir süre bekle
+                setTimeout(() => {
+                    console.log('PDF açılıyor:', fileParam2);
+                    
+                    try {
+                        window.PDFViewerApplication.open(fileParam2).then(() => {
+                            console.log('PDF başarıyla yüklendi');
+                        }).catch((error) => {
+                            console.error('PDF yükleme hatası:', error);
+                        });
+                    } catch (error) {
+                        console.error('PDF yükleme exception:', error);
+                    }
+                }, 1000);
             }).catch((error) => {
-                console.error('PDF yükleme hatası:', error);
-                sendToParent({
-                    type: 'pdf-error',
-                    error: error.message || 'PDF yüklenemedi'
-                });
+                console.error('PDFViewerApplication initialization hatası:', error);
             });
+            
         } else {
-            // Eski PDF.js versiyonları için
-            setTimeout(() => {
-                if (window.PDFViewerApplication.pdfDocument) {
-                    const numPages = window.PDFViewerApplication.pdfDocument.numPages;
-                    console.log('PDF yüklendi (eski yöntem), sayfa sayısı:', numPages);
-                    sendToParent({
-                        type: 'pdf-loaded',
-                        pages: numPages,
-                        fileName: fileName
-                    });
-                } else {
-                    console.error('PDF yüklenemedi (eski yöntem)');
-                    sendToParent({
-                        type: 'pdf-error',
-                        error: 'PDF yüklenemedi'
-                    });
-                }
-            }, 2000);
+            console.log('PDFViewerApplication henüz hazır değil, tekrar deneniyor...');
+            setTimeout(waitAndLoadPDF, 200);
         }
-        
-    } catch (error) {
-        console.error('PDF yükleme exception:', error);
-        sendToParent({
-            type: 'pdf-error',
-            error: error.message || 'PDF yükleme hatası'
+    }
+    
+    // DOMContentLoaded'ı bekle
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM yüklendi, PDF yükleme başlatılıyor');
+            setTimeout(waitAndLoadPDF, 500);
         });
-    }
-}
-
-// Mesaj dinleyici
-window.addEventListener('message', (event) => {
-    console.log('Mesaj alındı:', event.data?.type);
-    
-    // ArrayBuffer yöntemi
-    if (event.data?.type === 'load-pdf-array' && event.data?.pdfData) {
-        console.log('PDF array verisi alındı, boyut:', event.data.pdfData.length);
-        
-        try {
-            const uint8Array = new Uint8Array(event.data.pdfData);
-            
-            // PDF header kontrolü
-            const header = String.fromCharCode.apply(null, uint8Array.slice(0, 4));
-            console.log('PDF Header:', header);
-            
-            if (header !== '%PDF') {
-                throw new Error('Geçersiz PDF dosyası');
-            }
-            
-            // PDF.js hazır olana kadar bekle
-            const waitForPDFJS = () => {
-                if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-                    console.log('PDFViewerApplication hazır');
-                    loadPDFData(uint8Array, event.data.fileName);
-                } else {
-                    console.log('PDFViewerApplication bekleniyor...');
-                    setTimeout(waitForPDFJS, 100);
-                }
-            };
-            
-            waitForPDFJS();
-            
-        } catch (error) {
-            console.error('Array buffer işleme hatası:', error);
-            sendToParent({
-                type: 'pdf-error',
-                error: error.message
-            });
-        }
+    } else {
+        console.log('DOM zaten yüklü, PDF yükleme başlatılıyor');
+        setTimeout(waitAndLoadPDF, 500);
     }
     
-    // Blob URL yöntemi
-    else if (event.data?.type === 'load-pdf-url' && event.data?.pdfUrl) {
-        console.log('PDF URL alındı:', event.data.pdfUrl);
-        
-        const waitForPDFJS = () => {
-            if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-                console.log('PDFViewerApplication hazır (URL yöntemi)');
-                loadPDFData(event.data.pdfUrl, event.data.fileName);
-            } else {
-                console.log('PDFViewerApplication bekleniyor (URL yöntemi)...');
-                setTimeout(waitForPDFJS, 100);
-            }
-        };
-        
-        waitForPDFJS();
-    }
-    
-    // Base64 yöntemi
-    else if (event.data?.type === 'load-pdf-base64' && event.data?.base64Data) {
-        console.log('PDF base64 verisi alındı, boyut:', event.data.base64Data.length);
-        
-        try {
-            // Base64'ü binary'ye çevir
-            const binaryString = atob(event.data.base64Data);
-            const uint8Array = new Uint8Array(binaryString.length);
-            for (let i = 0; i < binaryString.length; i++) {
-                uint8Array[i] = binaryString.charCodeAt(i);
-            }
-            
-            // PDF header kontrolü
-            const header = String.fromCharCode.apply(null, uint8Array.slice(0, 4));
-            console.log('PDF Header (base64):', header);
-            
-            if (header !== '%PDF') {
-                throw new Error('Geçersiz PDF dosyası');
-            }
-            
-            const waitForPDFJS = () => {
-                if (window.PDFViewerApplication && window.PDFViewerApplication.initialized) {
-                    console.log('PDFViewerApplication hazır (base64 yöntemi)');
-                    loadPDFData(uint8Array, event.data.fileName);
-                } else {
-                    console.log('PDFViewerApplication bekleniyor (base64 yöntemi)...');
-                    setTimeout(waitForPDFJS, 100);
-                }
-            };
-            
-            waitForPDFJS();
-            
-        } catch (error) {
-            console.error('Base64 decode hatası:', error);
-            sendToParent({
-                type: 'pdf-error',
-                error: error.message
-            });
-        }
-    }
-});
-
-// PDF.js yüklenme kontrolü
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM yüklendi');
-    
-    // webviewerloaded event'ini dinle
+    // webviewerloaded event'ini de dinle
     document.addEventListener('webviewerloaded', () => {
         console.log('webviewerloaded event alındı');
-        sendToParent({
-            type: 'viewer-ready'
-        });
+        setTimeout(waitAndLoadPDF, 100);
     });
     
-    // PDFViewerApplication kontrolü
-    let checkCount = 0;
-    const checkPDFJS = setInterval(() => {
-        checkCount++;
-        
-        if (window.PDFViewerApplication) {
-            console.log('PDFViewerApplication bulundu, initialized:', window.PDFViewerApplication.initialized);
-            
-            if (window.PDFViewerApplication.initialized) {
-                console.log('PDF.js tamamen hazır');
-                clearInterval(checkPDFJS);
-                sendToParent({
-                    type: 'viewer-ready'
-                });
-            }
-        } else {
-            console.log('PDFViewerApplication henüz yok, deneme:', checkCount);
-        }
-        
-        // 10 saniye sonra vazgeç
-        if (checkCount > 100) {
-            console.warn('PDFViewerApplication 10 saniye içinde hazır olmadı');
-            clearInterval(checkPDFJS);
-        }
-    }, 100);
-});
+} else {
+    console.log('Post-load: File parametresi bulunamadı');
+}
 
-// Global hata yakalayıcı
-window.addEventListener('error', (event) => {
-    console.error('Global viewer hatası:', event.error);
-    sendToParent({
-        type: 'pdf-error',
-        error: 'Viewer hatası: ' + (event.error?.message || 'Bilinmeyen hata')
-    });
-});
-
-console.log('PDF Viewer script hazır');
+console.log('PDF.js post-load handler hazır');
 </script>
-
-
   </body>
 </html>
