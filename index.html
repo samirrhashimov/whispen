@@ -143,90 +143,6 @@
   <button data-i18n="clearhistory" id="clear-history">  <span id="clear-historytext"></span></button>
   
   
-  
-  <!-- test google drive int-->
-
-<button onclick="authorizeAndListDrive()">Google Drive’a Bağlan</button>
-  <ul id="file-list"></ul>
-
-</div>
-  <script>
-    let tokenClient;
-    let accessToken = null;
-
-    window.onload = () => {
-      tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/drive.readonly',
-        callback: (tokenResponse) => {
-          if (tokenResponse.access_token) {
-            accessToken = tokenResponse.access_token;
-            listDriveFiles();
-          } else {
-            alert('Token alınamadı.');
-          }
-        }
-      });
-    };
-
-    function authorizeAndListDrive() {
-      tokenClient.requestAccessToken();
-    }
-
-    function listDriveFiles() {
-      fetch('https://www.googleapis.com/drive/v3/files?q=mimeType="application/pdf"&fields=files(id,name)', {
-        headers: {
-          'Authorization': 'Bearer ' + accessToken
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById('file-list');
-        list.innerHTML = '';
-        if (data.files && data.files.length > 0) {
-          data.files.forEach(file => {
-            const li = document.createElement('li');
-            li.innerHTML = `<button onclick="openInIframeViewer('${file.id}')">${file.name}</button>`;
-            list.appendChild(li);
-          });
-        } else {
-          list.innerHTML = '<li>Hiç PDF bulunamadı.</li>';
-        }
-      })
-      .catch(err => {
-        alert('Drive dosya listeleme hatası: ' + JSON.stringify(err));
-      });
-    }
-
-    function openInIframeViewer(fileId) {
-      const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
-      fetch(url, {
-        headers: {
-          'Authorization': 'Bearer ' + accessToken
-        }
-      })
-      .then(res => res.blob())
-      .then(blob => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const iframe = document.getElementById('pdfViewer');
-          iframe.contentWindow.postMessage({
-            type: 'load-pdf',
-            dataUrl: reader.result
-          }, '*');
-        };
-        reader.readAsDataURL(blob);
-      })
-      .catch(err => {
-        alert('PDF yükleme hatası: ' + JSON.stringify(err));
-      });
-    }
-  </script>
-
-
-
-
-
 
 <!--Sounds Sidebar -->
   <div class="ambientdiv" id="ambientdiv">
@@ -429,7 +345,7 @@ volumeSlider.addEventListener("input", () => {
     </a>
   </p>
   <p>
-    <strong data-i18n="version"></strong> 1.2.9
+    <strong data-i18n="version"></strong> 1.4.4
   </p>
 </div>
 
@@ -670,7 +586,5 @@ document.getElementById('openBtn').addEventListener('click', () => {
 <script src="scripts/pdfviewer.js"></script>
 <script src="scripts/script.js"></script>
 <script src="scripts/nav_controller.js"></script>
-<script src="scripts/drive.js"></script>
-<script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
 </body>
 </html>

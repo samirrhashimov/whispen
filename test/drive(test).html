@@ -187,6 +187,8 @@
     </div>
 
     <script>
+      
+      //here8 -i öz id ile deyiş!!
         let tokenClient;
         let accessToken = null;
         let isConnected = false;
@@ -197,7 +199,7 @@
             console.log('Sayfa yüklendi');
             
             tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: '326327822458-9blrp41tjmgbh0kvtqu5n00602mbcjve.apps.googleusercontent.com',
+                client_id: 'here8',
                 scope: 'https://www.googleapis.com/auth/drive.readonly',
                 callback: (tokenResponse) => {
                     console.log('Token response:', tokenResponse);
