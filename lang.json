@@ -97,7 +97,8 @@
     "developer_info": "Geliştirici Bilgisi",
     "developer_name": "Geliştirici:",
     "contact": "İletişim:",
-    "version": "Uygulama Sürümü:"
+    "version": "Uygulama Sürümü:",
+    "imp-sounds": "İçe aktarılan sesler"
   },
   "en": {
     "library": "Library",
@@ -195,7 +196,8 @@
     "developer_info": "Developer Info",
     "developer_name": "Developer",
     "contact": "Contact",
-    "version": "App Version"
+    "version": "App Version",
+    "imp-sounds": "Imported sounds"
     
   },
   "ru": {
@@ -293,7 +295,8 @@
     "developer_info": "Информация о разработчике",
     "developer_name": "Разработчик",
     "contact": "Контакты",
-    "version": "Версия приложения"
+    "version": "Версия приложения",
+    "imp-sounds": "Импортированные звуки"
 },
 "es": {
   "library": "Biblioteca",
@@ -390,7 +393,8 @@
     "developer_info": "Información del desarrollador",
     "developer_name": "Desarrollador",
     "contact": "Contacto",
-    "version": "Versión de la aplicación"
+    "version": "Versión de la aplicación",
+    "imp-sounds": "Sonidos Importados"
 },
 "az": {
   "library": "Kitabxana",
@@ -488,6 +492,7 @@
     "developer_info": "Tərtibatçı Məlumatı",
     "developer_name": "Tərtibatçı",
     "contact": "Əlaqə",
-    "version": "Tətbiq Versiyası"
+    "version": "Tətbiq Versiyası",
+    "imp-sounds": "Daxili Səslər"
 }
 }

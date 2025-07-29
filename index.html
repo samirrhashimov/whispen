@@ -147,36 +147,28 @@
 <!--Sounds Sidebar -->
   <div class="ambientdiv" id="ambientdiv">
     <button class="close-btn" onclick="toggleAmbientMenu()">×</button>
-    <span>
-      <div class="ambienttitles">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M3 12v0"></path>
-  <path d="M6 10v4"></path>
-  <path d="M9 8v8"></path>
-  <path d="M12 6v12"></path>
-  <path d="M15 8v8"></path>
-  <path d="M18 10v4"></path>
-  <path d="M21 12v0"></path>
-</svg>
-    </span>
+    
+    <div class="ambienttitles">
     <span data-i18n="ambient-sounds" class="ambientstext"></span>
     </div>
+      <div class="ambient-header">
+        
+
     <div class="sound-list" id="soundList">
-      <!-- Dynamically generated sound items -->
     </div>
     <div id="error-container"></div>
-   
-   
+    </div>
+  <div class="ambient-footer">
     <input type="file" id="uploadSound" accept="audio/*" hidden multiple />
-<button id="uploadButton">Müzik Yükle</button>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <p data-i18n="imp-sounds" style="margin: 0 0 0 3px; font-family: Inter;"></p>
+  <button id="uploadButton">+</button>
+</div>
 
 <div id="userSoundList"></div>
-    
-    
-    
-    
-    
+   </div>
+   
+   
   </div>
 
 <!-- Themes Div -->
