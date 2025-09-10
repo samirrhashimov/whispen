@@ -1,0 +1,16 @@
+{
+  "name": "Whispen",
+  "version": "1.4.8",
+  "description": "A project using Firebase backend and PDF.js (pdfjs-dist 5.4.149) for PDF rendering",
+  "main": "index.js",
+  "scripts": {
+    "start": "node script.js",
+    "serve": "firebase serve"
+  },
+  "dependencies": {
+    "pdfjs-dist": "5.4.149",
+    "firebase": "^10.0.0"
+  },
+  "author": "LinzaApps",
+  "license": "SEE LICENCE IN LICENCE.txt"
+}
