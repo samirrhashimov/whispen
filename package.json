@@ -4,7 +4,7 @@
   "description": "A project using Firebase backend and PDF.js (pdfjs-dist 5.4.149) for PDF rendering",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node script.js",
     "serve": "firebase serve"
   },
   "dependencies": {
