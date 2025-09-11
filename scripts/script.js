@@ -229,7 +229,7 @@ options.forEach(option => {
     const selectedTheme = option.dataset.theme;
 
     // Clear all theme classes
-    document.body.classList.remove("forest-style", "moon-style", "desert-style", "ocean-style", "sakura-style", "cyberpunk-style", "autumn-style", "mystic-style", "cafe-style", "mc-style");
+    document.body.classList.remove("forest-style", "moon-style", "oled-style", "desert-style", "ocean-style", "sakura-style", "cyberpunk-style", "autumn-style", "mystic-style", "cafe-style", "mc-style");
 
     // Remove active class from all options
     options.forEach(opt => opt.classList.remove("active"));
