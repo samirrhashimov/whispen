@@ -1,4 +1,4 @@
-# 📘 Whispen – Modern & Calm PDF Reader
+# Whispen – *Modern & Calm PDF Reader*
 ![Banner](assets/banner.png)
 
 ![GitHub license](https://img.shields.io/github/license/samirrhashimov/whispen?style=flat)
@@ -30,59 +30,41 @@
 
 2. Open index.html in your browser to start using the app.
 
-
-3. To enable authentication, configure your Firebase settings in:
-
-scripts/firebase-config.js
-
 ---
 
 ## 🌍 Language Support
 
-🇬🇧 English (Default)
+- 🇬🇧 English (Default)
 
-🇦🇿 Azerbaijan
+- 🇦🇿 Azerbaijan
 
-🇪🇸 Spanish
+- 🇪🇸 Spanish
 
-🇹🇷 Turkish
+- 🇹🇷 Turkish
 
-🇷🇺 Russian
-
+- 🇷🇺 Russian
 
 ---
 
-## 🧩 Developer Guide
+# 🤝 Contributing
+If you would like to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) document.  
+Additionally, for ethical collaboration guidelines, see the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
 
 Want to add new ambient sounds or themes?
-Check out the docs/dev-guide.txt for detailed instructions.
+Check out the [dev-guide.txt](docs/dev-guide.txt) for detailed instructions.
 
 
 ---
 
-## 🛡️ License
-
-This project is licensed under Creative Commons BY-NC-ND 4.0.
-
-Non-commercial use only
-
-No derivative works
-
-Attribution required
-
-
-Learn more: creativecommons.org/licenses/by-nc-nd/4.0
-
+## 🛡️ Security
+If you discover a security vulnerability in the project, **do not open a public issue**.  
+Instead, submit a private report through the [Security advisories](../../security/advisories) section.  
 
 ---
 
-## 🙌 Contributing
+## 📜 License
+This project is licensed under the **APGLv3 License**. For more details, see the [LICENSE](LICENSE) file.  
 
-Feel free to open issues or submit pull requests.
-Whispen welcomes clean code and new ideas!
-
-
----
 
 ##  📫 Contact
 
