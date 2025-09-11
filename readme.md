@@ -1,6 +1,9 @@
 # 📘 Whispen – Modern & Calm PDF Reader
 ![Banner](assets/banner.png)
 
+![GitHub license](https://img.shields.io/github/license/samirrhashimov/whispen?style=flat)
+![GitHub release](https://img.shields.io/github/v/release/samirrhashimov/whispen?style=flat)
+
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
 ---
