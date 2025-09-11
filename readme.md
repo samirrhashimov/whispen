@@ -3,6 +3,8 @@
 
 ![GitHub license](https://img.shields.io/github/license/samirrhashimov/whispen?style=flat)
 ![GitHub release](https://img.shields.io/github/v/release/samirrhashimov/whispen?style=flat)
+![GitHub repo size](https://img.shields.io/github/repo-size/samirrhashimov/Whispen?style=flat)
+![GitHub top language](https://img.shields.io/github/languages/top/samirrhashimov/Whispen?style=flat)
 
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
