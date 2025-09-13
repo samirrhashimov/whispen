@@ -148,13 +148,18 @@
   
 
 <!--Sounds Sidebar -->
-  <div class="ambientdiv" id="ambientdiv">
+ <div class="ambientdiv" id="ambientdiv">
+   
+   <div class="topbar">
+  <div class="spacer-topbar"></div>
+  <div class="title-topbar" data-i18n="ambient-sounds">Ambient Sounds</div>
+  <div class="spacer-topbar"></div>
+  
     <button class="close-btn" onclick="toggleAmbientMenu()">×</button>
     
-    <div class="ambienttitles">
-    <span data-i18n="ambient-sounds" class="ambientstext"></span>
-    </div>
-      <div class="ambient-header">
+</div>
+    
+ <div class="ambient-header">
         
 
     <div class="sound-list" id="soundList">
@@ -177,11 +182,17 @@
 
 <!-- Themes Div -->
 <div id="themesdiv" class="themesdiv">
-  <button class="close-btn" onclick="toggleThemesMenu()" >×</button>
   
-  <h2 data-i18n="themes" style="text-align: flex-start; font-size: 22px; font-weight: 600; color: #fff; margin-bottom: 5px; letter-spacing: -0.0px; font-family: Inter;"></h2>
+     <div class="topbar">
+  <div class="spacer-topbar"></div>
+  <div class="title-topbar" data-i18n="themes">Themes</div>
+  <div class="spacer-topbar"></div>
   
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+    <button class="close-btn" onclick="toggleThemesMenu()">×</button>
+    
+</div>
+  
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px;">
     
     <!-- Default Theme -->
     <div data-i18n="default" class="theme-option" data-theme="default" onclick="selectTheme('default')" style="aspect-ratio: 1; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; background: linear-gradient(135deg, rgba(248,249,250,1) 0%, rgba(233,236,239,1) 100%), url('default-theme-bg.png') center/cover;font-family: Inter; position: relative; overflow: hidden; padding: 5px; color: black;">
@@ -305,8 +316,15 @@
 
 <!-- Settings Menu -->
 <div id="settingsMenu" class="settingsmenu">
-    <button id="settingsBtn" class="close-btn">×</button>
-  <h1 data-i18n="settings" class="settingstext"></h1>
+  
+   <div class="topbar">
+  <div class="spacer-topbar"></div>
+  <div class="title-topbar" data-i18n="settings">Settings</div>
+  <div class="spacer-topbar"></div>
+  
+    <button class="close-btn" onclick="toggleSettingsMenu()">×</button>
+    
+</div>
 
   <div class="setting-item">
     <label class="sitem" data-i18n="sound-volume"></label>
@@ -402,7 +420,7 @@ volumeSlider.addEventListener("input", () => {
     </a>
   </p>
   <p>
-    <strong data-i18n="version"></strong> 1.4.8
+    <strong data-i18n="version"></strong> 1.5.2
   </p>
   <div class="space1"></div>
 </div>
@@ -467,8 +485,8 @@ volumeSlider.addEventListener("input", () => {
   </button>
 
   <!-- Library Button -->
-  <button style="background: none; border: none; padding: 0;" id="libraryBtn">
-<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24" fill="black">
+  <button style="background: none; border: none; padding: 0;" id="libraryBtn" disabled>
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24" fill="gray">
   <path d="m13,20v4l-2.5-2.5-2.5,2.5v-4h5Zm-7-2V0h-1c-1.657,0-3,1.343-3,3v15.765c.549-.494,1.262-.766,2-.765h2Zm0,2h-2c-1.105,0-2,.895-2,2s.895,2,2,2h2v-4Zm9,4h7v-4h-7v4ZM20,0h-12v18h14V2c0-1.105-.895-2-2-2Z"/>
 </svg>
   </button>
@@ -544,12 +562,22 @@ document.getElementById('openBtn').addEventListener('click', () => {
 </script>
 
 <div class="notemenu" id="noteMenu">
+<div class="topbar">
+  <div class="spacer-topbar"></div>
+  <div class="title-topbar" data-i18n="notes">Notes</div>
+  <div class="spacer-topbar"></div>
+  
     <button class="close-btn" onclick="toggleNotesMenu()">×</button>
+    
+</div>
+
+
+
+
+    
     <div class="menu-header">
-      <h2 class="notetitle" data-i18n="notes">Notes:</h2>
-      <button class="add-note-btn" id="openAddModal" data-i18n="add"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="m18.5,0H5.5C2.467,0,0,2.468,0,5.5v13c0,3.032,2.467,5.5,5.5,5.5h10.343c1.469,0,2.85-.572,3.889-1.611l2.657-2.656c1.039-1.039,1.611-2.42,1.611-3.89V5.5c0-3.032-2.467-5.5-5.5-5.5ZM5.5,21c-1.378,0-2.5-1.121-2.5-2.5V5.5c0-1.379,1.122-2.5,2.5-2.5h13c1.378,0,2.5,1.121,2.5,2.5,0,0-.002,10.448-.005,10.5h-2.995c-1.105,0-2,.895-2,2v2.994c-.052.003-10.5.006-10.5.006Zm10-7.5h-2v2c0,.828-.671,1.5-1.5,1.5s-1.5-.672-1.5-1.5v-2h-2c-.829,0-1.5-.672-1.5-1.5s.671-1.5,1.5-1.5h2v-2c0-.828.671-1.5,1.5-1.5s1.5.672,1.5,1.5v2h2c.829,0,1.5.672,1.5,1.5s-.671,1.5-1.5,1.5Z"/></svg></button>
+      <button class="add-note-btn" id="openAddModal" data-i18n="add"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="m18.5,0H5.5C2.467,0,0,2.468,0,5.5v13c0,3.032,2.467,5.5,5.5,5.5h10.343c1.469,0,2.85-.572,3.889-1.611l2.657-2.656c1.039-1.039,1.611-2.42,1.611-3.89V5.5c0-3.032-2.467-5.5-5.5-5.5ZM5.5,21c-1.378,0-2.5-1.121-2.5-2.5V5.5c0-1.379,1.122-2.5,2.5-2.5h13c1.378,0,2.5,1.121,2.5,2.5,0,0-.002,10.448-.005,10.5h-2.995c-1.105,0-2,.895-2,2v2.994c-.052.003-10.5.006-10.5.006Zm10-7.5h-2v2c0,.828-.671,1.5-1.5,1.5s-1.5-.672-1.5-1.5v-2h-2c-.829,0-1.5-.672-1.5-1.5s.671-1.5,1.5-1.5h2v-2c0-.828.671-1.5,1.5-1.5s1.5.672,1.5,1.5v2h2c.829,0,1.5.672,1.5,1.5s-.671,1.5-1.5,1.5Z"/></svg></button>
     </div>
-    <hr class="noteshr">
     <div class="note-list" id="noteList"></div>
   </div>
 

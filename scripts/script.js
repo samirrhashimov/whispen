@@ -278,6 +278,11 @@ function closeLoginModal() {
 
 
 //settings
+function toggleSettingsMenu() {
+  const settingsMenu = document.querySelector('.settingsmenu');
+  settingsMenu.classList.remove('open');
+}
+
 function togglePasswordForm() {
   const form = document.getElementById('password-form');
   form.classList.toggle('hidden');
