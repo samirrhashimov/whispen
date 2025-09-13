@@ -41,7 +41,7 @@
   --navbar-color: #000000;
   --controlbar-color: #ccc;
   --menu-color: #17181C;
-  --button-color: #334155;
+  --button-color: #454649;
   --navborder-radius: 0;
   --greeting-color: #ffffff;
 }
@@ -52,8 +52,8 @@
   --text-color2: #000000;
   --navbar-color: url('/assets/images/desert_texture.jpg');
   --controlbar-color: #e1c89a;
-  --menu-color: linear-gradient(to bottom, #ed8c2b, #d0761d, #b35f11, #944a07, #733700);
-  --button-color: #e2725b;
+  --menu-color: #cbb18b;
+  --button-color: #8c7b5f;
   --navborder-radius: 0;
   --greeting-color: #e2725b;
 }
@@ -77,7 +77,7 @@
 --navbar-color: #f8bbd0;
 --menu-color: #f48fb1;
 --controlbar-color: #fce4ec;
---button-color: #ec407a;
+--button-color: #ab647c;
 --navborder-radius: 0;
 --greeting-color: #880e4f;
 }
@@ -88,8 +88,8 @@
 --text-color2: #ff00ff;
 --navbar-color: #1a1a1a;
 --menu-color: #2a003f;
---controlbar-color: #5a4a6b;
---button-color: #cc00cc;
+--controlbar-color: #5f406f;
+--button-color: #5f406f;
 --navborder-radius: 0;
 --greeting-color: #13810C;
 }
@@ -99,9 +99,9 @@
 --text-color: #4e342e;
 --text-color2: #3e2723;
 --navbar-color: #d84315;
---menu-color: #bf360c;
+--menu-color: #df7043;
 --controlbar-color: #ffe0b2;
---button-color: #ff7043;
+--button-color: #a75432;
 --navborder-radius: 0;
 --greeting-color: #000000;
 }
@@ -112,8 +112,8 @@
 --text-color2: #e0e0e0;
 --navbar-color: #3c096c;
 --menu-color: #240046;
---controlbar-color: #3f3d56;
---button-color: #7b2cbf;
+--controlbar-color: #452662;
+--button-color: #452662;
 --navborder-radius: 0;
 --greeting-color: #ffffff;
 }
