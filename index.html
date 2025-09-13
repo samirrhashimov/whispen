@@ -317,22 +317,23 @@
 <!-- Settings Menu -->
 <div id="settingsMenu" class="settingsmenu">
   
+  <!-- Bu kısımı değişme -->
    <div class="topbar">
   <div class="spacer-topbar"></div>
   <div class="title-topbar" data-i18n="settings">Settings</div>
   <div class="spacer-topbar"></div>
   
     <button class="close-btn" onclick="toggleSettingsMenu()">×</button>
-    
 </div>
-
+ <!-- -->
+ 
   <div class="setting-item">
-    <label class="sitem" data-i18n="sound-volume"></label>
+    <label class="sitem2" data-i18n="sound-volume"></label>
     <input type="range" id="volumeControl" min="0" max="100" value="70" onchange="setVolume(this.value)">
   </div>
 
   <div class="setting-item">
-    <label class="sitem" data-i18n="app-language"></label>
+    <label class="sitem2" data-i18n="app-language"></label>
     <select id="languageSelect" onchange="changeLanguage(this.value)">
       <option value="en">English</option>
       <option value="az">Azərbaycan</option>
@@ -344,7 +345,13 @@
 
 <label class="sitem" data-i18n="account-options"></label>
   <div class="setting-item">
-    <button data-i18n="change-password" onclick="togglePasswordForm()"></button>
+    <button onclick="togglePasswordForm()">
+    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="17px" height="17px" fill="white">
+  <path d="M22,14.556v-1.556c0-2.206-1.794-4-4-4s-4,1.794-4,4v1.556c-1.19,.694-2,1.97-2,3.444v2c0,2.206,1.794,4,4,4h4c2.206,0,4-1.794,4-4v-2c0-1.474-.81-2.75-2-3.444Zm-4,5.944c-.828,0-1.5-.672-1.5-1.5s.672-1.5,1.5-1.5,1.5,.672,1.5,1.5-.672,1.5-1.5,1.5Zm-2-6.5v-1c0-1.103,.897-2,2-2s2,.897,2,2v1h-4Zm3-12H5C2.239,2,0,4.239,0,7v3c0,2.761,2.239,5,5,5h5.812c.318-.548,.72-1.039,1.188-1.46v-.54c0-.772,.152-1.508,.419-2.187-.063,.012-.124,.036-.188,.036-.256,0-.512-.098-.707-.293l-.643-.643-.643,.643c-.195,.195-.451,.293-.707,.293s-.512-.098-.707-.293c-.391-.391-.391-1.023,0-1.414l.643-.643-.643-.643c-.391-.391-.391-1.023,0-1.414,.39-.391,1.023-.391,1.414,0l.643,.643,.643-.643c.391-.391,1.023-.391,1.414,0,.391,.391,.39,1.023,0,1.414l-.643,.643,.643,.643c.097,.097,.17,.21,.219,.33,1.092-1.495,2.853-2.473,4.843-2.473,2.754,0,5.074,1.867,5.777,4.4,.131-.447,.223-.91,.223-1.4v-3c0-2.761-2.239-5-5-5ZM6.707,9.143c.391,.391,.391,1.023,0,1.414-.195,.195-.451,.293-.707,.293s-.512-.098-.707-.293l-.643-.643-.643,.643c-.195,.195-.451,.293-.707,.293s-.512-.098-.707-.293c-.391-.391-.391-1.023,0-1.414l.643-.643-.643-.643c-.391-.391-.391-1.023,0-1.414,.39-.391,1.023-.391,1.414,0l.643,.643,.643-.643c.391-.391,1.023-.391,1.414,0s.391,1.023,0,1.414l-.643,.643,.643,.643Z"/>
+</svg>
+    <span data-i18n="change-password"></span>
+    </button>
+    
   </div>
     <div id="password-form" class="password-form hidden">
     <input type="password" id="current-password" data-i18n-placeholder="current-password" placeholder="" />
@@ -393,16 +400,27 @@ volumeSlider.addEventListener("input", () => {
 </script>
 
   <div class="setting-item">
-    <button data-i18n="logout" onclick="logout()"></button>
+    <button onclick="logout()">
+      <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="17" height="17" fill="white"><path d="M23.117,9.879l-4.95-4.95L16.046,7.05,19.5,10.5H6.617v3H19.5l-3.45,3.45,2.121,2.121,4.95-4.95A3,3,0,0,0,23.117,9.879Z"/><path d="M9.994,20.5a.5.5,0,0,1-.5.5H3.506a.5.5,0,0,1-.5-.5V3.531a.5.5,0,0,1,.5-.5H9.494a.5.5,0,0,1,.5.5V8.345h3V3.531a3.505,3.505,0,0,0-3.5-3.5H3.506a3.505,3.505,0,0,0-3.5,3.5V20.5a3.5,3.5,0,0,0,3.5,3.5H9.494a3.5,3.5,0,0,0,3.5-3.5V15.683h-3Z"/></svg>
+      <span data-i18n="logout"></span>
+    </button>
   </div>
   
   <div class="setting-item danger">
-    <button data-i18n="delete-account" onclick="showDeleteAccountModal()"></button>
+    <button onclick="showDeleteAccountModal()">
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="17px" height="17px" fill="red">
+  <path d="m22.242,5.272l-3.515-3.515c-1.133-1.133-2.64-1.757-4.242-1.757h-4.971c-1.602,0-3.109.624-4.243,1.757l-3.515,3.515c-1.133,1.134-1.757,2.641-1.757,4.243v4.971c0,1.602.624,3.109,1.757,4.243l3.515,3.515c1.134,1.133,2.641,1.757,4.243,1.757h4.971c1.603,0,3.109-.624,4.242-1.757l3.515-3.514c1.134-1.133,1.758-2.64,1.758-4.243v-4.971c0-1.603-.624-3.11-1.758-4.243Zm-5.803,9.789c.391.391.391,1.023,0,1.414-.195.195-.451.293-.707.293s-.512-.098-.707-.293l-3.043-3.043-3.043,3.043c-.195.195-.451.293-.707.293s-.512-.098-.707-.293c-.391-.391-.391-1.023,0-1.414l3.043-3.043-3.043-3.043c-.391-.391-.391-1.023,0-1.414s1.023-.391,1.414,0l3.043,3.043,3.043-3.043c.391-.391,1.023-.391,1.414,0s.391,1.023,0,1.414l-3.043,3.043,3.043,3.043Z"/>
+</svg>
+      <span data-i18n="delete-account"></span>
+    </button>
   </div>
   
   <label class="sitem" data-i18n="app-options"></label>
     <div class="setting-item">
-     <button data-i18n="app-info" onclick="toggleAppInfo()"></button>
+     <button class="pen" onclick="toggleAppInfo()">
+              <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M12,24A12,12,0,1,0,0,12,12.013,12.013,0,0,0,12,24ZM12,5a1.5,1.5,0,1,1-1.5,1.5A1.5,1.5,0,0,1,12,5Zm-1,5h1a2,2,0,0,1,2,2v6a1,1,0,0,1-2,0V12H11a1,1,0,0,1,0-2Z"/></svg>
+       <span data-i18n="app-info"></span>
+     </button>
   </div>
   
   <div id="dev-info-box" class="hidden">
@@ -422,7 +440,6 @@ volumeSlider.addEventListener("input", () => {
   <p>
     <strong data-i18n="version"></strong> 1.5.3
   </p>
-  <div class="space1"></div>
 </div>
   <!-- Delete Account Modal -->
 <div id="deleteAccountModal" class="delete-account-overlay hidden">

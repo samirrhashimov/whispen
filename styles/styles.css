@@ -919,10 +919,22 @@ body {
 }
 
 .sitem {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: 3px solid #222328;
 }
+
+.sitem2 {
+  margin-top: 10px;
+  margin-bottom: 3px;
+  padding-bottom: 2px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .setting-item {
   display: flex;
   flex-direction: column;
@@ -930,14 +942,37 @@ body {
   justify-content: flex-start;
 }
 
-.setting-item button,
-.setting-item select {
-  padding: 0.65rem;
+
+.setting-item button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0 10px 8px;
   border: none;
   border-radius: 8px;
-  background: white;
-  color: black;
-  font-weight: 500;
+  background: none;
+  color: white;
+  font-weight: 400;
+  text-align: left;
+  font-size: 16px;
+  
+}
+
+button span,
+button svg {
+  pointer-events: none;
+}
+
+.setting-item select {
+  padding: 10px 0 10px 5px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: white;
+  font-weight: 400;
+  text-align: left;
+  font-size: 16px;
 }
 
 .settingstext {
@@ -959,7 +994,6 @@ body {
   transition: background 0.2s ease;
 }
 
-/* Thumb stilleri (önceden olduğu gibi) */
 #volumeControl::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px;
@@ -984,8 +1018,8 @@ body {
 }
 
 .setting-item.danger button {
-  background-color: crimson;
-  color: white;
+  background: none;
+  color: crimson;
 }
 
 .password-form {
