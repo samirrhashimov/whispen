@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads – Whispen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      }
+      
+    body {
+      background:#000;
+      color:#fff;
+      text-align:center;
+      line-height:1.6;
+      }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: #000000;
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+      height: 53px;
+    }
+    
+    header img {
+      height:50px;
+      }
+      
+    .link {
+      color:#719AF2;
+      text-decoration:none;
+      }
+      
+    .link:hover {
+      text-decoration:underline;
+      }
+
+    main {
+      max-width:600px;
+      margin:3rem auto;
+      padding:0 1rem;
+      }
+      
+    .mainlogo {
+      width:80%;
+      }
+      
+    h1 {
+      font-family:Comfortaa, cursive;
+      font-size:2rem;
+      margin-bottom:0.5rem;
+      }
+      
+    p {
+      font-family:Manrope,sans-serif;
+      font-size:1rem;
+      color:#ddd;
+      margin-bottom:2rem;
+      }
+
+    .buttons {
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom:1.5rem;
+      }
+      
+    .buttons a {
+      padding:0.75rem 1.5rem;
+      border-radius:6px;
+      font-weight:bold;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      transition:background 0.3s ease;
+      }
+      
+    .apk {
+      background-color:#2563eb;
+      color:white;
+      }
+      
+    .apk:hover {
+      background-color:#1e4bb8;
+      }
+
+    .version-list {
+      text-align:left;
+      max-width:300px;
+      margin:0 auto;
+      font-size:0.95rem;
+      color:#ccc;
+      }
+      
+    .version-list h3 {
+      font-size:1rem;
+      margin-bottom:0.5rem
+      color:#fff;
+      }
+      
+    .version-list ul {
+      list-style:none;
+      padding-left:0;
+      }
+      
+    .version-list li {
+      margin-bottom:0.5rem;
+      }
+      
+    .version-list a {
+      color:#719AF2;
+      text-decoration:none;
+      }
+      
+    .version-list a:hover {
+      text-decoration:underline;
+      }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #777;
+      }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="/assets/linza.png" alt="Whispen Logo">
+  <a href="https://github.com/samirrhashimov/whispen" class="link" target="_blank">View on GitHub</a>
+</header>
+
+<main>
+  <img class="mainlogo" src="/assets/ogicon.png" alt="Whispen App Logo">
+  <h1>Whispen</h1>
+
+  <div class="buttons">
+    <!-- Latest Android APK -->
+    <a href="/apk/whispen-v1.5.4.apk" class="apk">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="white">
+        <path d="M17.523,15.342c-0.552,0-1-0.447-1-0.999s0.447-1,0.999-1c0.552,0,1,0.447,1,0.999 C18.522,14.894,18.075,15.341,17.523,15.342 M6.477,15.342c-0.552,0-1-0.447-1-0.999c0-0.552,0.447-1,0.999-1 c0.552,0,1,0.447,1,0.999C7.476,14.894,7.029,15.341,6.477,15.342 M17.881,9.322l1.997-3.459c0.115-0.199,0.047-0.453-0.152-0.568 c-0.199-0.115-0.453-0.047-0.568,0.152l0,0l-2.022,3.503C15.59,8.244,13.853,7.851,12,7.851S8.41,8.244,6.863,8.949L4.841,5.447 C4.726,5.248,4.472,5.18,4.273,5.294C4.075,5.409,4.006,5.663,4.121,5.862l0,0l1.997,3.46c-3.43,1.865-5.775,5.337-6.119,9.44h24 C23.656,14.659,21.311,11.187,17.881,9.322"/>
+      </svg>
+      <span>Download for Android</span>
+    </a>
+  </div>
+
+  <!-- Old versions list -->
+  <div class="version-list">
+    <h3>Previous Versions:</h3>
+    <ul>
+      <li><a href="/apk/whispen-v1.5.2.apk">Android APK v1.5.2</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2025 Whispen. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

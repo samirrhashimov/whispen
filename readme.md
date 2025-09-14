@@ -51,7 +51,7 @@ If you would like to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.
 Additionally, for ethical collaboration guidelines, see the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
 
 Want to add new ambient sounds or themes?
-Check out the [dev-guide.txt](docs/dev-guide.txt) for detailed instructions.
+Check out the [dev-guide.md](docs/dev-guide.md) for detailed instructions.
 
 
 ---
