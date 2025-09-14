@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -21,4 +21,4 @@ export async function handler(event, context) {
   } catch (err) {
     return { statusCode: 500, body: "Error: " + err.message };
   }
-}
+};
