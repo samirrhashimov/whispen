@@ -13,7 +13,7 @@
 
 ➡ Then paste this object inside the 
 **const soundLibrary = []**
-arrat in soundsystem.js.
+array in soundsystem.js.
 (Located near the top – Line 1)
 
 ---
