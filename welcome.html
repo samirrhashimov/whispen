@@ -16,7 +16,7 @@
     }
     html {
       height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body {
@@ -31,16 +31,30 @@
       perspective: 1000px;
     }
 
+    #header {
+      display: block;
+      text-align: center;
+    }
+    
     .title {
       color: white;
       font-family: Comfortaa;
       font-size: 1.5rem;
       font-weight: bold;
       text-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+      height: 10px;
+    }
+    
+   .subtitle {
+      font-family: Poppins;
+      color: #ccc;
+      font-size: 12px;
     }
 
 .screenshot {
-  width: 70%;
+  position: absolute;
+  top: 5%;
+  width: 75%;
   max-width: 360px;
   aspect-ratio: 9 / 17.5;
   border-radius: 16px;
@@ -56,10 +70,13 @@
 }
 
     .button-container {
+      position: fixed;
+      bottom: 20px;
       width: 90%;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      z-index: 999;
     }
 
     .button {
@@ -89,12 +106,6 @@
 
     .signin-btn:hover {
       background-color: rgba(255, 255, 255, 0.2);
-    }
-    
-    .subtitle {
-      font-family: Poppins;
-      color: #ccc;
-      font-size: 12px;
     }
     
 .whispen-bg {
@@ -159,10 +170,12 @@
 </head>
 <body>
   <div class="whispen-bg"></div>
-  <div class="title" data-i18n="welcome_title">Whispen</div>
-  <div class="subtitle" data-i18n="whispensubtitle">“Read Calmly, Focus Deeply"</div>
+  <div id="header">
+    <p class="title">Whispen</p>
+    <br>
+    <p class="subtitle">“Read Calmly, Focus Deeply"</p>
+  </div>
   
-
   <div class="screenshot" style="background-image: url('./assets/images/screenshot-main.jpg');">
   </div>
 

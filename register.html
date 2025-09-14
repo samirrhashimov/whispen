@@ -50,19 +50,22 @@
 <script>
   function toggleButton(checkbox) {
     document.getElementById("registerBtn").disabled = !checkbox.checked;
+    /*
     document.getElementById("anonymousbutton").disabled = !checkbox.checked;
+    */
   }
 </script>
         <div id="message" class="message"></div>
     <p class="separator">or</p>
         
 <!-- Google Button:
-    <button class="google-btn"onclick="googleLogin()"style="background-color: black; color:white; font-family: 'roboto'">
+    <button class="google-btn" onclick="googleLogin()"style="background-color: black; color:white; font-family: 'roboto'">
 <span style="font-weight: bold;">Google&nbsp </span>  ile Devam Et
 </button>
     -->
+    <!-- Anonymous Login Button
     <button data-i18n="withoutaccount" id="anonymousbutton" onclick="anonymous()" disabled></button>
-    
+    -->
     <p class="minitext">
       <span data-i18n="haveaccount"></span>
       <a data-i18n="login" href="login.html"></a>

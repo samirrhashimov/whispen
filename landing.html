@@ -7,6 +7,7 @@
      <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
   <meta property="og:title" content="Whispen – Read in Peace, Focus with Ease">
   <meta property="og:description" content="Enjoy focused PDF reading with ambient sounds and a distraction-free interface. Whispen helps you relax while you read.">
   <meta property="og:image" content="https://whispen.netlify.app/assets/ogicon.png">
@@ -20,7 +21,7 @@
 
     body {
       font-family: sans-serif;
-      background-color: #ffffff;
+      background-color: #000000;
       color: #222;
       line-height: 1.6;
     }
@@ -57,12 +58,14 @@
     .main h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: #fff;
     }
 
     .main p {
-      font-size: 1.1rem;
-      color: #555;
+      font-size: 1.05rem;
+      color: #ddd;
       margin-bottom: 2rem;
+      font-family: Manrope;
     }
     .mainlogo {
       width: 100%;
@@ -87,9 +90,11 @@
       margin-bottom: 3rem;
       flex-wrap: wrap;
     }
-
+    .buttons svg {
+      pointer-events: none;
+    }
     .buttons a {
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1rem;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
@@ -114,18 +119,18 @@
       background-color: #cbd5e1;
     }
 
-    .github-link {
+    .link {
       text-decoration: none;
-      color: #2563eb;
+      color: #719AF2;
       font-size: 0.95rem;
     }
 
-    .github-link:hover {
+    .link:hover {
       text-decoration: underline;
     }
 
     .features {
-      background-color: #f2f7fb;
+      background-color: #17181C;
       padding: 2rem 1rem;
     }
 
@@ -133,49 +138,78 @@
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       font-family: Inter;
+      color: #fff;
     }
 
     .features ul {
-      list-style: none;
+      list-style: circle;
       max-width: 600px;
       margin: 0 auto;
-      padding: 0;
+      padding-left: 12px;
       font-family: Poppins;
+      color: #fff;
     }
 
-    .features li {
+  .features li {
       margin-bottom: 0.8rem;
     }
   
+  .feature_lpi1 {
+  width: 100%;
+  height: 160px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #fff;
+  }
+    .feature_lpi2 {
+  width: 100%;
+  height: 150px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #fff;
+  }
+    .feature_lpi3 {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  height: 190px;
+  padding-bottom: 30px;
+  }
+    .feature_lp3div {
+      display: flex;
+      justify-content: center;
+    }
+    
    .usecases {
-      background-color: #f2f7fb;
+      background-color: #17181C;
       padding: 2rem 1rem;
     }
     .usecases h2 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       font-family: Inter;
+      color: #fff;
     }
 
     .usecases ul {
-      list-style: none;
+      list-style: circle;
       max-width: 600px;
       margin: 0 auto;
-      padding: 0;
+      padding-left: 12px;
       font-family: Poppins;
+      color: #fff;
     }
 
     .usecases li {
       margin-bottom: 0.8rem;
     }
     .faq {
-      background-color: #ffffff;
+      background-color: #000;
       padding: 2rem 1rem;
     }
     .faq h2 {
       font-size: 1.5rem;
       margin-bottom: 1.5rem;
       font-family: Inter;
+      color: #fff;
     }
 
     .question {
@@ -183,6 +217,14 @@
       margin: 0 auto;
       padding: 0;
       font-weight: bold;
+      font-size: 18px;
+      padding-bottom: 7px;
+      color: #fff;
+    }
+    
+    details>p {
+      padding-bottom: 7px;
+      color: #eee;
     }
 
     .usecases details {
@@ -192,16 +234,17 @@
       text-align: center;
       padding: 1.5rem;
       font-size: 0.9rem;
-      color: #666;
+      color: #777;
     }
     .contact {
-      background-color: #f2f7fb;
+      background-color: #17181C;
       padding: 2rem 1rem;
     }
     .contact h2 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
       font-family: Inter;
+      color: #fff;
     }
 
     .contact p {
@@ -209,22 +252,24 @@
       margin: 0 auto;
       padding: 0;
       font-family: Poppins;
+      color: #fff;
     }
 
     .contact li {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0rem;
     }
     .contact ul {
       list-style: none;
       max-width: 600px;
-      margin: 10 auto;
+      margin: 5 auto;
       padding: 0;
       font-family: Poppins;
+      color: #fff;
     }
-    .video-container {
+  .video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 9/16 = %56.25 */
+  padding-bottom: 56.25%;
   height: 0;
 }
 .video-container iframe {
@@ -243,13 +288,16 @@
 .roadmap h2 {
   margin-bottom: 20px;
   font-family: Inter;
+  color: #fff;
 }
 .station-list {
   list-style: none;
   padding-left: 0;
   position: relative;
-  border-left: 3px solid #ccc;
+  border-left: 3px dashed #777;
+  border-radius: 5px;
   font-family: Poppins;
+  color: #fff;
 }
 .station {
   padding: 10px 20px;
@@ -260,20 +308,20 @@
 .station::before {
   content: "";
   position: absolute;
-  left: -13px;
-  top: 12px;
-  width: 12px;
-  height: 12px;
+  left: -19px;
+  top: 14px;
+  width: 15px;
+  height: 15px;
   background-color: #ccc;
   border-radius: 50%;
-  border: 2px solid white;
+  
 }
 .station.completed::before {
-  background-color: #4caf50;
+  background-color: #4ccf50;
 }
 .station.completed {
   text-decoration: line-through;
-  color: #777;
+  color: #999;
 }
 .station.working::before {
   background-color: #ffcc00;
@@ -287,7 +335,7 @@
     <div class="logo-group">
       <img src="/assets/linza.png">
     </div>
-    <a href="https://github.com/samirrhashimov/whispen" class="github-link" target="_blank" data-i18n="view_github">View on GitHub</a>
+    <a href="https://github.com/samirrhashimov/whispen" class="link" target="_blank" data-i18n="view_github">View on GitHub</a>
   </header>
 
 
@@ -296,36 +344,46 @@
   <main class="main">
    
     <h1 id="logotext">Whispen</h1>
+    <!--
     <h4 id="logodes">"Read in Peace, Focus with Ease"</h4>
+    -->
     <p class="description" data-i18n="main_desc">
-      Whispen is a modern, minimalist PDF reading app that combines ambient <strong>sounds</strong> and customizable <strong>themes</strong> to enhance focus and relaxation.
+      A minimalist PDF reader with ambient sounds and customizable themes for better focus.
     </p>
 
     <div class="buttons">
-      <a href="/apk/whispen-latest.apk" class="apk" data-i18n="download_apk">Download APK</a>
+      <a href="/apk/whispen-latest.apk" class="apk">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" width="20" height="20" fill="white">
+<path d="M17.523,15.342c-0.552,0-1-0.447-1-0.999s0.447-1,0.999-1c0.552,0,1,0.447,1,0.999  C18.522,14.894,18.075,15.341,17.523,15.342 M6.477,15.342c-0.552,0-1-0.447-1-0.999c0-0.552,0.447-1,0.999-1  c0.552,0,1,0.447,1,0.999C7.476,14.894,7.029,15.341,6.477,15.342 M17.881,9.322l1.997-3.459c0.115-0.199,0.047-0.453-0.152-0.568  c-0.199-0.115-0.453-0.047-0.568,0.152l0,0l-2.022,3.503C15.59,8.244,13.853,7.851,12,7.851S8.41,8.244,6.863,8.949L4.841,5.447  C4.726,5.248,4.472,5.18,4.273,5.294C4.075,5.409,4.006,5.663,4.121,5.862l0,0l1.997,3.46c-3.43,1.865-5.775,5.337-6.119,9.44h24  C23.656,14.659,21.311,11.187,17.881,9.322"/>
+</svg>
+        <span data-i18n="download_apk"></span>
+        
+      </a>
       <a href="https://whispen.netlify.app/login.html" class="web" data-i18n="try_web">Try on Web</a>
     </div>
   </main>
-
+<!--
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/lz9i6lUHvvc?si=yqzL_K2gxM2WTlZf" 
     frameborder="0" allowfullscreen></iframe>
 </div>
+-->
   <!-- Features Section -->
   <section class="features">
     <h2 data-i18n="features_title">Why Choose Whispen?</h2>
     <ul>
-      <li data-i18n="feature_1">📄 Mobile-friendly PDF viewer</li>
-      <li data-i18n="feature_2">Clean and distraction-free reading interface</li>
-      <li data-i18n="feature_3">🎵 Ambient sound support (online & offline)</li>
-      <li data-i18n="feature_4">🎨 Theme switching with customizable palettes</li>
-      <li data-i18n="feature_5">📚 Library system and recent files history</li>
-      <li data-i18n="feature_6">🗣️ Multilingual interface (English, Azerbaijan, Turkish, Russian, Spanish)</li>
+      <li data-i18n="feature_1">Relax and focus while reading with ambient sounds</li>
+      <img class="feature_lpi1" src="/assets/images/feature_lp1.jpg">
+      <li data-i18n="feature_2">Personalize your reading with themes</li>
+      <img class="feature_lpi2" src="/assets/images/feature_lp2.jpg">
+      <li data-i18n="feature_3">Add quotes from your books to your notes</li>
+      <div class="feature_lp3div">
+      <img class="feature_lpi3" src="/assets/images/feature_lp3.jpg">
+      </div>
     </ul>
   </section>
   <section class="roadmap">
   <h2 data-i18n="roadmap_title">Roadmap</h2>
-  <progress value="60" max="100" style="width: 100%;"></progress>
   <ul class="station-list">
     <li class="station completed">PDF Viewer, Themes, Ambient Sounds</li>
     <li class="station completed">Multi Language support (EN,TR +3 more)</li>
@@ -334,7 +392,10 @@
     <li class="station completed">UI Redesign and Modernization
 </li>
     <li class="station completed">User-Uploaded Ambient Sounds</li>
-    <li class="station">User asset ownership system</li>
+    <li class="station completed">Documentation Update</li>
+    <li class="station completed">UI Redesign and Modernization (part 2)
+</li>
+    <li class="station">In-App Push Notification</li>
     <li class="station">Stable Beta</li>
     <li class="station">Google Play / App Store Release</li>
     <li class="station">AI Assistant, AI Vocabulary, AI Summarizer</li>
@@ -360,10 +421,6 @@
     <p data-i18n="faq_data_a">Your notes and settings are stored locally in your browser using IndexedDB.</p>
   </details>
   <details>
-    <summary class="question" data-i18n="faq_login_q">Do I need to log in?</summary>
-    <p data-i18n="faq_login_a">No login is required.You can use the application demo without logging in. Some features may not be unlocked in the demo version.</p>
-  </details>
-  <details>
     <summary class="question" data-i18n="faq_sound_q">Can I change the background sounds?</summary>
     <p data-i18n="faq_sound_a">Yes, you can choose from multiple ambient sounds (rain, wind, cafe, and more).</p>
   </details>
@@ -372,8 +429,8 @@
   <h2 data-i18n="contact_title">Contact</h2>
   <p data-i18n="contact_info">Have feedback or want to contribute?</p>
   <ul>
-    <li>Email: <a href="mailto:whispen.app@gmail.com">whispen.app@gmail.com</a></li>
-    <li>GitHub: <a href="https://github.com/samirrhashimov/whispen" target="_blank">Whispen Repository</a></li>
+    <li>Email: <a class="link" href="mailto:whispen.app@gmail.com">whispen.app@gmail.com</a></li>
+    <li>GitHub: <a class="link" href="https://github.com/samirrhashimov/whispen" target="_blank">Whispen Repository</a></li>
   </ul>
 </section>
 
