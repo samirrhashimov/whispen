@@ -16,6 +16,10 @@
   <meta name="twitter:image" content="https://whispen.netlify.app/assets/ogicon.png">
   <meta name="twitter:url" content="https://whispen.netlify.app">
   <meta name="twitter:site" content="@whispenapp">
+  
+  <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#000000">
+
   <title>Whispen</title>
   
   <link href="./styles/styles.css" rel="stylesheet">
@@ -658,6 +662,7 @@ document.getElementById('openBtn').addEventListener('click', () => {
 <div id="deleteConfirmModal" class="whispen-modal hidden">
   <div class="whispen-modal-box">
     <p data-i18n="confirmnotedelete" id="deleteConfirmMessage"></p>
+    
     <div class="whispen-modal-actions">
       <button id="deleteConfirmCancelBtn" class="whispen-btn whispen-btn-cancel" data-i18n="cancel"></button>
       <button id="deleteConfirmOkBtn" class="whispen-btn whispen-btn-delete" data-i18n="delete"></button>
@@ -698,5 +703,14 @@ document.getElementById('openBtn').addEventListener('click', () => {
 <script src="scripts/script.js"></script>
 <script src="scripts/nav_controller.js"></script>
 <script src="scripts/usersound.js"></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").then(() => {
+      console.log("Service Worker registered ✅");
+    });
+  }
+</script>
+
 </body>
 </html>
