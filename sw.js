@@ -5,7 +5,7 @@ const urlsToCache = [
   "/styles/styles.css",
   "/scripts/script.js",
   "/pdf.js/web/viewer.html",
-  "/pdf.js/web/styles.html",
+  "/pdf.js/web/styles.html"
 ];
 
 self.addEventListener("install", event => {
