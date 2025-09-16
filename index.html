@@ -16,9 +16,6 @@
   <meta name="twitter:image" content="https://whispen.netlify.app/assets/ogicon.png">
   <meta name="twitter:url" content="https://whispen.netlify.app">
   <meta name="twitter:site" content="@whispenapp">
-  
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#000000">
 
   <title>Whispen</title>
   
@@ -443,6 +440,7 @@ volumeSlider.addEventListener("input", () => {
   </p>
   <p>
     <strong data-i18n="version"></strong> 1.5.7
+    9
   </p>
 </div>
   <!-- Delete Account Modal -->
@@ -703,14 +701,6 @@ document.getElementById('openBtn').addEventListener('click', () => {
 <script src="scripts/script.js"></script>
 <script src="scripts/nav_controller.js"></script>
 <script src="scripts/usersound.js"></script>
-
-<script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").then(() => {
-      console.log("Service Worker registered ✅");
-    });
-  }
-</script>
 
 </body>
 </html>
