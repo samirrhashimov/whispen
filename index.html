@@ -438,7 +438,7 @@ volumeSlider.addEventListener("input", () => {
     </a>
   </p>
   <p>
-    <strong data-i18n="version"></strong> 1.5.6
+    <strong data-i18n="version"></strong> 1.5.7
   </p>
 </div>
   <!-- Delete Account Modal -->
@@ -654,7 +654,16 @@ document.getElementById('openBtn').addEventListener('click', () => {
     <div id="pdf-container"></div>
   </div>
   
-  
+  <!-- Delete Confirm Modal -->
+<div id="deleteConfirmModal" class="whispen-modal hidden">
+  <div class="whispen-modal-box">
+    <p data-i18n="confirmnotedelete" id="deleteConfirmMessage"></p>
+    <div class="whispen-modal-actions">
+      <button id="deleteConfirmCancelBtn" class="whispen-btn whispen-btn-cancel" data-i18n="cancel"></button>
+      <button id="deleteConfirmOkBtn" class="whispen-btn whispen-btn-delete" data-i18n="delete"></button>
+    </div>
+  </div>
+</div>
   
   
   
