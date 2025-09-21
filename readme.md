@@ -8,17 +8,17 @@
 
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
+![Intro](assets/intro.gif)
 ---
 
 ## 🌟 Features
 
-- 📄 Mobile-friendly PDF viewer
-- 🎵 Ambient sound support (online & offline)
-- 🎨 Theme switching with customizable palettes
-- 📚 Library system and recent files history
-- 🗣️ Multilingual interface (English, Azerbaijan, Turkish, Russian, Spanish)
-- 🔐 Firebase-based login & registration
-- ⚙️ Settings panel for volume, language, password, and account options
+-  Mobile-friendly PDF viewer
+-  Ambient sound support (online & offline)
+-  Theme switching with customizable palettes
+-  Multilingual Interface
+-  Firebase-based login & registration
+-  Settings panel for volume, language, password, and account options
 
 ---
 
