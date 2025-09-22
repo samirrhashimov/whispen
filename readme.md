@@ -8,7 +8,6 @@
 
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
-![Intro](assets/intro.gif)
 ---
 
 ## 🌟 Features
