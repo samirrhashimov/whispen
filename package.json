@@ -1,6 +1,6 @@
 {
   "name": "Whispen",
-  "version": "1.4.8",
+  "version": "1.6.1",
   "description": "A project using Firebase backend and PDF.js (pdfjs-dist 5.4.149) for PDF rendering",
   "main": "index.js",
   "scripts": {

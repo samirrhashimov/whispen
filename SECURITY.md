@@ -3,7 +3,7 @@
 ### Reporting a Vulnerability
 If you discover a security vulnerability in this project, please report it responsibly by emailing:
 
-**whispen.app@gmail.com**
+**linzaapps@gmail.com**
 
 Do **not** create a public GitHub issue for security problems.
 
