@@ -8,7 +8,7 @@
     "serve": "firebase serve"
   },
   "dependencies": {
-    "pdfjs-dist": "5.4.296",
+    "pdfjs-dist": "5.4.394",
     "firebase": "^10.0.0"
   },
   "author": "LinzaApps",
