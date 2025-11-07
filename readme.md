@@ -9,11 +9,21 @@
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
 ---
+## Screenshots
 
-## 🌟 Features
+<p align="center">
+<img src="assets/posters/whispen1.png" width="23%" height="auto">
+<img src="assets/posters/whispen2.png" width="23%" height="auto">
+<img src="assets/posters/whispen3.png" width="23%" height="auto">
+<img src="assets/posters/whispen4.png" width="23%" height="auto">
+</p>
 
--  Mobile-friendly PDF viewer
+## Features
+
+-  Mobile-friendly PDF view experience
+-  Open Source and no Ads
 -  Ambient sound support (online & offline)
+-  Dark theme support
 -  Theme switching with customizable palettes
 -  Multilingual Interface
 -  Firebase-based login & registration
@@ -21,7 +31,7 @@
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 1. Clone the repository:
    ```bash
@@ -31,7 +41,7 @@
 
 ---
 
-## 🌍 Language Support
+## Language Support
 
 - 🇬🇧 English (Default)
 
@@ -45,7 +55,7 @@
 
 ---
 
-# 🤝 Contributing
+# Contributing
 If you would like to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) document.  
 Additionally, for ethical collaboration guidelines, see the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
 
@@ -55,17 +65,17 @@ Check out the [dev-guide.md](docs/dev-guide.md) for detailed instructions.
 
 ---
 
-## 🛡️ Security
+## Security
 If you discover a security vulnerability in the project, **do not open a public issue**.  
 Instead, submit a private report through the [Security advisories](../../security/advisories) section.  
 
 ---
 
-## 📜 License
+## License
 This project is licensed under the **APGLv3 License**. For more details, see the [LICENSE](LICENSE) file.  
 
 
-##  📫 Contact
+## Contact
 
-Email: whispen.app@gmail.com
+Email: linzaapps@gmail.com
 
