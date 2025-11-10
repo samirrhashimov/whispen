@@ -12,7 +12,7 @@
    <img src="https://img.shields.io/github/languages/top/samirrhashimov/Whispen?style=flat">
 </p>
 
-**Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
+<p align="center"><b>Whispen</b> - is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.</p>
 
 ---
 ## Screenshots
