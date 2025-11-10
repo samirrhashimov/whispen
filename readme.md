@@ -1,10 +1,16 @@
-# Whispen – *Modern & Calm PDF Reader*
+<h1 align="center">Whispen – Modern & Calm PDF Reader</h1>
+
 ![Banner](assets/banner.png)
 
-![GitHub license](https://img.shields.io/github/license/samirrhashimov/whispen?style=flat)
-![GitHub release](https://img.shields.io/github/v/release/samirrhashimov/whispen?style=flat)
-![GitHub repo size](https://img.shields.io/github/repo-size/samirrhashimov/Whispen?style=flat)
-![GitHub top language](https://img.shields.io/github/languages/top/samirrhashimov/Whispen?style=flat)
+<p align="center">
+<img src="https://skillicons.dev/icons?i=html,css,js,firebase,netlify" />
+</p>
+<p align="center">
+   <img src="https://img.shields.io/github/license/samirrhashimov/whispen?style=flat">
+   <img src="https://img.shields.io/github/v/release/samirrhashimov/whispen?style=flat">
+   <img src="https://img.shields.io/github/repo-size/samirrhashimov/Whispen?style=flat">
+   <img src="https://img.shields.io/github/languages/top/samirrhashimov/Whispen?style=flat">
+</p>
 
 **Whispen** is a modern, minimalist PDF reading app that combines ambient sounds and customizable themes to enhance focus and relaxation.
 
@@ -72,10 +78,10 @@ Instead, submit a private report through the [Security advisories](../../securit
 ---
 
 ## License
-This project is licensed under the **APGLv3 License**. For more details, see the [LICENSE](LICENSE) file.  
+This project is licensed under the **APGLv3 License**. For more details, see the [LICENSE](LICENSE) file.
 
+---
+## Support
 
-## Contact
-
-Email: linzaapps@gmail.com
+For issues and questions, please open an issue on GitHub.
 
