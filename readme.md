@@ -1,3 +1,7 @@
+> [!WARNING]
+> This project works best on **Android** devices.  
+> **Desktop** support is limited and the interface is not fully responsive.
+
 <h1 align="center">Whispen – Modern & Calm PDF Reader</h1>
 
 ![Banner](assets/banner.png)
