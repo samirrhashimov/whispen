@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "pdfjs-dist": "5.4.394",
-    "firebase": "^10.0.0"
+    "firebase": "^12.7.0"
   },
   "author": "LinzaApps",
   "license": "SEE LICENCE IN LICENCE.txt"
