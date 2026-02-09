@@ -96,7 +96,8 @@
     "developer_name": "Geliştirici:",
     "contact": "İletişim:",
     "version": "Uygulama Sürümü:",
-    "imp-sounds": "İçe aktarılan sesler"
+    "imp-sounds": "İçe aktarılan sesler",
+    "delete-account-req": "Hesap Silme Talebi"
   },
   "en": {
     "library": "Library",
@@ -193,7 +194,8 @@
     "developer_name": "Developer",
     "contact": "Contact",
     "version": "App Version",
-    "imp-sounds": "Imported sounds"
+    "imp-sounds": "Imported sounds",
+    "delete-account-req": "Account Deletion Request"
   },
   "ru": {
     "library": "Библиотека",
@@ -290,7 +292,8 @@
     "developer_name": "Разработчик",
     "contact": "Контакты",
     "version": "Версия приложения",
-    "imp-sounds": "Импортированные звуки"
+    "imp-sounds": "Импортированные звуки",
+    "delete-account-req": "Запрос на удаление аккаунта"
   },
   "es": {
     "library": "Biblioteca",
@@ -387,7 +390,8 @@
     "developer_name": "Desarrollador",
     "contact": "Contacto",
     "version": "Versión de la aplicación",
-    "imp-sounds": "Sonidos Importados"
+    "imp-sounds": "Sonidos Importados",
+    "delete-account-req": "Solicitud de eliminación de cuenta"
   },
   "az": {
     "library": "Kitabxana",
@@ -484,6 +488,7 @@
     "developer_name": "Tərtibatçı",
     "contact": "Əlaqə",
     "version": "Tətbiq Versiyası",
-    "imp-sounds": "Daxili Səslər"
+    "imp-sounds": "Daxili Səslər",
+    "delete-account-req": "Hesab Silinməsi Sorğusu"
   }
 }
